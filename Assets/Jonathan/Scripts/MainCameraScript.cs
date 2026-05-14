@@ -5,46 +5,47 @@ using UnityEngine.UI;
 
 public class MainCameraScript : MonoBehaviour
 {
+    [System.Serializable]
+    public class CameraRooms
+    {
+        public GameObject cameraObject;
+        public string roomName; 
+    }
+
     [Header("Camera Setup")]
-    [SerializeField] private GameObject[] Cameras;
+    [SerializeField] private CameraRooms[] Cameras;
     [SerializeField] private int startingCameraIndex = 1;
-    [SerializeField] private GameObject[] Text;
-    [SerializeField] private int startingTextIndex = 1; 
+
     public int StartingCameraIndex => startingCameraIndex;
-    public int StartingTextIndex => startingTextIndex;
 
     private int activeCamera = 0;
     public bool camerasOpen = false;
 
-    private int activeText = 0; 
+    [Header("UI")]
+    [SerializeField] private TMP_Text roomText;  
 
 
-    
     void Start()
     {
         camerasOpen = false;  
         
         foreach (var cam in Cameras)
         {
-            if (cam != null)
+            if (cam.cameraObject != null)
             {
-                cam.SetActive(false); 
+                cam.cameraObject.SetActive(false); 
             }
         }
 
-        if (Cameras != null && startingCameraIndex >= 0 && startingCameraIndex < Cameras.Length)
-        {
-            Cameras[startingCameraIndex].SetActive(true);
-            activeCamera = startingCameraIndex; 
+        //Turn on Stage camera (stage index, 1)
+        //if (Cameras != null && startingCameraIndex >= 0 && startingCameraIndex < Cameras.Length)
+        //{
+        //    Cameras[startingCameraIndex].SetActive(true);
+        //    activeCamera = startingCameraIndex;
 
-        }
+        //}
 
-        if (Text != null && startingCameraIndex >= 0 && startingCameraIndex < Text.Length)
-        {
-            Text[startingTextIndex].SetActive(true);
-            activeCamera = startingTextIndex;
-
-        }
+        SwitchCamera(startingCameraIndex); 
     }
 
     // Update is called once per frame
@@ -52,23 +53,24 @@ public class MainCameraScript : MonoBehaviour
     {
         
     }
-
-    public void SwitchCamera(int camera, int text)
+    //ben was here... idk
+    public void SwitchCamera(int cameraIndex)
     {
-        activeText = text; 
-        activeCamera = camera;
+        if ( cameraIndex < 0 || cameraIndex >= Cameras.Length)
+        {
+            return; 
+        }
+
+        activeCamera = cameraIndex;
         camerasOpen = true; 
-
-
-
+        
         for (int i = 0; i < Cameras.Length; i++)
         {
-            Cameras[i].SetActive(i == camera); 
+            Cameras[i].cameraObject.SetActive(i == cameraIndex); 
         }
-        for (int i = 0; i < Text.Length; i++)
-        {
-            Text[i].SetActive(i == text); 
-        }
+
+
+        roomText.text = Cameras[cameraIndex].roomName;
     }
 
     public void CloseCameras()
@@ -77,11 +79,9 @@ public class MainCameraScript : MonoBehaviour
 
         foreach (var cam in Cameras)
         {
-            cam.SetActive(false); 
+            cam.cameraObject.SetActive(false); 
         }
-        foreach (var text in Text)
-        {
-            text.SetActive(false); 
-        }
+
+        roomText.text = "";
     }
 }
