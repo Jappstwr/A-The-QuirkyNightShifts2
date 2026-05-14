@@ -1,16 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine.UI;
 
 public class MainCameraScript : MonoBehaviour
 {
     [Header("Camera Setup")]
     [SerializeField] private GameObject[] Cameras;
     [SerializeField] private int startingCameraIndex = 1;
-
+    [SerializeField] private GameObject[] Text;
+    [SerializeField] private int startingTextIndex = 1; 
     public int StartingCameraIndex => startingCameraIndex;
+    public int StartingTextIndex => startingTextIndex;
 
     private int activeCamera = 0;
-    public bool camerasOpen = false; 
+    public bool camerasOpen = false;
+
+    private int activeText = 0; 
 
 
     
@@ -30,6 +36,14 @@ public class MainCameraScript : MonoBehaviour
         {
             Cameras[startingCameraIndex].SetActive(true);
             activeCamera = startingCameraIndex; 
+
+        }
+
+        if (Text != null && startingCameraIndex >= 0 && startingCameraIndex < Text.Length)
+        {
+            Text[startingTextIndex].SetActive(true);
+            activeCamera = startingTextIndex;
+
         }
     }
 
@@ -39,14 +53,21 @@ public class MainCameraScript : MonoBehaviour
         
     }
 
-    public void SwitchCamera(int camera)
+    public void SwitchCamera(int camera, int text)
     {
+        activeText = text; 
         activeCamera = camera;
         camerasOpen = true; 
+
+
 
         for (int i = 0; i < Cameras.Length; i++)
         {
             Cameras[i].SetActive(i == camera); 
+        }
+        for (int i = 0; i < Text.Length; i++)
+        {
+            Text[i].SetActive(i == text); 
         }
     }
 
@@ -57,6 +78,10 @@ public class MainCameraScript : MonoBehaviour
         foreach (var cam in Cameras)
         {
             cam.SetActive(false); 
+        }
+        foreach (var text in Text)
+        {
+            text.SetActive(false); 
         }
     }
 }
