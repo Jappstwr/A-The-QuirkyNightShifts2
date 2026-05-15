@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: cfc48fc903e7af0489c173734fc3939d
+guid: 28604231ff0823b4ca0f9d2c51060500
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3225061531645319000
-    second: QNS2TurnLeft_0
-  - first:
-      213: -6081446865948069939
-    second: QNS2TurnLeft_1
+      213: 5104013863746541993
+    second: TurnRightButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QNS2TurnLeft_0
+      name: TurnRightButton_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
+        width: 15
         height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8571f7c3068b1cc20800000000000000
-      internalID: 3225061531645319000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QNS2TurnLeft_1
-      rect:
-        serializedVersion: 2
-        x: 15
-        y: 44
-        width: 9
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dcfa0cadb4c5a9ba0800000000000000
-      internalID: -6081446865948069939
+      spriteID: 9a9184d119915d640800000000000000
+      internalID: 5104013863746541993
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      QNS2TurnLeft_0: 3225061531645319000
-      QNS2TurnLeft_1: -6081446865948069939
+      TurnRightButton_0: 5104013863746541993
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
