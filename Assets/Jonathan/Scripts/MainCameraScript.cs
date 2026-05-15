@@ -17,6 +17,7 @@ public class MainCameraScript : MonoBehaviour
     [SerializeField] private int startingCameraIndex = 1;
 
     public int StartingCameraIndex => startingCameraIndex;
+    public int ActiveCamera => activeCamera;
 
     private int activeCamera = 0;
     public bool camerasOpen = false;
@@ -70,7 +71,7 @@ public class MainCameraScript : MonoBehaviour
         }
 
 
-        roomText.text = Cameras[cameraIndex].roomName;
+        roomText.text = "CAM: " + Cameras[cameraIndex].roomName;
     }
 
     public void CloseCameras()

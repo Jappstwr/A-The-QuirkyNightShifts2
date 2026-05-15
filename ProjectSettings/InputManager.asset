@@ -470,13 +470,13 @@ InputManager:
     axis: 6
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Debug Horizontal
+    m_Name: WindUpBox
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: e
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
