@@ -1183,6 +1183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808399833}
+  - component: {fileID: 808399834}
   m_Layer: 0
   m_Name: ScriptForButton
   m_TagString: Untagged
@@ -1205,6 +1206,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 121115511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808399834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808399832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f210a8f80a391409831a6dbe8c8339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  cameraSystem: {fileID: 1491502924}
+  button: {fileID: 1082178737}
+  fillBar: {fileID: 1447320251}
+  songUI: {fileID: 1082178735}
+  requieredCameraIndex: 2
+  holdTime: 2
 --- !u!1 &848524995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2613,7 +2632,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2108693044}
   - component: {fileID: 2108693045}
-  - component: {fileID: 2108693046}
   m_Layer: 8
   m_Name: ChangeButton
   m_TagString: Untagged
@@ -2695,24 +2713,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2108693046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108693043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10f210a8f80a391409831a6dbe8c8339, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  cameraSystem: {fileID: 1491502924}
-  button: {fileID: 1082178737}
-  fillBar: {fileID: 1447320251}
-  songUI: {fileID: 1082178735}
-  requieredCameraIndex: 2
-  holdTime: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
