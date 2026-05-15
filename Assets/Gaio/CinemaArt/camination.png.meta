@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: e4e4ff5a04a91de48840588c6a07951b
+guid: 0bb1bd68d8cfe924d9512ad74548d2c2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7893481638957040012
-    second: QNS2TurnRight_0
-  - first:
-      213: 3512666610595545416
-    second: QNS2TurnRight_1
+      213: -7180955551214580788
+    second: camination_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 192
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,35 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QNS2TurnRight_0
+      name: camination_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 44
-        width: 9
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 47eb5e45548b47290800000000000000
-      internalID: -7893481638957040012
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QNS2TurnRight_1
-      rect:
-        serializedVersion: 2
-        x: 8
+        x: 16
         y: 0
-        width: 16
-        height: 100
+        width: 165
+        height: 86
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8414ce2ebaf7fb030800000000000000
-      internalID: 3512666610595545416
+      spriteID: ccb4cf5f8fe185c90800000000000000
+      internalID: -7180955551214580788
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      QNS2TurnRight_0: -7893481638957040012
-      QNS2TurnRight_1: 3512666610595545416
+      camination_0: -7180955551214580788
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
