@@ -1,7 +1,7 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using UnityEngine.Audio; 
 
 public class WindUpButton : MonoBehaviour
 {
@@ -11,6 +11,10 @@ public class WindUpButton : MonoBehaviour
 
     [SerializeField] private GameObject songUI;
 
+    [SerializeField] private AudioSource audioSource;
+
+    [SerializeField] private AudioClip song1;
+    [SerializeField] private AudioClip song2;
 
     [Header("Settings")]
     [SerializeField] private int requieredCameraIndex = 2;
@@ -19,12 +23,15 @@ public class WindUpButton : MonoBehaviour
     private float currentHoldTime = 0f;
 
     private float decreaseTimerPerNight = 0.08f;
-    private float currentModifier = 0.02f; 
+    private float currentModifier = 0.02f;
 
+    private bool isHoldingButton = false;
+    private bool songChanged = false;
 
     void Start()
     {
-        fillBar.fillAmount = 0; 
+        fillBar.fillAmount = 1;
+        currentHoldTime = holdTime; 
     }
 
     // Update is called once per frame
@@ -37,7 +44,7 @@ public class WindUpButton : MonoBehaviour
 
         //songUI.SetActive(correctCamera);
 
-        if (!correctCamera )
+        if (!correctCamera)
         {
             fillBar.fillAmount = currentHoldTime / holdTime;
 
@@ -50,7 +57,7 @@ public class WindUpButton : MonoBehaviour
             return; 
         }
 
-        if (Input.GetMouseButton(0) && correctCamera)
+        if (correctCamera && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.E)))
         {
             currentHoldTime += Time.deltaTime;
         }
@@ -61,6 +68,11 @@ public class WindUpButton : MonoBehaviour
 
         currentHoldTime = Mathf.Clamp(currentHoldTime, 0f, holdTime);
 
+        if (currentHoldTime < holdTime)
+        {
+            songChanged = false;
+        }
+
         fillBar.fillAmount = currentHoldTime / holdTime;
 
         if (currentHoldTime <= 0f)
@@ -68,8 +80,10 @@ public class WindUpButton : MonoBehaviour
             Debug.Log("Bithoven has woken up!"); 
         }
 
-        if (currentHoldTime >= holdTime)
+        if (currentHoldTime >= holdTime && !songChanged)
         {
+            songChanged = true; 
+
             ChangeSong();
 
             //currentHoldTime = 0f;
@@ -80,8 +94,30 @@ public class WindUpButton : MonoBehaviour
             
         }
     }
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
+    //    isHoldingButton = true;
+    //}
+
+    //// Mouse released
+    //public void OnPointerUp(PointerEventData eventData)
+    //{
+    //    isHoldingButton = false;
+    //}
+
     public void ChangeSong()
     {
+        if (audioSource.clip == song1)
+        {
+            audioSource.clip = song2;
+        }
+        else
+        {
+            audioSource.clip = song1;
+        }
+
+        audioSource.Play();
+
         Debug.Log("Song Changed"); 
     }
 
