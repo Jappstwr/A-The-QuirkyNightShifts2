@@ -3,9 +3,18 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class NightScript : MonoBehaviour
 {
+    public AudioClip pressSound;
+    public AudioClip ambience1Sound;
+    public AudioClip ambience2Sound;
+
+    public int Night;
+
     public List<GameObject> offices = new List<GameObject>();
     public int officeIndex;
 
@@ -30,6 +39,16 @@ public class NightScript : MonoBehaviour
     public int maxPower;
     public float currentPower;
     public int powerUsage;
+    public float defaultPower;
+
+    public float powerCooldown;
+    public float powerTimer;
+
+    public TMP_Text powerText;
+    public TMP_Text nightText;
+    public TMP_Text amText;
+
+    public float nightTime;
 
     public List<GameObject> powerLights;
 
@@ -43,27 +62,60 @@ public class NightScript : MonoBehaviour
 
     public bool _leftClosed;
     public bool _rightClosed;
-    public bool _monitor;
+    public bool _monitorOpen;
+
+    public Image leftSprite;
+    public Image rightSprite;
+
+    public Sprite leftOpen;
+    public Sprite rightOpen;
+    public Sprite leftClosed;
+    public Sprite rightClosed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetNightText();
+        officeIndex = 1;
+        nightTime = 0f;
+        currentPower = maxPower;
+
+        monitor.SetActive(false);
+        suit.SetActive(false);
+        turnLeftButton.SetActive(true);
+        turnRightButton.SetActive(true);
+        monitorButton.SetActive(true);
+        suitButton.SetActive(true);
+        closeButton.SetActive(false);
+        _monitorOpen = false;
+        _inSuit = false;
         _isOnCam = true;
-        _monitor = false;
         _leftClosed = false;
         _rightClosed = false;
         powerUsage = 1;
         _isFlashing = false;
+
+
         UpdateFlash();
-        closeButton.SetActive(false);
-        _inSuit = false;
-        CloseButton();
-        officeIndex = 1;
         UpdateOffice();
         ResetPowerLights();
     }
 
+    public void PressSoundEffect()
+    {
+        SoundEffectScript.Instance.PlaySoundEffect(pressSound, 1f);
+    }
+
     // Update is called once per frame
+    public void SetNightText()
+    {
+        nightText.text = $"Night {Night}";
+    }
+    public void UpdateAMText()
+    {
+        int am = (int)nightTime / 60;
+       amText.text = $"{am} AM";
+    }
     public void ResetPowerLights()
     {
         for (int i = 0; i < powerLights.Count; i++)
@@ -91,16 +143,20 @@ public class NightScript : MonoBehaviour
         monitorButton.SetActive(true);
         suitButton.SetActive(true);
         closeButton.SetActive(false);
-        _monitor = false;
+        _monitorOpen = false;
         _inSuit = false;
+
+        PressSoundEffect();
     }
     public void ToggleMonitor()
     {
-        _monitor = !_monitor;
+        _monitorOpen = !_monitorOpen;
         UpdateMonitor();
         UpdateFlash();
+
+        PressSoundEffect();
     }
-    public void ToggleView()
+    public void ToggleMonitorView()
     {
         _isOnCam = !_isOnCam;
         if (_isOnCam)
@@ -119,6 +175,8 @@ public class NightScript : MonoBehaviour
         _inSuit = !_inSuit;
         UpdateSuit();
         UpdateFlash();
+
+        PressSoundEffect();
     }
     public void TurnLeft()
     {
@@ -129,6 +187,8 @@ public class NightScript : MonoBehaviour
         }
         UpdateOffice();
         UpdateFlash();
+
+        PressSoundEffect();
     }
     public void TurnRight()
     {
@@ -139,10 +199,12 @@ public class NightScript : MonoBehaviour
         }
         UpdateOffice();
         UpdateFlash();
+
+        PressSoundEffect();
     }
     public void UpdateMonitor()
     {
-        if (_monitor)
+        if (_monitorOpen)
         {
             monitor.SetActive(true);
             turnLeftButton.SetActive(false);
@@ -202,7 +264,7 @@ public class NightScript : MonoBehaviour
     }
     public void UpdateFlash()
     {
-        if (_isFlashing && _inSuit == false && officeIndex == 1)
+        if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1)
         {
             flashlight.SetActive(true);
         }
@@ -212,9 +274,41 @@ public class NightScript : MonoBehaviour
             flashlight.SetActive(false);
         }
     }
+    public void ToggleLeft()
+    {
+        _leftClosed = !_leftClosed;
+        UpdateLeft();
+    }
+    public void UpdateLeft()
+    {
+        if (_leftClosed)
+        {
+            leftSprite.sprite = leftClosed;
+        }
+        else
+        {
+            leftSprite.sprite = leftOpen;
+        }
+    }
+    public void ToggleRight()
+    {
+        _rightClosed = !_rightClosed;
+        UpdateRight();
+    }
+    public void UpdateRight()
+    {
+        if (_rightClosed)
+        {
+            rightSprite.sprite = rightClosed;
+        }
+        else
+        {
+            rightSprite.sprite = rightOpen;
+        }
+    }
     public void CalculatePowerUsage()
     {
-        int calculatedUsage = 2;
+        int calculatedUsage = 1;
         if (_isFlashing)
         {
             calculatedUsage++;
@@ -227,7 +321,7 @@ public class NightScript : MonoBehaviour
         {
             calculatedUsage++;
         }
-        if (_monitor)
+        if (_monitorOpen)
         {
             calculatedUsage++;
         }
@@ -236,6 +330,22 @@ public class NightScript : MonoBehaviour
             calculatedUsage = 4;
         }
         powerUsage = calculatedUsage;
+    }
+
+    public void SubtractPower()
+    {
+        powerTimer -= Time.deltaTime;
+
+        if (powerTimer <= 0)
+        {
+            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage;
+            currentPower -= calculatedPower;
+
+            int visualPower = (int)currentPower;
+            powerText.text = $"Power:{visualPower.ToString()}%";
+
+            powerTimer = powerCooldown;
+        }
     }
     public void UpdatePowerLights()
     {
@@ -270,16 +380,27 @@ public class NightScript : MonoBehaviour
         {
             _isFlashing = !_isFlashing;
             UpdateFlash();
+            if (officeIndex == 0)
+            {
+                ToggleLeft();
+            }
+            else if (officeIndex == 2)
+            {
+                ToggleRight();
+            }
         }
         if (Input.GetButtonDown("MonitorToggle"))
         {
-            ToggleView();
+            ToggleMonitorView();
         }
     }
     void Update()
     {
+        nightTime += Time.deltaTime;
+        UpdateAMText();
         PlayerInput();
         CalculatePowerUsage();
         UpdatePowerLights();
+        SubtractPower();
     }
 }
