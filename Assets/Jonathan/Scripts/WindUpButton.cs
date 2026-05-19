@@ -25,7 +25,7 @@ public class WindUpButton : MonoBehaviour
     private float decreaseTimerPerNight = 0.08f;
     private float currentModifier = 0.02f;
 
-    private bool nightPassed;
+    private bool nightPassed = false;
     private bool nighPassedTrigger; 
 
     private bool isHoldingButton = false;

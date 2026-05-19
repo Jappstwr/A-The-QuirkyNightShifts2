@@ -6,6 +6,8 @@ public class BithovenScriptMovement : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private WindUpButton windUpSystem;
     [SerializeField] private SpriteRenderer bithovenRenderer;
+    [SerializeField] private int roomIndex = 2;
+    [SerializeField] private MainCameraScript camSystem;
 
     [Header("Sprite")]
     [SerializeField] private Sprite sleepSprite;
@@ -24,8 +26,11 @@ public class BithovenScriptMovement : MonoBehaviour
 
         if (Layer != -1)
         {
-            gameObject.layer = Layer; 
+            gameObject.layer = Layer;
         }
+
+        //bithovenRenderer.sortingLayerName = waypoints.roomLayer;
+        //bithovenRenderer.sortingOrder = 10;
 
         bithovenRenderer.sprite = sleepSprite; 
     }
@@ -33,6 +38,10 @@ public class BithovenScriptMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool visible = camSystem.ActiveCamera == roomIndex && camSystem.camerasOpen;
+
+        bithovenRenderer.enabled = visible;
+
         float fill = windUpSystem.FillPercent; 
         
         if (fill <= 0.3f)

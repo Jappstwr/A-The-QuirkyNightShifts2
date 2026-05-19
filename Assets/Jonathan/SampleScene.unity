@@ -687,7 +687,7 @@ Transform:
   m_GameObject: {fileID: 228473297}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 0}
+  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 1}
   m_LocalScale: {x: 5.6902313, y: 3.2006845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -836,6 +836,185 @@ MonoBehaviour:
   roomIndex: 1
   roomLayer: Stage
   isDoorWaypoint: 0
+--- !u!1 &387418543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 387418545}
+  - component: {fileID: 387418544}
+  m_Layer: 0
+  m_Name: Nighscript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &387418544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387418543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1bcc78ebde7ec44a25cc218f0f08c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NightScript
+  pressSound: {fileID: 0}
+  ambience1Sound: {fileID: 0}
+  ambience2Sound: {fileID: 0}
+  Night: 0
+  offices: []
+  officeIndex: 0
+  suit: {fileID: 0}
+  _inSuit: 0
+  turnLeftButton: {fileID: 0}
+  turnRightButton: {fileID: 0}
+  monitorButton: {fileID: 0}
+  suitButton: {fileID: 0}
+  closeButton: {fileID: 0}
+  monitor: {fileID: 0}
+  ventSystem: {fileID: 0}
+  camSystem: {fileID: 0}
+  _isOnCam: 0
+  flashlight: {fileID: 0}
+  _isFlashing: 0
+  maxPower: 0
+  currentPower: 0
+  powerUsage: 0
+  defaultPower: 0
+  powerCooldown: 0
+  powerTimer: 0
+  powerText: {fileID: 0}
+  nightText: {fileID: 0}
+  amText: {fileID: 0}
+  nightTime: 0
+  powerLights: []
+  shakePower: 0
+  PLrects: []
+  originalPLPositions: []
+  currentPLPositions: []
+  targetPLPositions: []
+  _leftClosed: 0
+  _rightClosed: 0
+  _monitorOpen: 0
+  leftSprite: {fileID: 0}
+  rightSprite: {fileID: 0}
+  leftOpen: {fileID: 0}
+  rightOpen: {fileID: 0}
+  leftClosed: {fileID: 0}
+  rightClosed: {fileID: 0}
+--- !u!4 &387418545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387418543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.46197, y: -0.60656, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &448041431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 448041432}
+  - component: {fileID: 448041433}
+  m_Layer: 0
+  m_Name: KlokerSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &448041432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448041431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 2.1167037, y: 2.3237648, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1645406169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &448041433
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448041431}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 7045675063963699452, guid: 0805e3776fed06d41951fe4961f3dc00, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1451,7 @@ Transform:
   m_GameObject: {fileID: 848524995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 0}
+  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 1}
   m_LocalScale: {x: 5.6902313, y: 3.2006845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2278,7 +2457,7 @@ Transform:
   m_GameObject: {fileID: 1459811601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.78, y: 0.18, z: 0}
+  m_LocalPosition: {x: -0.78, y: 0.18, z: 1}
   m_LocalScale: {x: 4.4688, y: 3.0506, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2520,6 +2699,62 @@ Transform:
   m_Children:
   - {fileID: 848524996}
   - {fileID: 808399833}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1645406167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1645406169}
+  - component: {fileID: 1645406168}
+  m_Layer: 0
+  m_Name: KlokerAnimatronic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1645406168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645406167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f81c04b03b7c7245992b8d1548425e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  paths:
+  - {fileID: 1051343313}
+  - {fileID: 351572397}
+  - {fileID: 1852371829}
+  baseAI: 1
+  checkInterval: 5
+  aiLevel: 0
+  aiTimer: 0
+  moveTimer: 0
+  currentRoom: 0
+  sr: {fileID: 448041433}
+--- !u!4 &1645406169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645406167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.27, y: 2.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 448041432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717027300
@@ -3090,6 +3325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   windUpSystem: {fileID: 808399834}
   bithovenRenderer: {fileID: 1459811603}
+  roomIndex: 2
+  camSystem: {fileID: 1491502924}
   sleepSprite: {fileID: 1388711804929170423, guid: d777fca45fe55334d8f74ee34700ba7a, type: 3}
   awakeSprite: {fileID: 2614477738919454129, guid: 0fd03dd25b5009b4c909a0b1a942f158, type: 3}
   waypoints: {fileID: 1852371829}
@@ -3214,3 +3451,5 @@ SceneRoots:
   - {fileID: 872204860}
   - {fileID: 955036772}
   - {fileID: 1014806262}
+  - {fileID: 1645406169}
+  - {fileID: 387418545}
