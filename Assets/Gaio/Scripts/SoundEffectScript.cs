@@ -23,7 +23,7 @@ public class SoundEffectScript : MonoBehaviour
         officeSource.clip = officeLoop;
         ambienceSource.clip = ambienceLoop;
 
-        //officeSource.Play();
+        officeSource.Play();
         ambienceSource.Play();
     }
 
