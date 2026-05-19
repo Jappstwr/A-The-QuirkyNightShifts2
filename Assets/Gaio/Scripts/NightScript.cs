@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 
 public class NightScript : MonoBehaviour
@@ -40,6 +41,7 @@ public class NightScript : MonoBehaviour
     public float currentPower;
     public int powerUsage;
     public float defaultPower;
+    public bool _powerOutage;
 
     public float powerCooldown;
     public float powerTimer;
@@ -64,8 +66,8 @@ public class NightScript : MonoBehaviour
     public bool _rightClosed;
     public bool _monitorOpen;
 
-    public Image leftSprite;
-    public Image rightSprite;
+    public SpriteRenderer leftSprite;
+    public SpriteRenderer rightSprite;
 
     public Sprite leftOpen;
     public Sprite rightOpen;
@@ -150,11 +152,14 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleMonitor()
     {
-        _monitorOpen = !_monitorOpen;
-        UpdateMonitor();
-        UpdateFlash();
+        if (_powerOutage == false)
+        {
+            _monitorOpen = !_monitorOpen;
+            UpdateMonitor();
+            UpdateFlash();
 
-        PressSoundEffect();
+            PressSoundEffect();
+        }
     }
     public void ToggleMonitorView()
     {
@@ -341,11 +346,39 @@ public class NightScript : MonoBehaviour
             float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage;
             currentPower -= calculatedPower;
 
+            powerTimer = powerCooldown;
+
+            if (currentPower <= 0)
+            {
+                TurnOffPower();
+            }
+
             int visualPower = (int)currentPower;
             powerText.text = $"Power:{visualPower.ToString()}%";
-
-            powerTimer = powerCooldown;
         }
+    }
+    public void TurnOffPower()
+    {
+        currentPower = 0;
+        powerUsage = 0;
+        _powerOutage = true;
+        UpdatePowerLights();
+
+        if (_monitorOpen)
+        {
+            closeButton.SetActive(false);
+            monitor.SetActive(false);
+            _monitorOpen = false;
+        }
+        
+        _leftClosed = false;
+        _rightClosed = false;
+        _isFlashing = false;
+
+        UpdateOffice();
+        UpdateFlash();
+        UpdateLeft();
+        UpdateRight();
     }
     public void UpdatePowerLights()
     {
@@ -376,7 +409,7 @@ public class NightScript : MonoBehaviour
     }
     public void PlayerInput()
     {
-        if (Input.GetButtonDown("Flashlight"))
+        if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
         {
             _isFlashing = !_isFlashing;
             UpdateFlash();
@@ -399,8 +432,11 @@ public class NightScript : MonoBehaviour
         nightTime += Time.deltaTime;
         UpdateAMText();
         PlayerInput();
-        CalculatePowerUsage();
-        UpdatePowerLights();
-        SubtractPower();
+        if (_powerOutage == false)
+        {
+            CalculatePowerUsage();
+            UpdatePowerLights();
+            SubtractPower();
+        }
     }
 }
