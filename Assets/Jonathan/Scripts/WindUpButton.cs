@@ -36,6 +36,9 @@ public class WindUpButton : MonoBehaviour
 
     private bool BithovenAwake;
 
+    public float FillPercent => currentHoldTime / holdTime;
+   
+
     void Start()
     {
         fillBar.fillAmount = 1;
@@ -50,32 +53,30 @@ public class WindUpButton : MonoBehaviour
         bool correctCamera = cameraSystem.ActiveCamera == requieredCameraIndex && cameraSystem.camerasOpen;
 
         button.gameObject.SetActive(correctCamera);
+        button.interactable = correctCamera;
 
         if (correctCamera)
         {
-            musicSource.volume = 0.5f; 
+            musicSource.volume = 0.5f;
         }
         else
         {
-            musicSource.volume = 0f; 
+            musicSource.volume = 0f;
         }
 
         //fillBar.gameObject.SetActive(correctCamera);
 
         //songUI.SetActive(correctCamera);
 
-        if (!correctCamera)
-        {
-            fillBar.fillAmount = currentHoldTime / holdTime;
+        //if (!correctCamera)
+        //{
+        //    fillBar.fillAmount = currentHoldTime / holdTime;
 
-            //songUI.SetActive(false);
+        //    //songUI.SetActive(false);
 
-            currentHoldTime -= Time.deltaTime * currentModifier;
+        //    currentHoldTime -= Time.deltaTime * currentModifier;
 
-
-
-            return;
-        }
+        //}
 
         if (correctCamera && (Input.GetMouseButton(0) || Input.GetKey(KeyCode.E)))
         {
@@ -95,6 +96,10 @@ public class WindUpButton : MonoBehaviour
 
         fillBar.fillAmount = currentHoldTime / holdTime;
 
+        if (currentHoldTime > 0f)
+        {
+            BithovenAwake = false;
+        }
         if (currentHoldTime <= 0f)
         {
            if (!BithovenAwake)
@@ -104,10 +109,7 @@ public class WindUpButton : MonoBehaviour
                 Debug.Log("Bithoven has woken up!");
            }
         }
-        if (currentHoldTime >= 0f) 
-        {
-            BithovenAwake = false; 
-        }
+       
 
         if (currentHoldTime >= holdTime && !songChanged)
         {
@@ -123,7 +125,7 @@ public class WindUpButton : MonoBehaviour
 
         }
 
-        if (fillBar.fillAmount <= 0.3f)
+        if (FillPercent <= 0.3f)
         {
             if (!warningActive)
             {
