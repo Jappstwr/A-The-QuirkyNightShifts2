@@ -6,9 +6,9 @@ using Unity.VisualScripting;
 
 public class KlokerScriptMovement : MonoBehaviour
 {
-    [SerializeField] public Waypoints[] paths; 
+    [SerializeField] public Waypoints[] paths;
 
-    //[SerializeField] private NightScript nighscript;
+    [SerializeField] private NightScript nightscript;
 
     [SerializeField] private int baseAI = 1;
 
@@ -22,7 +22,12 @@ public class KlokerScriptMovement : MonoBehaviour
     public float moveTimer;
 
     public int currentRoom;
-    public SpriteRenderer sr; 
+    public SpriteRenderer sr;
+
+    public bool backHallwayPoint;
+    public bool hallwayPoint;
+
+    public bool isFladderlappen; 
 
     void Start()
     {
@@ -48,9 +53,14 @@ public class KlokerScriptMovement : MonoBehaviour
 
         UpdateAILevel();
 
-        moveTimer -= Time.deltaTime; 
+        moveTimer -= Time.deltaTime;
 
-        if (moveTimer <= 0f)
+        if (currentPathIndex == 4)
+        {
+            AnimAttack();
+        }
+
+        if  (moveTimer <= 0f)
         {
             moveTimer = checkInterval;
 
@@ -62,16 +72,25 @@ public class KlokerScriptMovement : MonoBehaviour
     {
         //float hour = nighscript.nightTime;
 
-        if (aiTimer <= 60f)
+        //removed because he can be like benny (bonnie). starts with an ai lvl of 1. 
+        
+        if (isFladderlappen)
         {
-            aiLevel = 0; 
+            if (aiTimer <= 60f)
+            {
+                aiLevel = 0;
+            }
+            if (aiTimer >= 60)
+            {
+                baseAI = 1;
+                aiLevel = baseAI;
+            }
         }
-        else 
+        else
         {
             aiLevel = baseAI;
         }
-
-       
+            
 
         if (aiTimer >= 120f)
         {
@@ -99,18 +118,32 @@ public class KlokerScriptMovement : MonoBehaviour
         //    gameObject.layer = layer;
         //}
 
-        Debug.Log($"Kloker moved to: {wp.name}");
+        if (isFladderlappen)
+        {
+            Debug.Log($"FladderLappen moved to: {wp.name}"); 
+        }
+        else
+        {
+            Debug.Log($"Kloker moved to: {wp.name}");
+        }
     }
 
     public void OpportunityMovement()
     {
         int roll = Random.Range(1,21);
 
-        Debug.Log($"Kloker Roll: {roll} / {aiLevel}");
+        if (isFladderlappen)
+        {
+            Debug.Log($"Fladder Roll: {roll} / {aiLevel}");
+        }
+        else
+        {
+            Debug.Log($"Kloker Roll: {roll} / {aiLevel}");
+        }
 
         if (roll <= aiLevel)
         {
-            MoveForward(); 
+            MoveForward();
         }
     }
     public void MoveForward()
@@ -120,10 +153,83 @@ public class KlokerScriptMovement : MonoBehaviour
             return; 
         }
 
+        //if (currentPathIndex == 1)
+        //{
+        //    int roll = Random.Range(1, 21);
+
+        //    if (roll >= 5)
+        //    {
+        //        currentPathIndex = 3;
+        //        MoveToWaypoint(currentPathIndex);
+        //        Debug.Log("Failed to move to Hallway");
+        //    }
+        //    else
+        //    {
+        //        currentPathIndex = 4;
+        //        MoveToWaypoint(currentPathIndex);
+        //        Debug.Log("Successfully moved to Hallway");
+        //    }
+        //}
+
         currentPathIndex++;
 
-        MoveToWaypoint(currentPathIndex); 
+        MoveToWaypoint(currentPathIndex);
+
+    }
+    public void AnimAttack()
+    {
+        float attackTimer = 8f;
+        float resetTimer = 8f; 
+        attackTimer -= Time.deltaTime;
+        
+        float retreatTimer = Random.Range(3f, 5f); 
+        
+        
+        if (isFladderlappen)
+        {
+            if (nightscript._isFlashing)
+            {
+                retreatTimer -= Time.deltaTime;
+                attackTimer = resetTimer; 
+                if (retreatTimer <= 0f)
+                {
+                    MoveToWaypoint(1);
+                }
+            }
+            else if (!nightscript._isFlashing && attackTimer <= 0f)
+            {
+                JumpScare2(); 
+            }
+        }
+        else
+        {
+            if (nightscript._inSuit)
+            {
+                retreatTimer -= Time.deltaTime;
+                attackTimer = resetTimer; 
+                if (retreatTimer <= 0f)
+                {
+                    MoveToWaypoint(0);
+                }
+            }
+            else if (!nightscript._inSuit && attackTimer <= 0f)
+            {
+                JumpScare();
+                Debug.Log($"Game Over! You survived {aiTimer} minutes");
+            }
+        }
+
+       
+        
+        // if suit on: wait 3-4 sec, walk away. 
     }
 
-
+    public void JumpScare()
+    {
+        //Kloker jumspcare
+    }
+    public void JumpScare2()
+    {
+        //FladderLappen jumpscare
+    }
 }

@@ -9,4 +9,6 @@ public class Waypoints : MonoBehaviour
     public string roomLayer;
 
     public bool isDoorWaypoint;
+    public bool isBackHallwayPoint;
+    public bool isHallwayPoint; 
 }
