@@ -1,8 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Rendering.RenderGraphModule;
-using System.Net;
-using Unity.VisualScripting;
 
 public class KlokerScriptMovement : MonoBehaviour
 {
@@ -12,7 +9,10 @@ public class KlokerScriptMovement : MonoBehaviour
 
     [SerializeField] private int baseAI = 1;
 
-    [SerializeField] private float checkInterval = 5f; 
+    [SerializeField] private float checkInterval = 5f;
+
+    [SerializeField] private MainCameraScript maincamerascript; 
+    
 
     private int currentPathIndex = 0;
     public int aiLevel = 0;
@@ -22,31 +22,42 @@ public class KlokerScriptMovement : MonoBehaviour
     public float moveTimer;
 
     public int currentRoom;
-    public SpriteRenderer sr;
+    //public SpriteRenderer sr;
+    [SerializeField] private SpriteRenderer sr;
 
     public bool backHallwayPoint;
     public bool hallwayPoint;
 
-    public bool isFladderlappen; 
+    public bool isFladderlappen;
+
+    private float attackTimer = 8f;
+    private float retreatTimer;
+    private bool attacking;
+
+    private Waypoints currentWaypoint;
 
     void Start()
     {
+        //maincamerascript = FindFirstObjectByType<MainCameraScript>();
+
+        if (sr == null)
+        {
+            sr = GetComponent<SpriteRenderer>();
+        }
+
         aiLevel = baseAI;
 
         MoveToWaypoint(0);
 
-        moveTimer = checkInterval; 
+        moveTimer = checkInterval;
+
+        retreatTimer = Random.Range(3f, 5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        MainCameraScript cam = FindFirstObjectByType<MainCameraScript>();
-
-        bool visible = cam.ActiveCamera == currentRoom && cam.camerasOpen;
-
-        sr.enabled = visible;
-
+        UpdateVisibility();
 
 
         aiTimer += Time.deltaTime; 
@@ -55,7 +66,13 @@ public class KlokerScriptMovement : MonoBehaviour
 
         moveTimer -= Time.deltaTime;
 
-        if (currentPathIndex == 4)
+        if (currentPathIndex == 4 && !attacking)
+        {
+            attacking = true;
+            attackTimer = 8f;
+            retreatTimer = Random.Range(3f, 5f);
+        }
+        if (attacking)
         {
             AnimAttack();
         }
@@ -78,7 +95,7 @@ public class KlokerScriptMovement : MonoBehaviour
         {
             if (aiTimer <= 60f)
             {
-                aiLevel = 0;
+                baseAI = aiLevel; 
             }
             if (aiTimer >= 60)
             {
@@ -107,9 +124,13 @@ public class KlokerScriptMovement : MonoBehaviour
     {
         Waypoints wp = paths[index];
 
+
+        currentWaypoint = wp;
+
         transform.position = wp.transform.position;
 
         currentRoom = wp.roomIndex;
+
 
         //int layer = LayerMask.NameToLayer(wp.roomLayer);
 
@@ -178,22 +199,18 @@ public class KlokerScriptMovement : MonoBehaviour
     }
     public void AnimAttack()
     {
-        float attackTimer = 8f;
-        float resetTimer = 8f; 
         attackTimer -= Time.deltaTime;
-        
-        float retreatTimer = Random.Range(3f, 5f); 
-        
-        
+        retreatTimer -= Time.deltaTime;
+
         if (isFladderlappen)
         {
             if (nightscript._isFlashing)
             {
-                retreatTimer -= Time.deltaTime;
-                attackTimer = resetTimer; 
                 if (retreatTimer <= 0f)
                 {
-                    MoveToWaypoint(1);
+                    attacking = false;
+                    currentPathIndex = 1;
+                    MoveToWaypoint(currentPathIndex);
                 }
             }
             else if (!nightscript._isFlashing && attackTimer <= 0f)
@@ -203,13 +220,16 @@ public class KlokerScriptMovement : MonoBehaviour
         }
         else
         {
+
+
             if (nightscript._inSuit)
             {
-                retreatTimer -= Time.deltaTime;
-                attackTimer = resetTimer; 
+                
                 if (retreatTimer <= 0f)
                 {
-                    MoveToWaypoint(0);
+                    attacking = false;
+                    currentPathIndex = 0;
+                    MoveToWaypoint(currentPathIndex);
                 }
             }
             else if (!nightscript._inSuit && attackTimer <= 0f)
@@ -231,5 +251,29 @@ public class KlokerScriptMovement : MonoBehaviour
     public void JumpScare2()
     {
         //FladderLappen jumpscare
+    }
+    public void UpdateVisibility()
+    {
+        if (currentWaypoint == null)
+        {
+            sr.enabled = false;
+            return;
+        }
+
+        if (currentWaypoint.isHallway)
+        {
+            sr.enabled = nightscript._isFlashing;
+            return;
+        }
+
+        if (currentWaypoint.isOffice)
+        {
+            sr.enabled = true;
+            return;
+        }
+
+        bool visible = maincamerascript != null && maincamerascript.ActiveCamera == currentRoom && maincamerascript.camerasOpen;
+
+        sr.enabled = visible;
     }
 }

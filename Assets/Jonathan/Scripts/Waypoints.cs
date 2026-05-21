@@ -10,5 +10,8 @@ public class Waypoints : MonoBehaviour
 
     public bool isDoorWaypoint;
     public bool isBackHallwayPoint;
-    public bool isHallwayPoint; 
+
+    [Header("Special Locations")]
+    public bool isHallway;
+    public bool isOffice;
 }

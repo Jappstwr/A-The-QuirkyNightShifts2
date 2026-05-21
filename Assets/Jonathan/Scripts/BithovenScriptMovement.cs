@@ -41,7 +41,7 @@ public class BithovenScriptMovement : MonoBehaviour
         bool visible = camSystem.ActiveCamera == roomIndex && camSystem.camerasOpen;
 
         bithovenRenderer.enabled = visible;
-
+        
         float fill = windUpSystem.FillPercent; 
         
         if (fill <= 0.3f)

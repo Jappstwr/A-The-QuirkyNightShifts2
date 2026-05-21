@@ -9,6 +9,8 @@ public class WindUpButton : MonoBehaviour
 
     [SerializeField] private GameObject songUI;
 
+    [SerializeField] private NightScript nightscript; 
+
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource warningSource;
 
@@ -43,6 +45,8 @@ public class WindUpButton : MonoBehaviour
     {
         fillBar.fillAmount = 1;
         currentHoldTime = holdTime;
+
+        
 
         ChangeSong();
     }
