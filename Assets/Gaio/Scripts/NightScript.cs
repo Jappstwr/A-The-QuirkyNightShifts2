@@ -6,10 +6,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 
 public class NightScript : MonoBehaviour
 {
+    public GameObject office;
+    public GameObject deathmenu;
+    
     public AudioClip pressSound;
     public AudioClip ambience1Sound;
     public AudioClip ambience2Sound;
@@ -74,29 +78,12 @@ public class NightScript : MonoBehaviour
     public Sprite leftClosed;
     public Sprite rightClosed;
 
+    public bool _isDead;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetNightText();
-        officeIndex = 1;
-        nightTime = 0f;
-        currentPower = maxPower;
-
-        monitor.SetActive(false);
-        suit.SetActive(false);
-        turnLeftButton.SetActive(true);
-        turnRightButton.SetActive(true);
-        monitorButton.SetActive(true);
-        suitButton.SetActive(true);
-        closeButton.SetActive(false);
-        _monitorOpen = false;
-        _inSuit = false;
-        _isOnCam = true;
-        _leftClosed = false;
-        _rightClosed = false;
-        powerUsage = 1;
-        _isFlashing = false;
-
+        ResetNight();
 
         UpdateFlash();
         UpdateOffice();
@@ -109,9 +96,35 @@ public class NightScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void SetNightText()
+    public void ResetNight()
     {
         nightText.text = $"Night {Night}";
+
+        officeIndex = 1;
+        nightTime = 0f;
+        currentPower = maxPower;
+
+        office.SetActive(true);
+        deathmenu.SetActive(false);
+        monitor.SetActive(false);
+        suit.SetActive(false);
+        turnLeftButton.SetActive(true);
+        turnRightButton.SetActive(true);
+        monitorButton.SetActive(true);
+        suitButton.SetActive(true);
+        closeButton.SetActive(false);
+        _isDead = false;
+        _monitorOpen = false;
+        _inSuit = false;
+        _isOnCam = true;
+        _leftClosed = false;
+        _rightClosed = false;
+        powerUsage = 1;
+        _isFlashing = false;
+    }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(1);
     }
     public void UpdateAMText()
     {
@@ -429,14 +442,22 @@ public class NightScript : MonoBehaviour
     }
     void Update()
     {
-        nightTime += Time.deltaTime;
-        UpdateAMText();
-        PlayerInput();
-        if (_powerOutage == false)
+        if (_isDead)
         {
-            CalculatePowerUsage();
-            UpdatePowerLights();
-            SubtractPower();
+            office.SetActive(false);
+            deathmenu.SetActive(true);
+        }
+        else
+        {
+            nightTime += Time.deltaTime;
+            UpdateAMText();
+            PlayerInput();
+            if (_powerOutage == false)
+            {
+                CalculatePowerUsage();
+                UpdatePowerLights();
+                SubtractPower();
+            }
         }
     }
 }
