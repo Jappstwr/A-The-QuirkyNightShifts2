@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9b6b224c03ea63343b6a004fe1b2c678
+guid: 882952146130291408f44b2dadd851d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4987192787116407054
-    second: ventination_0
+      213: 4665312931653794226
+    second: NewVentSystem_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ventination_0
+      name: NewVentSystem_0
       rect:
         serializedVersion: 2
-        x: 15
+        x: 0
         y: 0
-        width: 165
-        height: 86
+        width: 192
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f64989559ee9cab0800000000000000
-      internalID: -4987192787116407054
+      spriteID: 2b9b249b4658eb040800000000000000
+      internalID: 4665312931653794226
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ventination_0: -4987192787116407054
+      NewVentSystem_0: 4665312931653794226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

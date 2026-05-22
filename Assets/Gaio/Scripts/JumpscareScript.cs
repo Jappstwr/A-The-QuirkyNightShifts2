@@ -4,24 +4,36 @@ using UnityEngine;
 public class JumpscareScript : MonoBehaviour
 {
     public NightScript nightScript;
+    public SoundEffectScript soundScript;
     public float time;
     public float staticTime;
+
+    [SerializeField] private float currentTime;
+    [SerializeField] private float currentStaticTime;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        ResetJumpscare();
     }
 
     // Update is called once per frame
+
+    public void ResetJumpscare()
+    {
+        currentTime = time;
+        currentStaticTime = staticTime;
+    }
     void Update()
     {
-        time -= Time.deltaTime;
+        currentTime -= Time.deltaTime;
+        nightScript._monitorOpen = false;
 
-        if (time <= 0)
+        if (currentTime <= 0)
         {
-            staticTime -= Time.deltaTime;
-            if (staticTime <= 0)
+            currentStaticTime -= Time.deltaTime;
+            if (currentStaticTime <= 0)
             {
+                soundScript.StopAmbience();
                 nightScript._isDead = true;
             }
         }

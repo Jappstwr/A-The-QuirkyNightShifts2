@@ -9,7 +9,7 @@ public class VentAnimatronicsScript : MonoBehaviour
     public GameObject clankaren;
     public GameObject ferdinand;
 
-    public enum Positions { a1, a2, b1, b2, c, d }
+    public enum Positions {x1, x2, a1, a2, b1, b2, c, d }
 
     public Positions clankarenPosition;
     public Positions ferdinandPosition;
@@ -34,6 +34,13 @@ public class VentAnimatronicsScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ResetAnimatronic();
+    }
+
+    public void ResetAnimatronic()
+    {
+        ferdinand.SetActive(false);
+        clankaren.SetActive(false);
         clankarenPosition = Positions.d;
         ferdinandPosition = Positions.d;
         clankarenTimer = 0;
@@ -43,7 +50,6 @@ public class VentAnimatronicsScript : MonoBehaviour
         counter = 0;
         SetStartingValues();
     }
-
     void SetStartingValues()
     {
         if (nightScript.Night == 1)
@@ -88,6 +94,8 @@ public class VentAnimatronicsScript : MonoBehaviour
         counter += Time.deltaTime;
         if (counter >= 120 && _hasAddedOnce == false)
         {
+            _hasAddedOnce = true;
+
             if (_clankarenActiveThisNight)
             {
                 clankarenAILevel += 2;
@@ -99,6 +107,8 @@ public class VentAnimatronicsScript : MonoBehaviour
 }
         else if (counter >= 240 && _hasAddedTwice == false)
         {
+            _hasAddedTwice = true;
+
             if (_clankarenActiveThisNight)
             {
                 clankarenAILevel += 2;
@@ -128,28 +138,82 @@ public class VentAnimatronicsScript : MonoBehaviour
                     int rng2 = Random.Range(1, 3);
                     if (rng2 == 1)
                     {
-                        clankarenPosition = Positions.b1;
+                        if (ferdinandPosition != Positions.b1)
+                        {
+                            clankarenPosition = Positions.b1;
+                        }
                     }
                     else
                     {
-                        clankarenPosition = Positions.b2;
+                        if (ferdinandPosition != Positions.b2)
+                        {
+                            clankarenPosition = Positions.b2;
+                        }
                     }
                 }
                 else if (clankarenPosition == Positions.b1)
                 {
-                    clankarenPosition = Positions.a1;
+                    if (ferdinandPosition != Positions.a1)
+                    {
+                        clankarenPosition = Positions.a1;
+                    }
                 }
                 else if (clankarenPosition == Positions.b2)
                 {
-                    clankarenPosition = Positions.a2;
+                    if (ferdinandPosition != Positions.a2)
+                    {
+                        clankarenPosition = Positions.a2;
+                    }
                 }
                 else if (clankarenPosition == Positions.a1)
                 {
-                    clankaren.SetActive(true);
+                    if (nightScript._leftClosed == true)
+                    {
+                        clankarenPosition = Positions.c;
+                    }
+                    else
+                    {
+                        if (ferdinandPosition != Positions.x1)
+                        {
+                            clankarenPosition = Positions.x1;
+                        }
+                    }
                 }
                 else if (clankarenPosition == Positions.a2)
                 {
-                    clankaren.SetActive(true);
+                    if (nightScript._rightClosed == true)
+                    {
+                        clankarenPosition = Positions.c;
+                    }
+                    else
+                    {
+                        if (ferdinandPosition != Positions.x2)
+                        {
+                            clankarenPosition = Positions.x2;
+                        }
+                    }
+                }
+                else if (clankarenPosition == Positions.x1)
+                {
+                    if (nightScript._leftClosed == true)
+                    {
+                        clankarenPosition = Positions.c;
+                    }
+                    else
+                    {
+                        clankaren.SetActive(true);
+                    }
+                }
+                else if (clankarenPosition == Positions.x2)
+                {
+                    if (nightScript._rightClosed == true)
+                    {
+                        clankarenPosition = Positions.c;
+                    }
+                    else
+                    {
+                        clankaren.SetActive(true);
+                    }
                 }
             }
         }
@@ -169,28 +233,79 @@ public class VentAnimatronicsScript : MonoBehaviour
                     int rng2 = Random.Range(1, 3);
                     if (rng2 == 1)
                     {
-                        ferdinandPosition = Positions.b1;
+                        if (clankarenPosition != Positions.b1)
+                        {
+                            ferdinandPosition = Positions.b1;
+                        }
                     }
                     else
                     {
-                        ferdinandPosition = Positions.b2;
+                        if (clankarenPosition != Positions.b2)
+                        {
+                            ferdinandPosition = Positions.b2;
+                        }
                     }
                 }
                 else if (ferdinandPosition == Positions.b1)
                 {
-                    ferdinandPosition = Positions.a1;
+                    if (clankarenPosition != Positions.a1)
+                    {
+                        ferdinandPosition = Positions.a1;
+                    }
                 }
                 else if (ferdinandPosition == Positions.b2)
                 {
-                    ferdinandPosition = Positions.a2;
+                    if (clankarenPosition != Positions.a2)
+                    {
+                        ferdinandPosition = Positions.a2;
+                    }
                 }
                 else if (ferdinandPosition == Positions.a1)
                 {
-                    ferdinand.SetActive(true);
+                    if (nightScript._leftClosed == true)
+                    {
+                        ferdinandPosition = Positions.c;
+                    }
+                    else
+                    {
+                        if (clankarenPosition != Positions.x1)
+                        {
+                            ferdinandPosition = Positions.x1;
+                        }
+                    }
                 }
                 else if (ferdinandPosition == Positions.a2)
                 {
-                    ferdinand.SetActive(true);
+                    if (nightScript._rightClosed == true)
+                    {
+                        ferdinandPosition = Positions.c;
+                    }
+                    else
+                    {
+                        ferdinandPosition = Positions.x2;
+                    }
+                }
+                else if (ferdinandPosition == Positions.x1)
+                {
+                    if (nightScript._leftClosed == true)
+                    {
+                        ferdinandPosition = Positions.c;
+                    }
+                    else
+                    {
+                        ferdinand.SetActive(true);
+                    }
+                }
+                else if (ferdinandPosition == Positions.x2)
+                {
+                    if (nightScript._rightClosed == true)
+                    {
+                        ferdinandPosition = Positions.c;
+                    }
+                    else
+                    {
+                        ferdinand.SetActive(true);
+                    }
                 }
             }
         }
