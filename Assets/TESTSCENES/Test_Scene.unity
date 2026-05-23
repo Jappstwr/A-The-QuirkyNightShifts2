@@ -518,6 +518,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 12709229}
+        m_TargetAssemblyTypeName: MainCameraScript, Assembly-CSharp
+        m_MethodName: SwitchCamera
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &87859911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +733,7 @@ Transform:
   m_GameObject: {fileID: 217345649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -903.95, y: -494.57, z: 0}
+  m_LocalPosition: {x: -903.95, y: -494.57, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1007,11 +1019,12 @@ MonoBehaviour:
   - {fileID: 1522589801}
   - {fileID: 288922242}
   nightscript: {fileID: 893002566}
-  baseAI: 1
+  baseAI: 10
   checkInterval: 5
   maincamerascript: {fileID: 12709229}
   aiLevel: 0
   aiTimer: 0
+  currentAIModifier: 0
   moveTimer: 0
   currentRoom: 0
   sr: {fileID: 926859952}
@@ -2978,7 +2991,7 @@ Transform:
   m_GameObject: {fileID: 863097605}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -910.21, y: -494.57, z: 0}
+  m_LocalPosition: {x: -910.21, y: -494.57, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3028,7 +3041,7 @@ Transform:
   m_GameObject: {fileID: 873302348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -909.3, y: -494.06, z: 0}
+  m_LocalPosition: {x: -909.3, y: -494.06, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3412,6 +3425,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2089993712}
         m_TargetAssemblyTypeName: CamHandelerInTestScene, Assembly-CSharp
         m_MethodName: SwitchToOffice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 12709229}
+        m_TargetAssemblyTypeName: MainCameraScript, Assembly-CSharp
+        m_MethodName: CloseCameras
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3819,6 +3844,7 @@ MonoBehaviour:
   camSystem: {fileID: 12709229}
   sleepSprite: {fileID: 1388711804929170423, guid: d777fca45fe55334d8f74ee34700ba7a, type: 3}
   awakeSprite: {fileID: 2614477738919454129, guid: 0fd03dd25b5009b4c909a0b1a942f158, type: 3}
+  AttackTimer: 10
   waypoints: {fileID: 863097607}
 --- !u!1 &1062374693
 GameObject:
@@ -4336,7 +4362,7 @@ Transform:
   m_GameObject: {fileID: 1188161551}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -903.2, y: -493.45, z: 0}
+  m_LocalPosition: {x: -903.2, y: -493.45, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5030,7 +5056,7 @@ MonoBehaviour:
   button: {fileID: 1066604751}
   fillBar: {fileID: 904701899}
   songUI: {fileID: 41612723}
-  nightscript: {fileID: 0}
+  nightscript: {fileID: 893002566}
   musicSource: {fileID: 519545166}
   warningSource: {fileID: 451552612}
   songs:
@@ -5125,7 +5151,7 @@ Transform:
   m_GameObject: {fileID: 1399516782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 1}
+  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 2}
   m_LocalScale: {x: 5.6902313, y: 3.2006845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5575,7 +5601,7 @@ Transform:
   m_GameObject: {fileID: 1465831141}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 1}
+  m_LocalPosition: {x: -863.62604, y: -575.65063, z: 2}
   m_LocalScale: {x: 5.6902313, y: 3.2006845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6112,7 +6138,7 @@ Transform:
   m_GameObject: {fileID: 1663915678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -913.99, y: -493.45, z: 0}
+  m_LocalPosition: {x: -913.99, y: -493.45, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6303,7 +6329,7 @@ Transform:
   m_GameObject: {fileID: 1701900136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4757, y: 0.3453, z: 1}
+  m_LocalPosition: {x: -0.4757, y: 0.3453, z: 2}
   m_LocalScale: {x: 9.259629, y: 9.2607155, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6394,7 +6420,7 @@ Transform:
   m_GameObject: {fileID: 1769571511}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -903.64, y: -498.09, z: 0}
+  m_LocalPosition: {x: -903.64, y: -498.09, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6837,7 +6863,7 @@ Transform:
   m_GameObject: {fileID: 1869042387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4757, y: 0.3453, z: 1}
+  m_LocalPosition: {x: -0.4757, y: 0.3453, z: 2}
   m_LocalScale: {x: 9.259629, y: 9.2607155, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7225,7 +7251,7 @@ Transform:
   m_GameObject: {fileID: 1955165820}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -915.4, y: -494.59, z: 0}
+  m_LocalPosition: {x: -915.4, y: -494.59, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7875,7 +7901,7 @@ Transform:
   m_GameObject: {fileID: 2072375851}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -916.63, y: -495.55, z: 0}
+  m_LocalPosition: {x: -916.63, y: -495.55, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8061,6 +8087,7 @@ MonoBehaviour:
   CAMSImage: {fileID: 832091353}
   Office: {fileID: 603454031}
   MonitorView: {fileID: 832091353}
+  nightscript: {fileID: 893002566}
 --- !u!4 &2089993713
 Transform:
   m_ObjectHideFlags: 0
@@ -8112,11 +8139,12 @@ MonoBehaviour:
   - {fileID: 1695552078}
   - {fileID: 1336780171}
   nightscript: {fileID: 893002566}
-  baseAI: 0
+  baseAI: 10
   checkInterval: 5.3
   maincamerascript: {fileID: 12709229}
   aiLevel: 0
   aiTimer: 0
+  currentAIModifier: 0
   moveTimer: 0
   currentRoom: 0
   sr: {fileID: 2000879722}

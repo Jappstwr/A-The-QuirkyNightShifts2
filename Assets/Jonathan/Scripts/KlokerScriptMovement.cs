@@ -17,7 +17,9 @@ public class KlokerScriptMovement : MonoBehaviour
     private int currentPathIndex = 0;
     public int aiLevel = 0;
 
-    public float aiTimer = 0; 
+    public float aiTimer = 0;
+
+    public int currentAIModifier; 
 
     public float moveTimer;
 
@@ -46,6 +48,8 @@ public class KlokerScriptMovement : MonoBehaviour
         }
 
         aiLevel = baseAI;
+
+        GetNight(); 
 
         MoveToWaypoint(0);
 
@@ -116,10 +120,41 @@ public class KlokerScriptMovement : MonoBehaviour
 
         if (aiTimer >= 240)
         {
-            aiLevel += 2; 
+            aiLevel += currentAIModifier; 
         }
     }
+    public void GetNight()
+    {
+        if (nightscript.Night == 1)
+        {
+            currentAIModifier += 1; 
+        }
 
+        if (nightscript.Night == 2)
+        {
+            currentAIModifier += 2; 
+        }
+
+        if (nightscript.Night == 3)
+        {
+            currentAIModifier += 3; 
+        }
+
+        if (nightscript.Night == 4)
+        {
+            currentAIModifier += 5; 
+        }
+
+        if (nightscript.Night == 5)
+        {
+            currentAIModifier += 6; 
+        }
+        if (nightscript.Night >= 6)
+        {
+            currentAIModifier += 8; 
+        }
+
+    }
     void MoveToWaypoint(int index)
     {
         Waypoints wp = paths[index];
@@ -195,7 +230,6 @@ public class KlokerScriptMovement : MonoBehaviour
         currentPathIndex++;
 
         MoveToWaypoint(currentPathIndex);
-
     }
     public void AnimAttack()
     {
@@ -215,13 +249,12 @@ public class KlokerScriptMovement : MonoBehaviour
             }
             else if (!nightscript._isFlashing && attackTimer <= 0f)
             {
-                JumpScare2(); 
+                JumpScare2();
+                Debug.Log($"Game Over! FladderLappen got you!");
             }
         }
         else
         {
-
-
             if (nightscript._inSuit)
             {
                 
@@ -235,7 +268,7 @@ public class KlokerScriptMovement : MonoBehaviour
             else if (!nightscript._inSuit && attackTimer <= 0f)
             {
                 JumpScare();
-                Debug.Log($"Game Over! You survived {aiTimer} minutes");
+                Debug.Log($"Game Over! Kloker got you!");
             }
         }
 
@@ -260,6 +293,7 @@ public class KlokerScriptMovement : MonoBehaviour
             return;
         }
 
+
         if (currentWaypoint.isHallway)
         {
             sr.enabled = nightscript._isFlashing;
@@ -271,6 +305,13 @@ public class KlokerScriptMovement : MonoBehaviour
             sr.enabled = true;
             return;
         }
+        else if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript._monitorOpen)
+        {
+            sr.enabled = false;
+        }
+
+        
+        
 
         bool visible = maincamerascript != null && maincamerascript.ActiveCamera == currentRoom && maincamerascript.camerasOpen;
 

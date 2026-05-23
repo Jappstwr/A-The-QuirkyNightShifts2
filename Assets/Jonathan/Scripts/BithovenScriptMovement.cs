@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,9 @@ public class BithovenScriptMovement : MonoBehaviour
     [SerializeField] private Sprite awakeSprite;
 
     private bool awake = false;
+    private bool hasAttacked = false;
+    private bool Attacking = false; 
+    public float AttackTimer = 10f;
 
     [Header("WayPoint")]
     [SerializeField] private Waypoints waypoints; 
@@ -29,6 +33,7 @@ public class BithovenScriptMovement : MonoBehaviour
             gameObject.layer = Layer;
         }
 
+        AttackTimer = 10f;
         //bithovenRenderer.sortingLayerName = waypoints.roomLayer;
         //bithovenRenderer.sortingOrder = 10;
 
@@ -36,47 +41,67 @@ public class BithovenScriptMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         bool visible = camSystem.ActiveCamera == roomIndex && camSystem.camerasOpen;
 
         bithovenRenderer.enabled = visible;
         
-        float fill = windUpSystem.FillPercent; 
+        float fill = windUpSystem.FillPercent;
+
         
+
         if (fill <= 0.3f)
         {
             awake = true;
 
             bithovenRenderer.sprite = awakeSprite;
-
-            
         }
-        else
+        else if (awake)
         {
-            if (awake)
+            if (fill >= 1f)
             {
+                 
                 awake = false;
 
                 bithovenRenderer.sprite = sleepSprite;
             }
         }
-
-        if (fill <= 0f)
+        else 
         {
-            Debug.Log("Bithoven attack! Game Over!");
-
-            Jumpscare(); 
+            bithovenRenderer.sprite = sleepSprite; 
         }
+
+        if (Attacking == false)
+        {
+            hasAttacked = false;
+        }
+        if (awake)
+        {
+            AttackTimer -= Time.deltaTime;
+        }
+        
+        if (awake && AttackTimer <= 0 && !hasAttacked && (fill <= 0 || fill >= 0) || fill <= 0)
+        {
+            hasAttacked = true;
+            Attacking = true; 
+            Debug.Log("Bithoven has attacked!");
+            Jumpscare();
+        }
+
+
+        //if (fill <= 0f && !hasAttacked)
+        //{
+        //    hasAttacked = true; 
+        //    Debug.Log("Bithoven attack! Game Over!");
+
+        //    Jumpscare(); 
+        //}
+
     }
 
     public void Jumpscare()
     {
        //Gaio, here goes the jumpscare       
-    }
-
-    public void StartPos(int Index)
-    {
-        
     }
 }

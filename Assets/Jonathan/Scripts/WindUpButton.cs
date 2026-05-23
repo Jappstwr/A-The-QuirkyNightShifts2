@@ -25,7 +25,7 @@ public class WindUpButton : MonoBehaviour
     private float currentHoldTime = 0f;
 
     private float decreaseTimerPerNight = 0.08f;
-    private float currentModifier = 0.02f;
+    private float currentModifier;
 
     private bool nightPassed = false;
     private bool nighPassedTrigger; 
@@ -43,10 +43,10 @@ public class WindUpButton : MonoBehaviour
 
     void Start()
     {
+        GetNight();
+
         fillBar.fillAmount = 1;
         currentHoldTime = holdTime;
-
-        
 
         ChangeSong();
     }
@@ -62,6 +62,10 @@ public class WindUpButton : MonoBehaviour
         if (correctCamera)
         {
             musicSource.volume = 0.5f;
+        }
+        else if (!nightscript.monitor)
+        {
+            musicSource.volume = 0f; 
         }
         else
         {
@@ -134,6 +138,7 @@ public class WindUpButton : MonoBehaviour
             if (!warningActive)
             {
                 warningActive = true;
+                
 
                 warningSource.clip = TireMeterSound;
                 warningSource.loop = true;
@@ -142,18 +147,49 @@ public class WindUpButton : MonoBehaviour
         }
         else
         {
-            if (warningActive)
+            if (warningActive && FillPercent >= 1f)
             {
                 warningActive = false;
 
                 warningSource.Stop();
             }
-        }
+            else
+            {
+                warningActive = false;
 
+                warningSource.Stop(); 
+            }
+        }
+        
     }
     private void FixedUpdate()
     {
         
+    }
+    public void GetNight()
+    {
+        if (nightscript.Night == 1)
+        {
+            currentModifier += 0.02f; 
+        }
+        if (nightscript.Night == 2)
+        {
+            currentModifier += 0.005f;
+        }
+
+        if (nightscript.Night == 3)
+        {
+            currentModifier += 0.005f;
+        }
+        if (nightscript.Night == 4)
+        {
+            currentModifier += 0.005f;
+        }
+
+        if (nightscript.Night == 5)
+        {
+            currentModifier += 0.05f;
+        }
     }
     //public void OnPointerDown(PointerEventData eventData)
     //{
