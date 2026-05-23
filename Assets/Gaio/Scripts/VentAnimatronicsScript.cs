@@ -76,7 +76,7 @@ public class VentAnimatronicsScript : MonoBehaviour
         else if (nightScript.Night == 4)
         {
             clankarenAILevel = 7;
-            ferdinandAILevel = 3;
+            ferdinandAILevel = 0;
             _clankarenActiveThisNight = true;
             _ferdinandActiveThisNight = true;
         }
