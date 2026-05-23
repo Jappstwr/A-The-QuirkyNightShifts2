@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class KlokerScriptMovement : MonoBehaviour
 {
@@ -97,31 +98,59 @@ public class KlokerScriptMovement : MonoBehaviour
         
         if (isFladderlappen)
         {
+            if (nightscript.Night == 1)
+            {
+                baseAI = 0;
+                aiLevel = baseAI; 
+            }
+        }
+
+        if (isFladderlappen && nightscript.Night >= 2)
+        {
             if (aiTimer <= 60f)
             {
-                baseAI = aiLevel; 
+                baseAI = aiLevel;
             }
-            if (aiTimer >= 60)
+            if (aiTimer == 60f)
             {
                 baseAI = 1;
                 aiLevel = baseAI;
+            }
+
+            if (aiTimer >= 60f)
+            {
+                if (aiTimer == 120f)
+                {
+                    aiLevel += 1;
+                }
+
+                if (aiTimer == 240)
+                {
+                    aiLevel += currentAIModifier;
+                }
             }
         }
         else
         {
             aiLevel = baseAI;
-        }
-            
 
-        if (aiTimer >= 120f)
-        {
-            aiLevel += 1; 
+
+            if (aiTimer == 120f)
+            {
+                aiLevel += 1;
+            }
+
+            if (aiTimer == 240)
+            {
+                aiLevel += currentAIModifier;
+            }
         }
 
-        if (aiTimer >= 240)
-        {
-            aiLevel += currentAIModifier; 
-        }
+        //WRONK, fladderlappen ökar ailvl med 60 varje sekund. FIXA DET!!!! (tror jag fixade det)
+
+
+
+
     }
     public void GetNight()
     {

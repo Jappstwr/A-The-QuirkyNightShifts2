@@ -17,7 +17,7 @@ public class BithovenScriptMovement : MonoBehaviour
     private bool awake = false;
     private bool hasAttacked = false;
     private bool Attacking = false; 
-    public float AttackTimer = 10f;
+    public float AttackTimer = 16f;
 
     [Header("WayPoint")]
     [SerializeField] private Waypoints waypoints; 
@@ -33,7 +33,7 @@ public class BithovenScriptMovement : MonoBehaviour
             gameObject.layer = Layer;
         }
 
-        AttackTimer = 10f;
+        AttackTimer = 16f;
         //bithovenRenderer.sortingLayerName = waypoints.roomLayer;
         //bithovenRenderer.sortingOrder = 10;
 

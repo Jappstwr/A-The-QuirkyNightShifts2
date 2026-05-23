@@ -25,24 +25,21 @@ public class CamHandelerInTestScene : MonoBehaviour
     {
         CAMS.SetActive(false);
         CAMSImage.SetActive(false);
-        Office.SetActive(true);
-        MonitorView.gameObject.SetActive(false); 
+        Office.SetActive(true); 
     }
     public void SwitchToCams()
     {
         if (!nightscript._powerOutage)
         {
-            nightscript._monitorOpen = true;
+            //nightscript._monitorOpen = true;
             CAMS.SetActive(true);
             CAMSImage.SetActive(true);
-            MonitorView.gameObject.SetActive(false);
             Office.SetActive(false);
         }
         else if (nightscript._powerOutage)
         {
             CAMS.SetActive(false);
             CAMSImage.SetActive(false);
-            MonitorView.gameObject.SetActive(true);
             Office.SetActive(true);
         }
     }
