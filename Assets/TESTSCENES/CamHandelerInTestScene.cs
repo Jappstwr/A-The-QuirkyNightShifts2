@@ -6,7 +6,6 @@ public class CamHandelerInTestScene : MonoBehaviour
     [SerializeField] private GameObject CAMS;
     [SerializeField] private GameObject CAMSImage;
     [SerializeField] private GameObject Office;
-    [SerializeField] private GameObject MonitorView;
 
     [SerializeField] private NightScript nightscript; 
 

@@ -18,17 +18,22 @@ public class FerdinandScriptHolder : MonoBehaviour
 
     public void GetNight() 
     {
-        if (nightscript.Night == 4)
+        if (nightscript.Night == 4 && nightscript.nightTime >= 120)
         {
             ferdinandSr.enabled = false;
         }
+        else
+        {
+            ferdinandSr.enabled = true;
+        }
+
         if (nightscript.Night >= 5)
         {
-            ferdinandSr.enabled = false; 
+            ferdinandSr.enabled = false;
         }
         else
         {
-            ferdinandSr.enabled = true; 
+            ferdinandSr.enabled = true;
         }
 
     }

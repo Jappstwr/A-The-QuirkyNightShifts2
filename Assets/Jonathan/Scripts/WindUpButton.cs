@@ -170,25 +170,25 @@ public class WindUpButton : MonoBehaviour
     {
         if (nightscript.Night == 1)
         {
-            currentModifier += 0.02f; 
+            currentModifier = 0.02f; 
         }
         if (nightscript.Night == 2)
         {
-            currentModifier += 0.005f;
+            currentModifier = 0.025f;
         }
 
         if (nightscript.Night == 3)
         {
-            currentModifier += 0.005f;
+            currentModifier += 0.03f;
         }
         if (nightscript.Night == 4)
         {
-            currentModifier += 0.005f;
+            currentModifier += 0.035f;
         }
 
         if (nightscript.Night == 5)
         {
-            currentModifier += 0.05f;
+            currentModifier += 0.040f;
         }
     }
     //public void OnPointerDown(PointerEventData eventData)

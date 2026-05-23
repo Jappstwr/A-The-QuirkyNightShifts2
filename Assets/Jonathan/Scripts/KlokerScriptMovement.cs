@@ -92,65 +92,38 @@ public class KlokerScriptMovement : MonoBehaviour
     }   
     public void UpdateAILevel()
     {
-        //float hour = nighscript.nightTime;
+        aiLevel = baseAI; 
 
-        //removed because he can be like benny (bonnie). starts with an ai lvl of 1. 
-        
         if (isFladderlappen)
         {
             if (nightscript.Night == 1)
             {
-                baseAI = 0;
-                aiLevel = baseAI; 
+                aiLevel = 0;
+                return; 
             }
-        }
 
-        if (isFladderlappen && nightscript.Night >= 2)
-        {
-            if (aiTimer <= 60f)
+            if (aiTimer < 60f)
             {
-                baseAI = aiLevel;
-            }
-            if (aiTimer == 60f)
-            {
-                baseAI = 1;
-                aiLevel = baseAI;
+                aiLevel = 0;
+                return; 
             }
 
             if (aiTimer >= 60f)
             {
-                if (aiTimer == 120f)
-                {
-                    aiLevel += 1;
-                }
-
-                if (aiTimer == 240)
-                {
-                    aiLevel += currentAIModifier;
-                }
+                aiLevel = baseAI; 
             }
         }
-        else
+
+
+        if (aiTimer >= 120f)
         {
-            aiLevel = baseAI;
-
-
-            if (aiTimer == 120f)
-            {
-                aiLevel += 1;
-            }
-
-            if (aiTimer == 240)
-            {
-                aiLevel += currentAIModifier;
-            }
+            aiLevel += 1;
         }
 
-        //WRONK, fladderlappen ökar ailvl med 60 varje sekund. FIXA DET!!!! (tror jag fixade det)
-
-
-
-
+        if (aiTimer >= 240)
+        {
+            aiLevel += currentAIModifier;
+        }
     }
     public void GetNight()
     {
@@ -322,6 +295,11 @@ public class KlokerScriptMovement : MonoBehaviour
             return;
         }
 
+        if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript._monitorOpen)
+        {
+            sr.enabled = false;
+            return;
+        }
 
         if (currentWaypoint.isHallway)
         {
@@ -334,10 +312,8 @@ public class KlokerScriptMovement : MonoBehaviour
             sr.enabled = true;
             return;
         }
-        else if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript.monitor)
-        {
-            sr.enabled = false;
-        }
+        
+      
 
         
         
