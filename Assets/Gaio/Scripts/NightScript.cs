@@ -54,7 +54,7 @@ public class NightScript : MonoBehaviour
     public TMP_Text nightText;
     public TMP_Text amText;
 
-    [SerializeField] private float nightTime;
+    public float nightTime;
 
     public List<GameObject> powerLights;
 
