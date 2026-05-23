@@ -305,7 +305,7 @@ public class KlokerScriptMovement : MonoBehaviour
             sr.enabled = true;
             return;
         }
-        else if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript._monitorOpen)
+        else if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript.monitor)
         {
             sr.enabled = false;
         }

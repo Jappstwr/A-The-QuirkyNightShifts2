@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CamHandelerInTestScene : MonoBehaviour
@@ -11,7 +12,7 @@ public class CamHandelerInTestScene : MonoBehaviour
 
     void Start()
     {
-        
+        CAMSImage.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class CamHandelerInTestScene : MonoBehaviour
     {
         if (!nightscript._powerOutage)
         {
-            //nightscript._monitorOpen = true; 
+            nightscript._monitorOpen = true;
             CAMS.SetActive(true);
             CAMSImage.SetActive(true);
             MonitorView.gameObject.SetActive(false);
