@@ -6,10 +6,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 
 public class NightScript : MonoBehaviour
 {
+    public GameObject office;
+    public GameObject deathmenu;
+    
     public AudioClip pressSound;
     public AudioClip ambience1Sound;
     public AudioClip ambience2Sound;
@@ -17,7 +21,7 @@ public class NightScript : MonoBehaviour
     public int Night;
 
     public List<GameObject> offices = new List<GameObject>();
-    public int officeIndex;
+    [SerializeField] private int officeIndex;
 
     public GameObject suit;
     public bool _inSuit;
@@ -32,35 +36,35 @@ public class NightScript : MonoBehaviour
     public GameObject ventSystem;
     public GameObject camSystem;
 
-    public bool _isOnCam;
+    [SerializeField] private bool _isOnCam;
 
     public GameObject flashlight;
     public bool _isFlashing;
 
     public int maxPower;
-    public float currentPower;
-    public int powerUsage;
+    [SerializeField] private float currentPower;
+    [SerializeField] private int powerUsage;
     public float defaultPower;
     public bool _powerOutage;
 
     public float powerCooldown;
-    public float powerTimer;
+    [SerializeField] private float powerTimer;
 
     public TMP_Text powerText;
     public TMP_Text nightText;
     public TMP_Text amText;
 
-    public float nightTime;
+    [SerializeField] private float nightTime;
 
     public List<GameObject> powerLights;
 
-    public float shakePower;
+    [SerializeField] private float shakePower;
 
-    public List<RectTransform> PLrects = new List<RectTransform>();
+    [SerializeField] private List<RectTransform> PLrects = new List<RectTransform>();
 
-    public Vector2[] originalPLPositions;
-    public Vector2[] currentPLPositions;
-    public Vector2[] targetPLPositions;
+    [SerializeField] private Vector2[] originalPLPositions;
+    [SerializeField] private Vector2[] currentPLPositions;
+    [SerializeField] private Vector2[] targetPLPositions;
 
     public bool _leftClosed;
     public bool _rightClosed;
@@ -74,29 +78,12 @@ public class NightScript : MonoBehaviour
     public Sprite leftClosed;
     public Sprite rightClosed;
 
+    public bool _isDead;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SetNightText();
-        officeIndex = 1;
-        nightTime = 0f;
-        currentPower = maxPower;
-
-        monitor.SetActive(false);
-        suit.SetActive(false);
-        turnLeftButton.SetActive(true);
-        turnRightButton.SetActive(true);
-        monitorButton.SetActive(true);
-        suitButton.SetActive(true);
-        closeButton.SetActive(false);
-        _monitorOpen = false;
-        _inSuit = false;
-        _isOnCam = true;
-        _leftClosed = false;
-        _rightClosed = false;
-        powerUsage = 1;
-        _isFlashing = false;
-
+        ResetNight();
 
         UpdateFlash();
         UpdateOffice();
@@ -109,9 +96,37 @@ public class NightScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void SetNightText()
+    public void ResetNight()
     {
         nightText.text = $"Night {Night}";
+
+        officeIndex = 1;
+        nightTime = 0f;
+        currentPower = maxPower;
+
+        office.SetActive(true);
+        deathmenu.SetActive(false);
+        monitor.SetActive(false);
+        suit.SetActive(false);
+        turnLeftButton.SetActive(true);
+        turnRightButton.SetActive(true);
+        monitorButton.SetActive(true);
+        suitButton.SetActive(true);
+        closeButton.SetActive(false);
+        _isDead = false;
+        _monitorOpen = false;
+        _inSuit = false;
+        _isOnCam = true;
+        _leftClosed = false;
+        _rightClosed = false;
+        powerUsage = 1;
+        _isFlashing = false;
+
+        SoundEffectScript.Instance.StartAmbience();
+    }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(1);
     }
     public void UpdateAMText()
     {
@@ -429,14 +444,22 @@ public class NightScript : MonoBehaviour
     }
     void Update()
     {
-        nightTime += Time.deltaTime;
-        UpdateAMText();
-        PlayerInput();
-        if (_powerOutage == false)
+        if (_isDead)
         {
-            CalculatePowerUsage();
-            UpdatePowerLights();
-            SubtractPower();
+            office.SetActive(false);
+            deathmenu.SetActive(true);
+        }
+        else
+        {
+            nightTime += Time.deltaTime;
+            UpdateAMText();
+            PlayerInput();
+            if (_powerOutage == false)
+            {
+                CalculatePowerUsage();
+                UpdatePowerLights();
+                SubtractPower();
+            }
         }
     }
 }

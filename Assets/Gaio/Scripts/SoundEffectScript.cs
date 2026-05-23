@@ -27,6 +27,18 @@ public class SoundEffectScript : MonoBehaviour
         ambienceSource.Play();
     }
 
+    public void StopAmbience()
+    {
+        officeSource.Stop();
+        ambienceSource.Stop();
+    }
+
+    public void StartAmbience()
+    {
+        officeSource.Play();
+        ambienceSource.Play();
+    }
+
     public void PlaySoundEffect(AudioClip audioClip, float volume)
     {
         AudioSource audioSource = Instantiate(soundEffectObject);
