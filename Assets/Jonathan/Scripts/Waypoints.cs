@@ -14,4 +14,9 @@ public class Waypoints : MonoBehaviour
     [Header("Special Locations")]
     public bool isHallway;
     public bool isOffice;
+
+    [Header("Specific Office locations")]
+    public bool isLeftOffice;
+    public bool isCenterOffice;
+    public bool isRightOffice;
 }

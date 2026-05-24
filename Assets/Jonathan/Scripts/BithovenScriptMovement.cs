@@ -63,7 +63,7 @@ public class BithovenScriptMovement : MonoBehaviour
             {
                  
                 awake = false;
-
+                AttackTimer = 16f; 
                 bithovenRenderer.sprite = sleepSprite;
             }
         }

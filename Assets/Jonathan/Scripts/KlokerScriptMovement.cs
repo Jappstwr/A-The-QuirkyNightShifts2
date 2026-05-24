@@ -75,7 +75,7 @@ public class KlokerScriptMovement : MonoBehaviour
         {
             attacking = true;
             attackTimer = 8f;
-            retreatTimer = Random.Range(3f, 5f);
+            retreatTimer = Random.Range(2f, 3f);
         }
         if (attacking)
         {
@@ -296,6 +296,18 @@ public class KlokerScriptMovement : MonoBehaviour
         }
 
         if ((currentWaypoint.isHallway || currentWaypoint.isOffice) && nightscript._monitorOpen)
+        {
+            sr.enabled = false;
+            return;
+        }
+
+        if (currentWaypoint.isLeftOffice && nightscript._leftClosed)
+        {
+            sr.enabled = false;
+            return;
+        }
+
+        if (currentWaypoint.isRightOffice && nightscript._rightClosed)
         {
             sr.enabled = false;
             return;
