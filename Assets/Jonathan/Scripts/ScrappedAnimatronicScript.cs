@@ -28,7 +28,8 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     public float attackTimer = 8f;
     public float retreatTimer;
 
-    public bool attacking = false; 
+    public bool attacking;
+    private bool hasAttackStarted; 
 
     private Waypoints currentWaypoint;
 
@@ -47,12 +48,12 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
         aiLvl = BaseAI;
 
-        MoveToWaypoint(0);
+        MoveToWaypoint(0); 
 
-        attackTimer = 8f;
-        retreatTimer = Random.Range(2f,4f); 
+        moveTimer = checkInterval;
 
-        moveTimer = checkInterval; 
+
+        retreatTimer = Random.Range(2f, 4f);
     }
 
     // Update is called once per frame
@@ -63,22 +64,25 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
         aiTimer += Time.deltaTime;
 
-        if (BaseAI <= 0f)
-        {
-            return; 
-        }
+        //if (BaseAI <= 0f && !attacking)
+        //{
+        //    return; 
+        //}
 
         moveTimer -= Time.deltaTime;
 
-        if (currentPathIndex == 4 && !attacking)
+        if (currentWaypoint.isOffice && !hasAttackStarted)
         {
+            hasAttackStarted = true; 
             attacking = true;
             attackTimer = 8f;
             retreatTimer = Random.Range(2f, 4f);
         }
         if (attacking)
         {
+            Debug.Log($"Attack started {attackTimer}");
             AnimAttack();
+            return; 
         }
 
         if (moveTimer <= 0f)
@@ -89,7 +93,7 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     }
     public void UpdateAI()
     {
-        //BaseAI = 0;
+        BaseAI = 0;
 
         //fredrik movement
         if (isFredrik)
@@ -184,32 +188,34 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     public void AnimAttack()
     {
         attackTimer -= Time.deltaTime;
-        retreatTimer -= Time.deltaTime; 
+        retreatTimer -= Time.deltaTime;
 
         if (nightscript._inSuit)
         {
             if (retreatTimer <= 0f)
             {
+                hasAttackStarted = false; 
                 attacking = false;
-                currentPathIndex = 0;
-                MoveToWaypoint(currentPathIndex);
-            } 
-        }
-        else if (!nightscript._inSuit)
-        {
-            if (attackTimer <= 0f)
-            {
-                Jumpscare();
 
-                if (isBenny)
-                {
-                    Debug.Log("Benny got you! Game Over!");
-                }
-                else if (isFredrik)
-                {
-                    Debug.Log("Fredrik got you! Game Over!");
-                }
+                currentPathIndex = 0;
+
+                MoveToWaypoint(currentPathIndex);
             }
+        }
+        else if (!nightscript._inSuit && attackTimer <= 0f)
+        {
+          
+            Jumpscare();
+
+            if (isBenny)
+            {
+                Debug.Log("Benny got you! Game Over!");
+            }
+            else if (isFredrik)
+            {
+                Debug.Log("Fredrik got you! Game Over!");
+            }
+            
         }
     }
 

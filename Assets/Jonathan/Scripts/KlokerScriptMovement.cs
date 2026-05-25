@@ -71,7 +71,7 @@ public class KlokerScriptMovement : MonoBehaviour
 
         moveTimer -= Time.deltaTime;
 
-        if (currentPathIndex == 4 && !attacking)
+        if (currentWaypoint.isOffice && !attacking)
         {
             attacking = true;
             attackTimer = 8f;
@@ -80,6 +80,7 @@ public class KlokerScriptMovement : MonoBehaviour
         if (attacking)
         {
             AnimAttack();
+            return; 
         }
 
         if  (moveTimer <= 0f)
