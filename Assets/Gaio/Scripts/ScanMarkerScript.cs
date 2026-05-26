@@ -13,6 +13,8 @@ public class ScanMarkerScript : MonoBehaviour
         
     }
 
+    
+
     public void Activate()
     {
         currentTime = activeTime;
@@ -37,5 +39,7 @@ public class ScanMarkerScript : MonoBehaviour
         {
             gameObject.transform.localPosition = new Vector3(0, 500);
         }
+
+       
     }
 }

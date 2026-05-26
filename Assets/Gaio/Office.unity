@@ -210,6 +210,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1788814729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &43324541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43324544}
+  - component: {fileID: 43324543}
+  - component: {fileID: 43324542}
+  m_Layer: 5
+  m_Name: ScanSlider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &43324542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43324541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1078294437307101432, guid: a5264221525e5ef4dbb55fb658757328, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &43324543
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43324541}
+  m_CullTransparentMesh: 1
+--- !u!224 &43324544
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43324541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1714452668}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 540, y: -105}
+  m_SizeDelta: {x: 350, y: 15}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &58040657
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64eb052af4e35df438cd16687e102886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VentScanScript
+  nightScript: {fileID: 1543463250}
   ventAnimScript: {fileID: 1305467397}
   scanPositions:
   - {x: -0.114, y: -0.115, z: 0}
@@ -745,6 +821,8 @@ MonoBehaviour:
   scanMarker: {fileID: 6730439631238884272}
   scanMarker2: {fileID: 511421393194657523}
   doubleScanMarker: {fileID: 6109184536750051262}
+  scanTime: 0
+  scanSlider: {fileID: 43324542}
 --- !u!212 &156604562
 SpriteRenderer:
   serializedVersion: 2
@@ -3161,8 +3239,8 @@ MonoBehaviour:
   ferdinandPosition: 0
   clankarenAILevel: 0
   ferdinandAILevel: 0
-  clankarenCooldown: 4.95
-  ferdinandCooldown: 5.05
+  clankarenCooldown: 10.5
+  ferdinandCooldown: 9.95
   clankarenTimer: 0
   ferdinandTimer: 0
   _clankarenActiveThisNight: 0
@@ -3954,6 +4032,7 @@ MonoBehaviour:
   leftClosed: {fileID: 21300000, guid: c3766f2f2715c474bb105505ff19a1b0, type: 3}
   rightClosed: {fileID: 21300000, guid: 9dd6e9208a2ea3449a976cb93c4a50d4, type: 3}
   _isDead: 0
+  scanTimer: 0
 --- !u!4 &1543463251
 Transform:
   m_ObjectHideFlags: 0
@@ -4440,6 +4519,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1827164470}
+  - {fileID: 43324544}
   m_Father: {fileID: 156604560}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
