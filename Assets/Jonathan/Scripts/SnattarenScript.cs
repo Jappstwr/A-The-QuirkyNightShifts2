@@ -26,6 +26,7 @@ public class SnattarenScript : MonoBehaviour
 
     public float attackTimer = 8f;
     public float retreatTimer;
+    public float punishTimer; 
 
     public bool attacking;
     private bool hasAttackStarted;
@@ -47,7 +48,8 @@ public class SnattarenScript : MonoBehaviour
 
         moveTimer = checkInterval;
 
-        retreatTimer = Random.Range(1,3); 
+        retreatTimer = Random.Range(1f,3f);
+        punishTimer = Random.Range(6f, 10f); 
     }
 
     // Update is called once per frame
@@ -66,11 +68,14 @@ public class SnattarenScript : MonoBehaviour
             hasAttackStarted = true; 
             attacking = true;
             attackTimer = 6f;
-            retreatTimer = Random.Range(1,3); 
+            retreatTimer = Random.Range(1f,3f);
+            punishTimer = Random.Range(6f,10f); 
         }
         if (attacking)
         {
-            AnimAttack(); 
+            Debug.Log("Snattaren got you! You can no longer flash for the time being"); 
+            AnimAttack();
+            return; 
         }
 
         if (moveTimer <= 0f)
@@ -144,20 +149,38 @@ public class SnattarenScript : MonoBehaviour
     public void AnimAttack()
     {
         attackTimer -= Time.deltaTime;
-        retreatTimer -= Time.deltaTime; 
+        retreatTimer -= Time.deltaTime;
+        
 
         if (nightscript._isFlashing && retreatTimer <= 0f)
         {
             hasAttackStarted = false;
-            attacking = false; 
+            attacking = false;
+            nightscript._canFlash = true; 
 
             currentPathIndex = 0;
 
             MoveToWaypoint(currentPathIndex); 
         }
-        else if (!nightscript._isFlashing)
+        else if (!nightscript._isFlashing && attackTimer <= 0f)
         {
             //take 'em bloody batteries
+
+            nightscript._canFlash = false;
+
+            punishTimer -= Time.deltaTime; 
+
+            if (punishTimer <= 0f)
+            {
+                attacking = false;
+                hasAttackStarted = false;
+                nightscript._canFlash = true; 
+
+
+                currentPathIndex = 0;
+
+                MoveToWaypoint(currentPathIndex); 
+            }
         }
     }
     public void UpdateVisibility()

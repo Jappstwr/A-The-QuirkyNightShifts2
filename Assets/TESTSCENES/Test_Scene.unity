@@ -1294,7 +1294,7 @@ Transform:
   m_GameObject: {fileID: 217345649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -903.95, y: -494.57, z: 1}
+  m_LocalPosition: {x: -903.42, y: -494.57, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2268,6 +2268,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1981606480}
+  - {fileID: 2116429148}
   m_Father: {fileID: 1579308019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3425,7 +3426,7 @@ Transform:
   m_GameObject: {fileID: 812996391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.7, y: -1.47, z: -1}
+  m_LocalPosition: {x: -6.7, y: -1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3444,19 +3445,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325c3d12068a2594e92f76e0c9031ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  paths: []
-  nightscript: {fileID: 0}
+  paths:
+  - {fileID: 217345651}
+  - {fileID: 1554113821}
+  nightscript: {fileID: 1140767873}
   BaseAI: 0
   checkInterval: 5
-  maincamerascript: {fileID: 0}
+  maincamerascript: {fileID: 1089598042}
   aiLvl: 0
   aiTimer: 0
   currentAIModifier: 0
   moveTimer: 0
   currentRoom: 0
-  sr: {fileID: 0}
+  sr: {fileID: 1708218991}
   attackTimer: 8
   retreatTimer: 0
+  punishTimer: 0
   attacking: 0
 --- !u!1 &820269703
 GameObject:
@@ -5617,8 +5621,10 @@ MonoBehaviour:
   office: {fileID: 1110524039}
   deathmenu: {fileID: 951171041}
   pressSound: {fileID: 8300000, guid: 44de25b16ea4f1942bf82893f679931e, type: 3}
+  cameraSound: {fileID: 8300000, guid: 66ef434ffe7dd1440a753000ae8f77f7, type: 3}
   ambience1Sound: {fileID: 8300000, guid: f14fad932caf4b64d937b3df4ca3e5be, type: 3}
   ambience2Sound: {fileID: 8300000, guid: fa38414eb7a9fdf4789415f9d4e2365b, type: 3}
+  doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
   Night: 4
   offices:
   - {fileID: 23193822}
@@ -5638,6 +5644,7 @@ MonoBehaviour:
   _isOnCam: 0
   flashlight: {fileID: 266144073}
   _isFlashing: 0
+  _canFlash: 0
   maxPower: 99
   currentPower: 0
   powerUsage: 0
@@ -7928,7 +7935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64eb052af4e35df438cd16687e102886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VentScanScript
-  nightScript: {fileID: 0}
+  nightScript: {fileID: 1140767873}
   ventAnimScript: {fileID: 1495635654}
   scanPositions:
   - {x: -0.114, y: -0.115, z: 0}
@@ -7942,7 +7949,8 @@ MonoBehaviour:
   scanMarker2: {fileID: 1799111289}
   doubleScanMarker: {fileID: 980975668}
   scanTime: 0
-  scanSlider: {fileID: 0}
+  scanSlider: {fileID: 2116429149}
+  scanSound: {fileID: 8300000, guid: cbced195941c6ed4c85d0104beb42bde, type: 3}
 --- !u!212 &1579308021
 SpriteRenderer:
   serializedVersion: 2
@@ -11120,6 +11128,81 @@ Transform:
   - {fileID: 2000879723}
   m_Father: {fileID: 1484334435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2116429147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2116429148}
+  - component: {fileID: 2116429150}
+  - component: {fileID: 2116429149}
+  m_Layer: 5
+  m_Name: ScanSlider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2116429148
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116429147}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391574456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 350, y: 15}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2116429149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116429147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1078294437307101432, guid: a5264221525e5ef4dbb55fb658757328, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2116429150
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116429147}
+  m_CullTransparentMesh: 1
 --- !u!1 &2127154391
 GameObject:
   m_ObjectHideFlags: 0
