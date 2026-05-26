@@ -80,6 +80,8 @@ public class NightScript : MonoBehaviour
 
     public bool _isDead;
 
+    public float scanTimer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -103,6 +105,7 @@ public class NightScript : MonoBehaviour
         officeIndex = 1;
         nightTime = 0f;
         currentPower = maxPower;
+        scanTimer = 0;
 
         office.SetActive(true);
         deathmenu.SetActive(false);
@@ -153,21 +156,24 @@ public class NightScript : MonoBehaviour
     }
     public void CloseButton()
     {
-        monitor.SetActive(false);
-        suit.SetActive(false);
-        turnLeftButton.SetActive(true);
-        turnRightButton.SetActive(true);
-        monitorButton.SetActive(true);
-        suitButton.SetActive(true);
-        closeButton.SetActive(false);
-        _monitorOpen = false;
-        _inSuit = false;
+        if (scanTimer <= 0)
+        {
+            monitor.SetActive(false);
+            suit.SetActive(false);
+            turnLeftButton.SetActive(true);
+            turnRightButton.SetActive(true);
+            monitorButton.SetActive(true);
+            suitButton.SetActive(true);
+            closeButton.SetActive(false);
+            _monitorOpen = false;
+            _inSuit = false;
 
-        PressSoundEffect();
+            PressSoundEffect();
+        }
     }
     public void ToggleMonitor()
     {
-        if (_powerOutage == false)
+        if (_powerOutage == false && scanTimer <= 0)
         {
             _monitorOpen = !_monitorOpen;
             UpdateMonitor();
@@ -178,16 +184,19 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleMonitorView()
     {
-        _isOnCam = !_isOnCam;
-        if (_isOnCam)
+        if (scanTimer <= 0)
         {
-            camSystem.SetActive(true);
-            ventSystem.SetActive(false);
-        }
-        else
-        {
-            camSystem.SetActive(false);
-            ventSystem.SetActive(true);
+            _isOnCam = !_isOnCam;
+            if (_isOnCam)
+            {
+                camSystem.SetActive(true);
+                ventSystem.SetActive(false);
+            }
+            else
+            {
+                camSystem.SetActive(false);
+                ventSystem.SetActive(true);
+            }
         }
     }
     public void ToggleSuit()
@@ -451,6 +460,7 @@ public class NightScript : MonoBehaviour
         }
         else
         {
+            scanTimer -= Time.deltaTime;
             nightTime += Time.deltaTime;
             UpdateAMText();
             PlayerInput();
