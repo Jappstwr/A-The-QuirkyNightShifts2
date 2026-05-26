@@ -15,8 +15,10 @@ public class NightScript : MonoBehaviour
     public GameObject deathmenu;
     
     public AudioClip pressSound;
+    public AudioClip cameraSound;
     public AudioClip ambience1Sound;
     public AudioClip ambience2Sound;
+    public AudioClip doorSound;
 
     public int Night;
 
@@ -40,6 +42,7 @@ public class NightScript : MonoBehaviour
 
     public GameObject flashlight;
     public bool _isFlashing;
+    public bool _canFlash;
 
     public int maxPower;
     [SerializeField] private float currentPower;
@@ -124,6 +127,7 @@ public class NightScript : MonoBehaviour
         _rightClosed = false;
         powerUsage = 1;
         _isFlashing = false;
+        _canFlash = true;
 
         SoundEffectScript.Instance.StartAmbience();
     }
@@ -186,6 +190,8 @@ public class NightScript : MonoBehaviour
     {
         if (scanTimer <= 0)
         {
+            SoundEffectScript.Instance.PlaySoundEffect(cameraSound, 0.5f);
+
             _isOnCam = !_isOnCam;
             if (_isOnCam)
             {
@@ -293,7 +299,7 @@ public class NightScript : MonoBehaviour
     }
     public void UpdateFlash()
     {
-        if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1)
+        if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1 && _canFlash == true)
         {
             flashlight.SetActive(true);
         }
@@ -305,6 +311,7 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleLeft()
     {
+        SoundEffectScript.Instance.PlaySoundEffect(doorSound, 0.5f);
         _leftClosed = !_leftClosed;
         UpdateLeft();
     }
@@ -321,6 +328,7 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleRight()
     {
+        SoundEffectScript.Instance.PlaySoundEffect(doorSound, 0.5f);
         _rightClosed = !_rightClosed;
         UpdateRight();
     }

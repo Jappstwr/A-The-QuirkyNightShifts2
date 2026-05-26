@@ -16,6 +16,8 @@ public class VentScanScript : MonoBehaviour
     public float scanTime;
     public Image scanSlider;
 
+    public AudioClip scanSound;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,6 +39,8 @@ public class VentScanScript : MonoBehaviour
     {
         if (scanTime <= 0)
         {
+            SoundEffectScript.Instance.PlaySoundEffect(scanSound, 1f);
+
             nightScript.scanTimer = 4;
             scanTime = 4;
 
