@@ -3408,6 +3408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812996392}
+  - component: {fileID: 812996393}
   m_Layer: 0
   m_Name: Snattaren
   m_TagString: Untagged
@@ -3431,6 +3432,32 @@ Transform:
   - {fileID: 1708218990}
   m_Father: {fileID: 1484334435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812996393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812996391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325c3d12068a2594e92f76e0c9031ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  paths: []
+  nightscript: {fileID: 0}
+  BaseAI: 0
+  checkInterval: 5
+  maincamerascript: {fileID: 0}
+  aiLvl: 0
+  aiTimer: 0
+  currentAIModifier: 0
+  moveTimer: 0
+  currentRoom: 0
+  sr: {fileID: 0}
+  attackTimer: 8
+  retreatTimer: 0
+  attacking: 0
 --- !u!1 &820269703
 GameObject:
   m_ObjectHideFlags: 0
@@ -7479,8 +7506,8 @@ MonoBehaviour:
   ferdinandPosition: 0
   clankarenAILevel: 0
   ferdinandAILevel: 0
-  clankarenCooldown: 4.95
-  ferdinandCooldown: 5.05
+  clankarenCooldown: 9.95
+  ferdinandCooldown: 10.05
   clankarenTimer: 0
   ferdinandTimer: 0
   _clankarenActiveThisNight: 0
@@ -7560,6 +7587,7 @@ Transform:
   - {fileID: 1336780170}
   - {fileID: 1880775292}
   - {fileID: 731576620}
+  - {fileID: 1554113820}
   m_Father: {fileID: 611091717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522589799
@@ -7797,6 +7825,59 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1554113819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554113820}
+  - component: {fileID: 1554113821}
+  m_Layer: 10
+  m_Name: Office5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1554113820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554113819}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.63, y: -1, z: -0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1509400004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1554113821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554113819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1dce17a776c05a4190d07f35fcf1a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Waypoints
+  roomIndex: 4
+  roomLayer: Hallway
+  isDoorWaypoint: 0
+  isBackHallwayPoint: 0
+  isHallway: 0
+  isOffice: 1
+  isLeftOffice: 0
+  isCenterOffice: 0
+  isRightOffice: 0
 --- !u!1 &1579308018
 GameObject:
   m_ObjectHideFlags: 0
