@@ -81,6 +81,7 @@ public class NightScript : MonoBehaviour
     public Sprite leftClosed;
     public Sprite rightClosed;
 
+    public bool _isJumpscared;
     public bool _isDead;
 
     public float scanTimer;
@@ -119,6 +120,8 @@ public class NightScript : MonoBehaviour
         monitorButton.SetActive(true);
         suitButton.SetActive(true);
         closeButton.SetActive(false);
+        camSystem.SetActive(true);
+        ventSystem.SetActive(false);
         _isDead = false;
         _monitorOpen = false;
         _inSuit = false;

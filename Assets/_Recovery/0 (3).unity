@@ -823,7 +823,7 @@ MonoBehaviour:
   doubleScanMarker: {fileID: 6109184536750051262}
   scanTime: 0
   scanSlider: {fileID: 43324542}
-  scanSound: {fileID: 8300000, guid: cbced195941c6ed4c85d0104beb42bde, type: 3}
+  scanSound: {fileID: 0}
 --- !u!212 &156604562
 SpriteRenderer:
   serializedVersion: 2
@@ -3027,18 +3027,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 156604561}
-        m_TargetAssemblyTypeName: VentScanScript, Assembly-CSharp
-        m_MethodName: ResetScan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1245919306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3252,7 +3240,7 @@ MonoBehaviour:
   ferdinandPosition: 0
   clankarenAILevel: 0
   ferdinandAILevel: 0
-  clankarenCooldown: 1
+  clankarenCooldown: 10.5
   ferdinandCooldown: 9.95
   clankarenTimer: 0
   ferdinandTimer: 0
@@ -3993,10 +3981,10 @@ MonoBehaviour:
   office: {fileID: 888559848}
   deathmenu: {fileID: 1673836808}
   pressSound: {fileID: 8300000, guid: 44de25b16ea4f1942bf82893f679931e, type: 3}
-  cameraSound: {fileID: 8300000, guid: 66ef434ffe7dd1440a753000ae8f77f7, type: 3}
+  cameraSound: {fileID: 0}
   ambience1Sound: {fileID: 8300000, guid: f14fad932caf4b64d937b3df4ca3e5be, type: 3}
   ambience2Sound: {fileID: 8300000, guid: fa38414eb7a9fdf4789415f9d4e2365b, type: 3}
-  doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
+  doorSound: {fileID: 0}
   Night: 5
   offices:
   - {fileID: 1199538119}
@@ -4047,7 +4035,6 @@ MonoBehaviour:
   rightOpen: {fileID: -8627549915620952191, guid: 53934207d48329044b8ababc611ab1c5, type: 3}
   leftClosed: {fileID: 21300000, guid: c3766f2f2715c474bb105505ff19a1b0, type: 3}
   rightClosed: {fileID: 21300000, guid: 9dd6e9208a2ea3449a976cb93c4a50d4, type: 3}
-  _isJumpscared: 0
   _isDead: 0
   scanTimer: 0
 --- !u!4 &1543463251

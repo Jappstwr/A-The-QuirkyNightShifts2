@@ -20,6 +20,11 @@ public class ScanMarkerScript : MonoBehaviour
         currentTime = activeTime;
     }
 
+    public void DeActivate()
+    {
+        currentTime = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
