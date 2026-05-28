@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FerdinandScriptHolder : MonoBehaviour
@@ -22,23 +23,29 @@ public class FerdinandScriptHolder : MonoBehaviour
 
     public void GetNight() 
     {
-        if (nightscript.Night == 4 && aiTimer >= 120)
+        if (nightscript.Night >= 4)
         {
-            ferdinandSr.enabled = false;
-        }
-        else
-        {
-            ferdinandSr.enabled = true;
+            ferdinandSr.enabled = false; 
         }
 
-        if (nightscript.Night >= 5)
-        {
-            ferdinandSr.enabled = false;
-        }
-        else
-        {
-            ferdinandSr.enabled = true;
-        }
+        //if (nightscript.Night == 4 && aiTimer >= 120)
+        //{
+        //    ferdinandSr.enabled = false;
+              // return; 
+        //}
+        //else
+        //{
+        //    ferdinandSr.enabled = true;
+        //}
+
+        //if (nightscript.Night >= 5)
+        //{
+        //    ferdinandSr.enabled = false;
+        //}
+        //else
+        //{
+        //    ferdinandSr.enabled = true;
+        //}
 
     }
 }
