@@ -98,7 +98,6 @@ public class KlokerScriptMovement : MonoBehaviour
 
             OpportunityMovement();
         }
-
     }   
     public void UpdateAILevel()
     {
