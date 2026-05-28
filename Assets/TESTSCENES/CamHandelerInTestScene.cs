@@ -28,7 +28,7 @@ public class CamHandelerInTestScene : MonoBehaviour
         
         if (nightscript.scanTimer <= 0f)
         {
-            hasClosedCameras = true; 
+            //hasClosedCameras = true; 
             nightscript._monitorOpen = false; 
             CAMS.SetActive(false);
             CAMSImage.SetActive(false);
@@ -36,17 +36,17 @@ public class CamHandelerInTestScene : MonoBehaviour
         }
         else if (nightscript.scanTimer > 0f) 
         {
-            hasClosedCameras = false; 
+            //hasClosedCameras = false; 
             nightscript._monitorOpen = true; 
             Debug.Log("Cannot close whilst scanning!"); 
         }
         
-        if (!hasClosedCameras && nightscript.scanTimer > 0f)
-        {
-            CAMS.SetActive(false);
-            CAMSImage.SetActive(false);
-            Office.SetActive(false);
-        }
+        //if (!hasClosedCameras && nightscript.scanTimer > 0f)
+        //{
+        //    CAMS.SetActive(false);
+        //    CAMSImage.SetActive(false);
+        //    Office.SetActive(false);
+        //}
         
     }
     public void SwitchToCams()

@@ -890,7 +890,6 @@ Transform:
   m_Children:
   - {fileID: 418960006}
   - {fileID: 1214883828}
-  - {fileID: 2117627358}
   - {fileID: 948432496}
   m_Father: {fileID: 1110524040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5984,6 +5983,7 @@ Transform:
   m_Children:
   - {fileID: 2127154392}
   - {fileID: 1089598041}
+  - {fileID: 2117627358}
   m_Father: {fileID: 127339424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1217125877
@@ -11136,7 +11136,7 @@ Transform:
   - {fileID: 1213273110}
   - {fileID: 1173705744}
   - {fileID: 423128773}
-  m_Father: {fileID: 127339424}
+  m_Father: {fileID: 1214883828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2117627359
 MonoBehaviour:
