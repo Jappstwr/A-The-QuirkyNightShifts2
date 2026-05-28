@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScrappedAnimatronicScript : MonoBehaviour
@@ -80,7 +79,6 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         }
         if (attacking)
         {
-            Debug.Log($"Attack started {attackTimer}");
             AnimAttack();
             return; 
         }
@@ -107,6 +105,23 @@ public class ScrappedAnimatronicScript : MonoBehaviour
             {
                 BaseAI = 1;
             }
+
+            if (nightscript.Night >= 4 && aiTimer >= 120f)
+            {
+                aiLvl += 1;
+            }
+            if (nightscript.Night >= 4 && aiTimer >= 240f)
+            {
+                aiLvl += 3;
+            }
+
+
+            if (nightscript.Night >= 6)
+            {
+                BaseAI = 15; 
+            }
+
+            
         }
 
         //benny movement
@@ -119,6 +134,20 @@ public class ScrappedAnimatronicScript : MonoBehaviour
             if (nightscript.Night >= 5)
             {
                 BaseAI = 1; 
+            }
+
+            if (nightscript.Night >= 5 && aiTimer >= 120f)
+            {
+                aiLvl += 1;
+            }
+            if (nightscript.Night >= 5 && aiTimer >= 240f)
+            {
+                aiLvl += 3;
+            }
+
+            if (nightscript.Night >= 6)
+            {
+                BaseAI = 15;
             }
         }
 
@@ -158,6 +187,24 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     {
         int roll = Random.Range(1,21);
 
+        int roll2 = Random.Range(1,5);
+        
+        if (currentWaypoint.isHallway && nightscript._monitorOpen)
+        {
+            if (roll2 <= 2)
+            {
+                MoveForward();
+                Debug.Log($"Opportunity attack! {roll2}"); 
+            }
+            else
+            {
+                if (roll <= aiLvl)
+                {
+                    MoveForward(); 
+                }
+            }
+                return; 
+        }
       
         if (roll <= aiLvl)
         {
@@ -172,6 +219,10 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
             Debug.Log($"ScrappedFredrik Roll: {roll} / {aiLvl}");
         }
+
+    }
+    public void OpportunityAttack()
+    {
 
     }
     public void MoveForward()

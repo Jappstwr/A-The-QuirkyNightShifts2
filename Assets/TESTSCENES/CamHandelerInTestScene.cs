@@ -26,12 +26,14 @@ public class CamHandelerInTestScene : MonoBehaviour
         
         if (nightscript.scanTimer <= 0f)
         {
+            nightscript._monitorOpen = false; 
             CAMS.SetActive(false);
             CAMSImage.SetActive(false);
             Office.SetActive(true);
         }
         else if (nightscript.scanTimer > 0f) 
         {
+            nightscript._monitorOpen = true; 
             Debug.Log("Cannot close whilst scanning!"); 
         }
         

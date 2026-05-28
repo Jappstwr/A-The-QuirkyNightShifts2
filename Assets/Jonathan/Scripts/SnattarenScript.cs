@@ -8,7 +8,7 @@ public class SnattarenScript : MonoBehaviour
 
     [SerializeField] private int BaseAI = 0;
 
-    [SerializeField] private float checkInterval = 5f;
+    [SerializeField] private float checkInterval = 10f;
 
     [SerializeField] private MainCameraScript maincamerascript;
 
@@ -73,7 +73,7 @@ public class SnattarenScript : MonoBehaviour
         }
         if (attacking)
         {
-            Debug.Log("Snattaren got you! You can no longer flash for the time being"); 
+            
             AnimAttack();
             return; 
         }
@@ -108,6 +108,10 @@ public class SnattarenScript : MonoBehaviour
         if (nightscript.Night >= 4 && aiTimer >= 240f)
         {
             aiLvl += 2; 
+        }
+        if (nightscript.Night >= 6)
+        {
+            BaseAI = 10; 
         }
 
         aiLvl = BaseAI;
@@ -168,8 +172,8 @@ public class SnattarenScript : MonoBehaviour
 
             nightscript._canFlash = false;
 
-            punishTimer -= Time.deltaTime; 
-
+            punishTimer -= Time.deltaTime;
+            Debug.Log("Snattaren got you! You can no longer flash for the time being");
             if (punishTimer <= 0f)
             {
                 attacking = false;

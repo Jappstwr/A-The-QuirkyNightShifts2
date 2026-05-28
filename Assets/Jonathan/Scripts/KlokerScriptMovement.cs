@@ -71,23 +71,32 @@ public class KlokerScriptMovement : MonoBehaviour
 
         moveTimer -= Time.deltaTime;
 
-        if (currentWaypoint.isOffice && !attacking)
+        if (isFladderlappen && currentWaypoint.isHallway && !attacking)
         {
             attacking = true;
             attackTimer = 8f;
             retreatTimer = Random.Range(2f, 3f);
         }
+        else
+        {
+            if (currentWaypoint.isOffice && !attacking)
+            {
+                attacking = true;
+                attackTimer = 8f;
+                retreatTimer = Random.Range(2f, 3f);
+            }
+        }
         if (attacking)
         {
             AnimAttack();
-            return; 
+            return;
         }
 
-        if  (moveTimer <= 0f)
+        if (moveTimer <= 0f)
         {
             moveTimer = checkInterval;
 
-            OpportunityMovement(); 
+            OpportunityMovement();
         }
 
     }   
@@ -113,6 +122,11 @@ public class KlokerScriptMovement : MonoBehaviour
             {
                 aiLevel = baseAI; 
             }
+
+            if (nightscript.Night >= 6)
+            {
+                baseAI = 10; 
+            }
         }
 
 
@@ -124,6 +138,11 @@ public class KlokerScriptMovement : MonoBehaviour
         if (aiTimer >= 240)
         {
             aiLevel += currentAIModifier;
+        }
+
+        if (nightscript.Night >= 6)
+        {
+            baseAI = 10; 
         }
     }
     public void GetNight()
@@ -212,27 +231,29 @@ public class KlokerScriptMovement : MonoBehaviour
             return; 
         }
 
-        //if (currentPathIndex == 1)
-        //{
-        //    int roll = Random.Range(1, 21);
+        if (currentWaypoint.isOuterStage)
+        {
+            int roll = Random.Range(1, 21);
 
-        //    if (roll >= 5)
-        //    {
-        //        currentPathIndex = 3;
-        //        MoveToWaypoint(currentPathIndex);
-        //        Debug.Log("Failed to move to Hallway");
-        //    }
-        //    else
-        //    {
-        //        currentPathIndex = 4;
-        //        MoveToWaypoint(currentPathIndex);
-        //        Debug.Log("Successfully moved to Hallway");
-        //    }
-        //}
+            if (roll <= aiLevel)
+            {
+                currentPathIndex = 4;
+                MoveToWaypoint(currentPathIndex); 
+            }
+            else if (roll >= aiLevel)
+            {
+                currentPathIndex++;
 
-        currentPathIndex++;
+                MoveToWaypoint(currentPathIndex);
+            }
+        }
+        else
+        {
+            currentPathIndex++;
 
-        MoveToWaypoint(currentPathIndex);
+            MoveToWaypoint(currentPathIndex);
+        }
+       
     }
     public void AnimAttack()
     {

@@ -190,6 +190,11 @@ public class WindUpButton : MonoBehaviour
         {
             currentModifier += 0.040f;
         }
+
+        if (nightscript.Night >= 6)
+        {
+            currentModifier += 0.050f; 
+        }
     }
     //public void OnPointerDown(PointerEventData eventData)
     //{

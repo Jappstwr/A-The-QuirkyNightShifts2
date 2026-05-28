@@ -548,6 +548,7 @@ MonoBehaviour:
   roomLayer: 
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -1316,6 +1317,7 @@ MonoBehaviour:
   roomLayer: Corner
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -1634,6 +1636,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 1
   isLeftOffice: 0
@@ -1687,6 +1690,7 @@ MonoBehaviour:
   roomLayer: 
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 1
@@ -2105,6 +2109,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326519642}
   m_CullTransparentMesh: 1
+--- !u!1 &330634962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 330634963}
+  - component: {fileID: 330634965}
+  - component: {fileID: 330634964}
+  m_Layer: 5
+  m_Name: ScanSlider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &330634963
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330634962}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391574456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 350, y: 15}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &330634964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330634962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1078294437307101432, guid: a5264221525e5ef4dbb55fb658757328, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &330634965
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330634962}
+  m_CullTransparentMesh: 1
 --- !u!1 &341898407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,7 +2347,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1981606480}
-  - {fileID: 2116429148}
+  - {fileID: 330634963}
   m_Father: {fileID: 1579308019}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3054,6 +3133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ferdinandSr: {fileID: 1531743303}
   nightscript: {fileID: 1140767873}
+  aiTimer: 0
 --- !u!1 &652494307
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,6 +3257,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 1
   isLeftOffice: 0
@@ -3450,7 +3531,7 @@ MonoBehaviour:
   - {fileID: 1554113821}
   nightscript: {fileID: 1140767873}
   BaseAI: 0
-  checkInterval: 5
+  checkInterval: 8
   maincamerascript: {fileID: 1089598042}
   aiLvl: 0
   aiTimer: 0
@@ -3510,6 +3591,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 1
   isOffice: 0
   isLeftOffice: 0
@@ -4161,6 +4243,7 @@ MonoBehaviour:
   roomLayer: Corner
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -4214,6 +4297,7 @@ MonoBehaviour:
   roomLayer: BackOfHallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -5625,7 +5709,7 @@ MonoBehaviour:
   ambience1Sound: {fileID: 8300000, guid: f14fad932caf4b64d937b3df4ca3e5be, type: 3}
   ambience2Sound: {fileID: 8300000, guid: fa38414eb7a9fdf4789415f9d4e2365b, type: 3}
   doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
-  Night: 4
+  Night: 6
   offices:
   - {fileID: 23193822}
   - {fileID: 834581095}
@@ -5740,6 +5824,7 @@ MonoBehaviour:
   roomLayer: Stage
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 1
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -5828,6 +5913,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 1
   isOffice: 0
   isLeftOffice: 0
@@ -6318,6 +6404,7 @@ MonoBehaviour:
   roomLayer: Backroom
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -6718,6 +6805,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 1
   isLeftOffice: 0
@@ -7624,7 +7712,7 @@ Transform:
   m_GameObject: {fileID: 1522589799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -911.2, y: -494.42, z: -1}
+  m_LocalPosition: {x: -910.01, y: -494.42, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7646,6 +7734,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 1
   isOffice: 0
   isLeftOffice: 0
@@ -7881,6 +7970,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 1
   isLeftOffice: 0
@@ -7949,7 +8039,7 @@ MonoBehaviour:
   scanMarker2: {fileID: 1799111289}
   doubleScanMarker: {fileID: 980975668}
   scanTime: 0
-  scanSlider: {fileID: 2116429149}
+  scanSlider: {fileID: 330634964}
   scanSound: {fileID: 8300000, guid: cbced195941c6ed4c85d0104beb42bde, type: 3}
 --- !u!212 &1579308021
 SpriteRenderer:
@@ -8862,6 +8952,7 @@ MonoBehaviour:
   roomLayer: Stage
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -9006,6 +9097,7 @@ MonoBehaviour:
   roomLayer: Backroom
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -9059,6 +9151,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 1
   isOffice: 0
   isLeftOffice: 0
@@ -9423,6 +9516,7 @@ MonoBehaviour:
   roomLayer: Stage
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 1
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -10034,6 +10128,7 @@ MonoBehaviour:
   roomLayer: Hallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 1
   isLeftOffice: 0
@@ -10294,6 +10389,7 @@ MonoBehaviour:
   roomLayer: BackOfHallway
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -10872,6 +10968,7 @@ MonoBehaviour:
   roomLayer: Stage
   isDoorWaypoint: 0
   isBackHallwayPoint: 0
+  isOuterStage: 0
   isHallway: 0
   isOffice: 0
   isLeftOffice: 0
@@ -11128,81 +11225,6 @@ Transform:
   - {fileID: 2000879723}
   m_Father: {fileID: 1484334435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2116429147
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2116429148}
-  - component: {fileID: 2116429150}
-  - component: {fileID: 2116429149}
-  m_Layer: 5
-  m_Name: ScanSlider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2116429148
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116429147}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 391574456}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 15}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2116429149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116429147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 1078294437307101432, guid: a5264221525e5ef4dbb55fb658757328, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &2116429150
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116429147}
-  m_CullTransparentMesh: 1
 --- !u!1 &2127154391
 GameObject:
   m_ObjectHideFlags: 0
