@@ -128,6 +128,10 @@ public class KlokerScriptMovement : MonoBehaviour
             }
         }
 
+        if (nightscript.Night >= 6)
+        {
+            baseAI = 10;
+        }
 
         if (aiTimer >= 120f)
         {
@@ -139,10 +143,7 @@ public class KlokerScriptMovement : MonoBehaviour
             aiLevel += currentAIModifier;
         }
 
-        if (nightscript.Night >= 6)
-        {
-            baseAI = 10; 
-        }
+        
     }
     public void GetNight()
     {
@@ -236,14 +237,8 @@ public class KlokerScriptMovement : MonoBehaviour
 
             if (roll <= aiLevel)
             {
-                currentPathIndex = 4;
+                currentPathIndex = 3;
                 MoveToWaypoint(currentPathIndex); 
-            }
-            else if (roll >= aiLevel)
-            {
-                currentPathIndex++;
-
-                MoveToWaypoint(currentPathIndex);
             }
         }
         else
