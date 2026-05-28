@@ -19,6 +19,7 @@ public class NightScript : MonoBehaviour
     public AudioClip ambience1Sound;
     public AudioClip ambience2Sound;
     public AudioClip doorSound;
+    public AudioClip flashSound;
 
     public int Night;
 
@@ -167,6 +168,7 @@ public class NightScript : MonoBehaviour
         {
             monitor.SetActive(false);
             suit.SetActive(false);
+            SoundEffectScript.Instance.StopBreathing();
             turnLeftButton.SetActive(true);
             turnRightButton.SetActive(true);
             monitorButton.SetActive(true);
@@ -292,6 +294,8 @@ public class NightScript : MonoBehaviour
     {
         if (_inSuit)
         {
+            SoundEffectScript.Instance.StartBreathing();
+
             suit.SetActive(true);
             turnLeftButton.SetActive(false);
             turnRightButton.SetActive(false);
@@ -305,11 +309,13 @@ public class NightScript : MonoBehaviour
         if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1 && _canFlash == true)
         {
             flashlight.SetActive(true);
+            SoundEffectScript.Instance.StartFlashlight();
         }
         else
         {
             _isFlashing = false;
             flashlight.SetActive(false);
+            SoundEffectScript.Instance.StopFlashlight();
         }
     }
     public void ToggleLeft()
@@ -378,7 +384,7 @@ public class NightScript : MonoBehaviour
 
         if (powerTimer <= 0)
         {
-            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage/2;
+            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage/1.5f;
             currentPower -= calculatedPower;
 
             powerTimer = powerCooldown;
@@ -446,6 +452,7 @@ public class NightScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
         {
+            SoundEffectScript.Instance.PlaySoundEffect(flashSound, 1f);
             _isFlashing = !_isFlashing;
             UpdateFlash();
             if (officeIndex == 0)
