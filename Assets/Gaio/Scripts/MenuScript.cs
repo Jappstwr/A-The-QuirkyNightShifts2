@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     public void LoadGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     void Update()
     {
