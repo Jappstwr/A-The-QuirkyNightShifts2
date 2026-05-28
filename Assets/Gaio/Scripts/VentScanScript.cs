@@ -23,6 +23,13 @@ public class VentScanScript : MonoBehaviour
     {
         scanTime = 0;
     }
+    public void ResetScan()
+    {
+        scanTime = 0;
+        scanMarker.GetComponent<ScanMarkerScript>().DeActivate();
+        scanMarker2.GetComponent<ScanMarkerScript>().DeActivate();
+        doubleScanMarker.GetComponent<ScanMarkerScript>().DeActivate();
+    }
     public void UpdateSlider()
     {
         if (scanTime <= 0f)
@@ -147,5 +154,7 @@ public class VentScanScript : MonoBehaviour
     {
         scanTime -= Time.deltaTime;
         UpdateSlider();
+
+        
     }
 }
