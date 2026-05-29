@@ -98,12 +98,12 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
             if (nightscript.Night == 3 && aiTimer >= 240f)
             {
-                BaseAI = 2; 
+                aiLvl = 2; 
             }
 
             if (nightscript.Night >= 4)
             {
-                BaseAI = 1;
+                aiLvl = 1;
             }
 
             if (nightscript.Night >= 4 && aiTimer >= 120f)
@@ -129,11 +129,11 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
             if (nightscript.Night == 4 && aiTimer >= 240f)
             {
-                BaseAI = 2; 
+                aiLvl = 2; 
             }
             if (nightscript.Night >= 5)
             {
-                BaseAI = 1; 
+                aiLvl = 1; 
             }
 
             if (nightscript.Night >= 5 && aiTimer >= 120f)
@@ -329,5 +329,18 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
 
         }
+    }
+
+    public void ResetScrappedAnimatronics()
+    {
+        BaseAI = 0;
+        aiLvl = 0;
+
+        aiTimer = 0f;
+
+        currentPathIndex = 0; 
+        MoveToWaypoint(currentPathIndex);
+
+        moveTimer = checkInterval; 
     }
 }

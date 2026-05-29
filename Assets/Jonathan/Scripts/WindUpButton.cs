@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -231,5 +232,17 @@ public class WindUpButton : MonoBehaviour
         Debug.Log("Song Changed"); 
     }
 
+    public void ResetBithoven()
+    {
+        currentHoldTime = holdTime; 
+        fillBar.fillAmount = 1f; 
+    }
 
+    public void StartNextNight()
+    {
+        //Night++; 
+
+        
+
+    }
 }
