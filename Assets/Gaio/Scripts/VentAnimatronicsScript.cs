@@ -201,6 +201,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     }
                     else
                     {
+                        nightScript.TurnOnJumpscare();
                         clankaren.SetActive(true);
                     }
                 }
@@ -212,6 +213,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     }
                     else
                     {
+                        nightScript.TurnOnJumpscare();
                         clankaren.SetActive(true);
                     }
                 }
@@ -293,6 +295,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     }
                     else
                     {
+                        nightScript.TurnOnJumpscare();
                         ferdinand.SetActive(true);
                     }
                 }
@@ -304,6 +307,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     }
                     else
                     {
+                        nightScript.TurnOnJumpscare();
                         ferdinand.SetActive(true);
                     }
                 }

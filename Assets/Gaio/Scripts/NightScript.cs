@@ -13,6 +13,7 @@ public class NightScript : MonoBehaviour
 {
     public GameObject office;
     public GameObject deathmenu;
+    public GameObject jumpscaresHolder;
     
     public AudioClip pressSound;
     public AudioClip cameraSound;
@@ -114,6 +115,7 @@ public class NightScript : MonoBehaviour
 
         office.SetActive(true);
         deathmenu.SetActive(false);
+        jumpscaresHolder.SetActive(false);
         monitor.SetActive(false);
         suit.SetActive(false);
         turnLeftButton.SetActive(true);
@@ -309,10 +311,12 @@ public class NightScript : MonoBehaviour
         if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1 && _canFlash == true)
         {
             flashlight.SetActive(true);
+            SoundEffectScript.Instance.PlaySoundEffect(flashSound, 1f);
             SoundEffectScript.Instance.StartFlashlight();
         }
         else
         {
+            if(_isFlashing)
             _isFlashing = false;
             flashlight.SetActive(false);
             SoundEffectScript.Instance.StopFlashlight();
@@ -448,11 +452,15 @@ public class NightScript : MonoBehaviour
             targetPLPositions[i] = Random.insideUnitCircle * shakePower;
         }
     }
+
+    public void TurnOnJumpscare()
+    {
+        jumpscaresHolder.SetActive(true);
+    }
     public void PlayerInput()
     {
         if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
         {
-            SoundEffectScript.Instance.PlaySoundEffect(flashSound, 1f);
             _isFlashing = !_isFlashing;
             UpdateFlash();
             if (officeIndex == 0)
