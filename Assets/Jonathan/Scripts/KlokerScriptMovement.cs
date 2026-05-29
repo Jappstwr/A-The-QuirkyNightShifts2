@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Buffers.Text;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 public class KlokerScriptMovement : MonoBehaviour
@@ -349,5 +350,18 @@ public class KlokerScriptMovement : MonoBehaviour
         bool visible = maincamerascript != null && maincamerascript.ActiveCamera == currentRoom && maincamerascript.camerasOpen;
 
         sr.enabled = visible;
+    }
+
+    public void ResetAnimatronics()
+    {
+        baseAI = 0;
+        aiLevel = 0;
+
+        aiTimer = 0f;
+
+        currentPathIndex = 0;
+        MoveToWaypoint(currentPathIndex);
+
+        moveTimer = checkInterval;
     }
 }
