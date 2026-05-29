@@ -72,7 +72,7 @@ public class BithovenScriptMovement : MonoBehaviour
             bithovenRenderer.sprite = sleepSprite; 
         }
 
-        if (Attacking == false)
+        if (!Attacking)
         {
             hasAttacked = false;
         }
@@ -87,6 +87,8 @@ public class BithovenScriptMovement : MonoBehaviour
             Attacking = true; 
             Debug.Log("Bithoven has attacked!");
             Jumpscare();
+
+            return; 
         }
 
 
