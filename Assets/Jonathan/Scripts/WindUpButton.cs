@@ -8,6 +8,8 @@ public class WindUpButton : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private Image fillBar;
 
+    [SerializeField] private GameObject WarningTriangle; 
+
     [SerializeField] private GameObject songUI;
 
     [SerializeField] private NightScript nightscript; 
@@ -48,6 +50,8 @@ public class WindUpButton : MonoBehaviour
 
         fillBar.fillAmount = 1;
         currentHoldTime = holdTime;
+
+        WarningTriangle.gameObject.SetActive(false); 
 
         ChangeSong();
     }
@@ -139,7 +143,8 @@ public class WindUpButton : MonoBehaviour
             if (!warningActive)
             {
                 warningActive = true;
-                
+
+                WarningTriangle.gameObject.SetActive(true); 
 
                 warningSource.clip = TireMeterSound;
                 warningSource.loop = true;
@@ -153,12 +158,16 @@ public class WindUpButton : MonoBehaviour
                 warningActive = false;
 
                 warningSource.Stop();
+
+                WarningTriangle.SetActive(false); 
             }
             else
             {
                 warningActive = false;
 
-                warningSource.Stop(); 
+                warningSource.Stop();
+
+                WarningTriangle.gameObject.SetActive(false); 
             }
         }
         
@@ -235,7 +244,9 @@ public class WindUpButton : MonoBehaviour
     public void ResetBithoven()
     {
         currentHoldTime = holdTime; 
-        fillBar.fillAmount = 1f; 
+        fillBar.fillAmount = 1f;
+
+        WarningTriangle.gameObject.SetActive(false); 
     }
 
     //public void StartNextNight()
