@@ -238,11 +238,16 @@ public class WindUpButton : MonoBehaviour
         fillBar.fillAmount = 1f; 
     }
 
-    public void StartNextNight()
-    {
-        //Night++; 
+    //public void StartNextNight()
+    //{
+    //    Night++; 
 
-        
+    //    ScrappedAnimatronicScript scrapped = new ScrappedAnimatronicScript();
+    //    KlokerScriptMovement normal = new KlokerScriptMovement();
+    //    WindUpButton bithoven = new WindUpButton(); 
 
-    }
+    //    scrapped.ResetScrappedAnimatronics();
+    //    normal.ResetAnimatronics();
+    //    bithoven.ResetBithoven();
+    //}
 }

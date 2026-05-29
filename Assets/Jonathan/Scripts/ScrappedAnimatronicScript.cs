@@ -28,7 +28,8 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     public float retreatTimer;
 
     public bool attacking;
-    private bool hasAttackStarted; 
+    private bool hasAttackStarted;
+    private bool oppertunityAttackAttemped = false; 
 
     private Waypoints currentWaypoint;
 
@@ -191,25 +192,28 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         
         if (currentWaypoint.isHallway && nightscript._monitorOpen)
         {
-            if (roll2 <= 2)
+            if (roll2 <= 2 && !oppertunityAttackAttemped)
             {
+                oppertunityAttackAttemped = true; 
                 MoveForward();
                 Debug.Log($"Opportunity attack! {roll2}"); 
             }
-            else
+            else if (currentWaypoint.isHallway && oppertunityAttackAttemped)
             {
                 if (roll <= aiLvl)
                 {
                     MoveForward(); 
                 }
-            }
-                return; 
+            } 
         }
-      
-        if (roll <= aiLvl)
+        else
         {
-            MoveForward(); 
+            if (roll <= aiLvl)
+            {
+                MoveForward();
+            }
         }
+
 
         if (isBenny)
         {
@@ -230,6 +234,11 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         if (currentPathIndex >= paths.Length - 1)
         {
             return;
+        }
+
+        if (currentWaypoint.isOffice && oppertunityAttackAttemped)
+        {
+            oppertunityAttackAttemped = false; 
         }
 
         currentPathIndex++;

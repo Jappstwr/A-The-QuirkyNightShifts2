@@ -230,4 +230,15 @@ public class SnattarenScript : MonoBehaviour
 
         sr.enabled = visible;
     }
+
+    public void ResetSnattaren()
+    {
+        BaseAI = 0;
+        aiLvl = 0;
+
+        currentPathIndex = 0;
+        MoveToWaypoint(0);
+
+        moveTimer = checkInterval; 
+    }
 }
