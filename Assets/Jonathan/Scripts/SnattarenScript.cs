@@ -44,6 +44,8 @@ public class SnattarenScript : MonoBehaviour
             sr = GetComponent<SpriteRenderer>(); 
         }
 
+        nightscript._canFlash = true; 
+
         MoveToWaypoint(0);
 
         moveTimer = checkInterval;
