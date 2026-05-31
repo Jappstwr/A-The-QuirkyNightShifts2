@@ -13,6 +13,7 @@ public class NightScript : MonoBehaviour
 {
     public GameObject office;
     public GameObject deathmenu;
+    public GameObject transitionObject;
     public GameObject jumpscaresHolder;
     
     public AudioClip pressSound;
@@ -47,7 +48,7 @@ public class NightScript : MonoBehaviour
     public bool _canFlash;
 
     public int maxPower;
-    [SerializeField] private float currentPower;
+    public float currentPower;
     [SerializeField] private int powerUsage;
     public float defaultPower;
     public bool _powerOutage;
@@ -60,6 +61,7 @@ public class NightScript : MonoBehaviour
     public TMP_Text amText;
 
     public float nightTime;
+    public bool _is6AM;
 
     public List<GameObject> powerLights;
 
@@ -110,11 +112,13 @@ public class NightScript : MonoBehaviour
 
         officeIndex = 1;
         nightTime = 0f;
+        _is6AM = false;
         currentPower = maxPower;
         scanTimer = 0;
 
         office.SetActive(true);
         deathmenu.SetActive(false);
+        transitionObject.SetActive(false);
         jumpscaresHolder.SetActive(false);
         monitor.SetActive(false);
         suit.SetActive(false);
@@ -381,7 +385,6 @@ public class NightScript : MonoBehaviour
         }
         powerUsage = calculatedUsage;
     }
-
     public void SubtractPower()
     {
         powerTimer -= Time.deltaTime;
@@ -484,10 +487,40 @@ public class NightScript : MonoBehaviour
             office.SetActive(false);
             deathmenu.SetActive(true);
         }
+        else if(_is6AM)
+        {
+            if (office.activeSelf)
+            {
+                SoundEffectScript.Instance.StopAmbience();
+
+                scanTimer = 0;
+                _leftClosed = false;
+                _rightClosed = false;
+                _isFlashing = false;
+                _inSuit = false;
+
+                UpdateLeft();
+                UpdateRight();
+                UpdateFlash();
+                UpdateSuit();
+                CloseButton();
+
+                CalculatePowerUsage();
+                UpdatePowerLights();
+
+                office.SetActive(false);
+                transitionObject.SetActive(true);
+            }
+        }
         else
         {
             scanTimer -= Time.deltaTime;
             nightTime += Time.deltaTime;
+            if (nightTime >= 360)
+            {
+                _is6AM = true;
+            }
+
             UpdateAMText();
             PlayerInput();
             if (_powerOutage == false)
