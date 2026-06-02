@@ -13,7 +13,10 @@ public class KlokerScriptMovement : MonoBehaviour
 
     [SerializeField] private float checkInterval = 5f;
 
-    [SerializeField] private MainCameraScript maincamerascript; 
+    [SerializeField] private MainCameraScript maincamerascript;
+
+    [SerializeField] public GameObject FladderLappenJumpscare;
+    [SerializeField] public GameObject KlokerJumpscare; 
     
 
     private int currentPathIndex = 0;
@@ -33,10 +36,12 @@ public class KlokerScriptMovement : MonoBehaviour
     public bool hallwayPoint;
 
     public bool isFladderlappen;
+    //public bool isKloker; 
 
     private float attackTimer = 8f;
     private float retreatTimer;
     private bool attacking;
+    private bool isJumpscareActive; 
 
     private Waypoints currentWaypoint;
 
@@ -58,6 +63,8 @@ public class KlokerScriptMovement : MonoBehaviour
         moveTimer = checkInterval;
 
         retreatTimer = Random.Range(3f, 5f);
+
+        isJumpscareActive = false; 
     }
 
     // Update is called once per frame
@@ -286,7 +293,11 @@ public class KlokerScriptMovement : MonoBehaviour
             }
             else if (!nightscript._inSuit && attackTimer <= 0f)
             {
-                JumpScare();
+                if (!isJumpscareActive)
+                {
+                    isJumpscareActive = true; 
+                    JumpScare();
+                }
                 Debug.Log($"Game Over! Kloker got you!");
             }
         }
@@ -298,11 +309,13 @@ public class KlokerScriptMovement : MonoBehaviour
 
     public void JumpScare()
     {
-        //Kloker jumspcare
+        KlokerJumpscare.gameObject.SetActive(true);
+        nightscript.TurnOnJumpscare(); 
     }
     public void JumpScare2()
     {
-        //FladderLappen jumpscare
+        FladderLappenJumpscare.gameObject.SetActive(true);
+        nightscript.TurnOnJumpscare(); 
     }
     public void UpdateVisibility()
     {
@@ -356,6 +369,7 @@ public class KlokerScriptMovement : MonoBehaviour
     {
         baseAI = 0;
         aiLevel = 0;
+        isJumpscareActive = false; 
 
         aiTimer = 0f;
 
@@ -363,5 +377,8 @@ public class KlokerScriptMovement : MonoBehaviour
         MoveToWaypoint(currentPathIndex);
 
         moveTimer = checkInterval;
+
+        KlokerJumpscare.gameObject.SetActive(false);
+        FladderLappenJumpscare.gameObject.SetActive(false);
     }
 }

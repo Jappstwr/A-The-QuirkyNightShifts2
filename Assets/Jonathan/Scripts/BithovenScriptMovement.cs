@@ -10,6 +10,9 @@ public class BithovenScriptMovement : MonoBehaviour
     [SerializeField] private int roomIndex = 2;
     [SerializeField] private MainCameraScript camSystem;
 
+    [SerializeField] private NightScript nightScript;
+    [SerializeField] public GameObject BithovenJumpscare; 
+
     [Header("Sprite")]
     [SerializeField] private Sprite sleepSprite;
     [SerializeField] private Sprite awakeSprite;
@@ -18,6 +21,7 @@ public class BithovenScriptMovement : MonoBehaviour
     private bool hasAttacked = false;
     private bool Attacking = false; 
     public float AttackTimer = 16f;
+    public bool isJumpscareActive; 
 
     [Header("WayPoint")]
     [SerializeField] private Waypoints waypoints; 
@@ -37,7 +41,9 @@ public class BithovenScriptMovement : MonoBehaviour
         //bithovenRenderer.sortingLayerName = waypoints.roomLayer;
         //bithovenRenderer.sortingOrder = 10;
 
-        bithovenRenderer.sprite = sleepSprite; 
+        bithovenRenderer.sprite = sleepSprite;
+
+        isJumpscareActive = false; 
     }
 
     // Update is called once per frame
@@ -86,7 +92,12 @@ public class BithovenScriptMovement : MonoBehaviour
             hasAttacked = true;
             Attacking = true; 
             Debug.Log("Bithoven has attacked!");
-            Jumpscare();
+            
+            if (!isJumpscareActive)
+            {
+                isJumpscareActive = true; 
+                Jumpscare();
+            }
 
             return; 
         }
@@ -104,6 +115,8 @@ public class BithovenScriptMovement : MonoBehaviour
 
     public void Jumpscare()
     {
-       //Gaio, here goes the jumpscare       
+
+        BithovenJumpscare.gameObject.SetActive(true);
+        nightScript.TurnOnJumpscare(); 
     }
 }

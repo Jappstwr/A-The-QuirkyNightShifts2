@@ -12,6 +12,9 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
     [SerializeField] private MainCameraScript maincamerascript;
 
+    [SerializeField] public GameObject BennyJumpscare;
+    [SerializeField] public GameObject FredrikJumpscare; 
+
     private int currentPathIndex;
     public int aiLvl = 0;
 
@@ -29,7 +32,9 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
     public bool attacking;
     private bool hasAttackStarted;
-    private bool oppertunityAttackAttemped = false; 
+    private bool oppertunityAttackAttemped = false;
+
+    private bool isJumpscareActive; 
 
     private Waypoints currentWaypoint;
 
@@ -264,8 +269,12 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         }
         else if (!nightscript._inSuit && attackTimer <= 0f)
         {
-          
-            Jumpscare();
+
+            if (!isJumpscareActive)
+            {
+                isJumpscareActive = true; 
+                Jumpscare();
+            }
 
             if (isBenny)
             {
@@ -330,13 +339,15 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         // Benny jumpscare 
         if (isBenny)
         {
-
+            BennyJumpscare.gameObject.SetActive(true);
+            nightscript.TurnOnJumpscare(); 
         }
         
         //Fredrik jumpscare
         if (isFredrik)
         {
-
+            FredrikJumpscare.gameObject.SetActive(true);
+            nightscript.TurnOnJumpscare(); 
         }
     }
 
@@ -344,12 +355,16 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     {
         BaseAI = 0;
         aiLvl = 0;
+        isJumpscareActive = false; 
 
         aiTimer = 0f;
 
         currentPathIndex = 0; 
         MoveToWaypoint(currentPathIndex);
 
-        moveTimer = checkInterval; 
+        moveTimer = checkInterval;
+
+        BennyJumpscare.gameObject.SetActive(false);
+        FredrikJumpscare.gameObject.SetActive(false);
     }
 }

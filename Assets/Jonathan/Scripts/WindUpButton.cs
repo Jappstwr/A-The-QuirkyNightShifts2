@@ -19,7 +19,8 @@ public class WindUpButton : MonoBehaviour
 
     [SerializeField] private AudioClip[] songs;
     //[SerializeField] private AudioClip song2;
-    [SerializeField] private AudioClip TireMeterSound; 
+    [SerializeField] private AudioClip TireMeterSound;
+    [SerializeField] private BithovenScriptMovement Bithovenscript; 
 
     [Header("Settings")]
     [SerializeField] private int requieredCameraIndex = 2;
@@ -63,6 +64,13 @@ public class WindUpButton : MonoBehaviour
 
         button.gameObject.SetActive(correctCamera);
         button.interactable = correctCamera;
+
+        if (Bithovenscript.isJumpscareActive)
+        {
+            musicSource.Stop();
+            warningSource.Stop();
+            return; 
+        }
 
         if (correctCamera)
         {
@@ -245,6 +253,8 @@ public class WindUpButton : MonoBehaviour
     {
         currentHoldTime = holdTime; 
         fillBar.fillAmount = 1f;
+
+        Bithovenscript.isJumpscareActive = false; 
 
         WarningTriangle.gameObject.SetActive(false); 
     }

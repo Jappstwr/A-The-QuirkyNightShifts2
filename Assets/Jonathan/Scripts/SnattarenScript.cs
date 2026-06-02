@@ -24,6 +24,10 @@ public class SnattarenScript : MonoBehaviour
     public int currentRoom;
     [SerializeField] private SpriteRenderer sr;
 
+    [SerializeField] private Sprite activeSprite;
+    [SerializeField] private Sprite peacefullSprite;
+    [SerializeField] private Sprite attackSprite; 
+
     public float attackTimer = 8f;
     public float retreatTimer;
     public float punishTimer; 
@@ -48,6 +52,8 @@ public class SnattarenScript : MonoBehaviour
 
         MoveToWaypoint(0);
 
+        sr.sprite = peacefullSprite;
+
         moveTimer = checkInterval;
 
         retreatTimer = Random.Range(1f,3f);
@@ -65,17 +71,25 @@ public class SnattarenScript : MonoBehaviour
 
         moveTimer -= Time.deltaTime; 
 
+        if (currentWaypoint.isOffice)
+        {
+            sr.sprite = activeSprite;
+        }
+        else
+        {
+            sr.sprite = peacefullSprite; 
+        }
+
         if (currentWaypoint.isOffice && !hasAttackStarted)
         {
-            hasAttackStarted = true; 
+            hasAttackStarted = true;
             attacking = true;
             attackTimer = 6f;
-            retreatTimer = Random.Range(1f,3f);
-            punishTimer = Random.Range(6f,10f); 
+            retreatTimer = Random.Range(1f, 3f);
+            punishTimer = Random.Range(6f, 10f);
         }
         if (attacking)
         {
-            
             AnimAttack();
             return; 
         }
@@ -171,7 +185,7 @@ public class SnattarenScript : MonoBehaviour
         else if (!nightscript._isFlashing && attackTimer <= 0f)
         {
             //take 'em bloody batteries
-
+            sr.sprite = attackSprite;
             nightscript._canFlash = false;
 
             punishTimer -= Time.deltaTime;
@@ -237,6 +251,7 @@ public class SnattarenScript : MonoBehaviour
     {
         BaseAI = 0;
         aiLvl = 0;
+        nightscript._canFlash = true; 
 
         currentPathIndex = 0;
         MoveToWaypoint(0);
