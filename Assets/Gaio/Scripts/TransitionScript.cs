@@ -4,6 +4,12 @@ public class TransitionScript : MonoBehaviour
 {
     public NightScript nightScript;
     public VentScanScript scanScript;
+    public VentAnimatronicsScript ventAnimScript;
+
+    [SerializeField] private ScrappedAnimatronicScript scrapped;
+    [SerializeField] private KlokerScriptMovement normal;
+    [SerializeField] private WindUpButton bithoven;
+    [SerializeField] private SnattarenScript snattaren;
 
     public Animator leftAnimator;
     public Animator rightAnimator;
@@ -42,6 +48,14 @@ public class TransitionScript : MonoBehaviour
             nightScript.powerText.text = $"Power:99%";
 
             scanScript.ResetScan();
+
+            ventAnimScript.ResetAnimatronic();
+
+            scrapped.ResetScrappedAnimatronics();
+            normal.ResetAnimatronics();
+            bithoven.ResetBithoven();
+            snattaren.ResetSnattaren();
+
 
             _hasAddedNight = true;
         }

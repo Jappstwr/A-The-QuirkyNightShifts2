@@ -6527,6 +6527,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TransitionScript
   nightScript: {fileID: 1543463250}
   scanScript: {fileID: 156604561}
+  ventAnimScript: {fileID: 1305467397}
+  scrapped: {fileID: 0}
+  normal: {fileID: 0}
+  bithoven: {fileID: 0}
+  snattaren: {fileID: 0}
   leftAnimator: {fileID: 528599832}
   rightAnimator: {fileID: 1409435616}
 --- !u!1 &2089692707
