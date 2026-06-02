@@ -199,7 +199,9 @@ public class SnattarenScript : MonoBehaviour
 
                 currentPathIndex = 0;
 
-                MoveToWaypoint(currentPathIndex); 
+                MoveToWaypoint(currentPathIndex);
+
+                moveTimer = checkInterval; 
             }
         }
     }

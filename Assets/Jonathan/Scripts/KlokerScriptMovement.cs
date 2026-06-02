@@ -381,4 +381,6 @@ public class KlokerScriptMovement : MonoBehaviour
         KlokerJumpscare.gameObject.SetActive(false);
         FladderLappenJumpscare.gameObject.SetActive(false);
     }
+
+    
 }
