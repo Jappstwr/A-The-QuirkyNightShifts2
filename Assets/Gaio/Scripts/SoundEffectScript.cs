@@ -5,15 +5,17 @@ public class SoundEffectScript : MonoBehaviour
     public static SoundEffectScript Instance;
 
     [SerializeField] private AudioSource soundEffectObject;
-    [SerializeField] AudioSource officeSource;
-    [SerializeField] AudioSource ambienceSource;
-    [SerializeField] AudioSource flashlightSource;
-    [SerializeField] AudioSource breathingSource;
+    public AudioSource officeSource;
+    public AudioSource ambienceSource;
+    public AudioSource flashlightSource;
+    public AudioSource breathingSource;
 
     public AudioClip officeLoop;
     public AudioClip ambienceLoop;
     public AudioClip flashlightLoop;
     public AudioClip breathingLoop;
+
+    public float Volume;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class SoundEffectScript : MonoBehaviour
         ambienceSource.clip = ambienceLoop;
         flashlightSource.clip = flashlightLoop;
         breathingSource.clip = breathingLoop;
+        Volume = 1;
 
         officeSource.Play();
         ambienceSource.Play();
@@ -71,7 +74,7 @@ public class SoundEffectScript : MonoBehaviour
 
         audioSource.clip = audioClip;
 
-        audioSource.volume = volume;
+        audioSource.volume = volume * Volume;
 
         audioSource.Play();
 
