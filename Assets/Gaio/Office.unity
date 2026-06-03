@@ -3692,54 +3692,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1305467397}
-        m_TargetAssemblyTypeName: VentAnimatronicsScript, Assembly-CSharp
-        m_MethodName: ResetAnimatronic
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 460412688}
-        m_TargetAssemblyTypeName: JumpscareScript, Assembly-CSharp
-        m_MethodName: ResetJumpscare
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 546154582}
-        m_TargetAssemblyTypeName: JumpscareScript, Assembly-CSharp
-        m_MethodName: ResetJumpscare
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 156604561}
-        m_TargetAssemblyTypeName: VentScanScript, Assembly-CSharp
-        m_MethodName: ResetScan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1245919306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4874,6 +4826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1bcc78ebde7ec44a25cc218f0f08c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  scanScript: {fileID: 156604561}
+  ventAnimScript: {fileID: 1305467397}
   office: {fileID: 888559848}
   deathmenu: {fileID: 1673836808}
   transitionObject: {fileID: 2015644628}
@@ -4938,6 +4892,12 @@ MonoBehaviour:
   _isJumpscared: 0
   _isDead: 0
   scanTimer: 0
+  scrapped: {fileID: 0}
+  scrapped2: {fileID: 0}
+  normal: {fileID: 0}
+  normal2: {fileID: 0}
+  bithoven: {fileID: 0}
+  snattaren: {fileID: 0}
 --- !u!4 &1543463251
 Transform:
   m_ObjectHideFlags: 0
@@ -6534,7 +6494,9 @@ MonoBehaviour:
   scanScript: {fileID: 156604561}
   ventAnimScript: {fileID: 1305467397}
   scrapped: {fileID: 0}
+  scrapped2: {fileID: 0}
   normal: {fileID: 0}
+  normal2: {fileID: 0}
   bithoven: {fileID: 0}
   snattaren: {fileID: 0}
   leftAnimator: {fileID: 528599832}

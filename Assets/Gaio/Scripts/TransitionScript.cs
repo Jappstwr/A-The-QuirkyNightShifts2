@@ -49,7 +49,7 @@ public class TransitionScript : MonoBehaviour
             nightScript.UpdateAMText();
             nightScript.powerText.text = $"Power:99%";
 
-            scanScript.ResetScan();
+            /*scanScript.ResetScan();
 
             ventAnimScript.ResetAnimatronic();
 
@@ -58,7 +58,9 @@ public class TransitionScript : MonoBehaviour
             normal.ResetAnimatronics();
             normal2.ResetAnimatronics();
             bithoven.ResetBithoven();
-            snattaren.ResetSnattaren();
+            snattaren.ResetSnattaren();*/
+
+            nightScript.ResetNight();
 
 
             _hasAddedNight = true;

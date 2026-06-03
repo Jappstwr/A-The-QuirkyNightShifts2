@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
 
 public class NightScript : MonoBehaviour
 {
+    public VentScanScript scanScript;
+    public VentAnimatronicsScript ventAnimScript;
+
     public GameObject office;
     public GameObject deathmenu;
     public GameObject transitionObject;
@@ -90,6 +93,13 @@ public class NightScript : MonoBehaviour
 
     public float scanTimer;
 
+    [SerializeField] private ScrappedAnimatronicScript scrapped;
+    [SerializeField] private ScrappedAnimatronicScript scrapped2;
+    [SerializeField] private KlokerScriptMovement normal;
+    [SerializeField] private KlokerScriptMovement normal2;
+    [SerializeField] private WindUpButton bithoven;
+    [SerializeField] private SnattarenScript snattaren;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -108,6 +118,18 @@ public class NightScript : MonoBehaviour
     // Update is called once per frame
     public void ResetNight()
     {
+        scanScript.ResetScan();
+
+        ventAnimScript.ResetAnimatronic();
+
+        scrapped.ResetScrappedAnimatronics();
+        scrapped2.ResetScrappedAnimatronics();
+        normal.ResetAnimatronics();
+        normal2.ResetAnimatronics();
+        bithoven.ResetBithoven();
+        snattaren.ResetSnattaren();
+
+
         nightText.text = $"Night {Night}";
 
         officeIndex = 1;
