@@ -124,12 +124,12 @@ public class NightScript : MonoBehaviour
 
         ventAnimScript.ResetAnimatronic();
 
-        scrapped.ResetScrappedAnimatronics();
+        /*scrapped.ResetScrappedAnimatronics();
         scrapped2.ResetScrappedAnimatronics();
         normal.ResetAnimatronics();
         normal2.ResetAnimatronics();
         bithoven.ResetBithoven();
-        snattaren.ResetSnattaren();
+        snattaren.ResetSnattaren();*/
 
 
         nightText.text = $"Night {Night}";

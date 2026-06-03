@@ -525,7 +525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 100, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84204036
@@ -3615,7 +3615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1245919304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6496,12 +6496,7 @@ MonoBehaviour:
   nightScript: {fileID: 1543463250}
   scanScript: {fileID: 156604561}
   ventAnimScript: {fileID: 1305467397}
-  scrapped: {fileID: 0}
-  scrapped2: {fileID: 0}
-  normal: {fileID: 0}
-  normal2: {fileID: 0}
-  bithoven: {fileID: 0}
-  snattaren: {fileID: 0}
+  melody: {fileID: 8300000, guid: 084c889b167a57648a90fbf7c5a23c29, type: 3}
   leftAnimator: {fileID: 528599832}
   rightAnimator: {fileID: 1409435616}
 --- !u!1 &2089692707

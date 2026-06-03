@@ -8,13 +8,6 @@ public class TransitionScript : MonoBehaviour
 
     public AudioClip melody;
 
-    [SerializeField] private ScrappedAnimatronicScript scrapped;
-    [SerializeField] private ScrappedAnimatronicScript scrapped2;
-    [SerializeField] private KlokerScriptMovement normal;
-    [SerializeField] private KlokerScriptMovement normal2;
-    [SerializeField] private WindUpButton bithoven;
-    [SerializeField] private SnattarenScript snattaren;
-
     public Animator leftAnimator;
     public Animator rightAnimator;
 
@@ -42,7 +35,7 @@ public class TransitionScript : MonoBehaviour
     {
         transitionTime -= Time.deltaTime;
 
-        if (transitionTime < 5 && _hasAddedNight == false)
+        if (transitionTime < 1 && _hasAddedNight == false)
         {
             nightScript.Night++;
             nightScript.nightTime = 0;
@@ -51,17 +44,6 @@ public class TransitionScript : MonoBehaviour
             nightScript.nightText.text = $"Night {nightScript.Night}";
             nightScript.UpdateAMText();
             nightScript.powerText.text = $"Power:99%";
-
-            /*scanScript.ResetScan();
-
-            ventAnimScript.ResetAnimatronic();
-
-            scrapped.ResetScrappedAnimatronics();
-            scrapped2.ResetScrappedAnimatronics();
-            normal.ResetAnimatronics();
-            normal2.ResetAnimatronics();
-            bithoven.ResetBithoven();
-            snattaren.ResetSnattaren();*/
 
             nightScript.ResetNight();
 
