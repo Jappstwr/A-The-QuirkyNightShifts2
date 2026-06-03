@@ -1891,6 +1891,8 @@ MonoBehaviour:
   soundScript: {fileID: 1664550029}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!1 &476691857
@@ -2132,6 +2134,8 @@ MonoBehaviour:
   soundScript: {fileID: 1664550029}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!1 &547445616
@@ -5128,6 +5132,7 @@ MonoBehaviour:
   ambienceLoop: {fileID: 8300000, guid: a022c5cb3fd6d4e4aa0a7412f676b3b5, type: 3}
   flashlightLoop: {fileID: 8300000, guid: 2b1423262bc95fc43b3d2f63d49a31d2, type: 3}
   breathingLoop: {fileID: 8300000, guid: 29294d14eb153e94ba414fb2272a11b7, type: 3}
+  Volume: 0
 --- !u!4 &1664550030
 Transform:
   m_ObjectHideFlags: 0
