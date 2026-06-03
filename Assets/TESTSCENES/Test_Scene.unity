@@ -6797,7 +6797,7 @@ MonoBehaviour:
   doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
   flashSound: {fileID: 8300000, guid: a708d5b9e528bae44b59da446451f852, type: 3}
   ambienceTimer: 0
-  Night: 6
+  Night: 1
   offices:
   - {fileID: 23193822}
   - {fileID: 834581095}
