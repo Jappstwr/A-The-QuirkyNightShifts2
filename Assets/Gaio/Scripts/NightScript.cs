@@ -517,6 +517,10 @@ public class NightScript : MonoBehaviour
                 ToggleRight();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GoToMainMenu();
+        }
         if (Input.GetButtonDown("MonitorToggle"))
         {
             ToggleMonitorView();
