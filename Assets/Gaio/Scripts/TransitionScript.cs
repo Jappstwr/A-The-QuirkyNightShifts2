@@ -7,7 +7,9 @@ public class TransitionScript : MonoBehaviour
     public VentAnimatronicsScript ventAnimScript;
 
     [SerializeField] private ScrappedAnimatronicScript scrapped;
+    [SerializeField] private ScrappedAnimatronicScript scrapped2;
     [SerializeField] private KlokerScriptMovement normal;
+    [SerializeField] private KlokerScriptMovement normal2;
     [SerializeField] private WindUpButton bithoven;
     [SerializeField] private SnattarenScript snattaren;
 
@@ -52,7 +54,9 @@ public class TransitionScript : MonoBehaviour
             ventAnimScript.ResetAnimatronic();
 
             scrapped.ResetScrappedAnimatronics();
+            scrapped2.ResetScrappedAnimatronics();
             normal.ResetAnimatronics();
+            normal2.ResetAnimatronics();
             bithoven.ResetBithoven();
             snattaren.ResetSnattaren();
 
