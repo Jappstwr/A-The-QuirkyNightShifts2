@@ -6,6 +6,8 @@ public class TransitionScript : MonoBehaviour
     public VentScanScript scanScript;
     public VentAnimatronicsScript ventAnimScript;
 
+    public AudioClip melody;
+
     [SerializeField] private ScrappedAnimatronicScript scrapped;
     [SerializeField] private ScrappedAnimatronicScript scrapped2;
     [SerializeField] private KlokerScriptMovement normal;
@@ -32,6 +34,7 @@ public class TransitionScript : MonoBehaviour
 
         transitionTime = 10f;
         _hasAddedNight = false;
+        SoundEffectScript.Instance.PlaySoundEffect(melody, 1f);
     }
 
     // Update is called once per frame

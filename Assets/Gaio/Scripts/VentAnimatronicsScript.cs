@@ -9,6 +9,8 @@ public class VentAnimatronicsScript : MonoBehaviour
     public GameObject clankaren;
     public GameObject ferdinand;
 
+    public AudioClip ventForward;
+    public AudioClip ventBackward;
     public enum Positions {x1, x2, a1, a2, b1, b2, c, d }
 
     public Positions clankarenPosition;
@@ -87,6 +89,13 @@ public class VentAnimatronicsScript : MonoBehaviour
             _clankarenActiveThisNight = true;
             _ferdinandActiveThisNight = true;
         }
+        else if (nightScript.Night == 6)
+        {
+            clankarenAILevel = 12;
+            ferdinandAILevel = 13;
+            _clankarenActiveThisNight = true;
+            _ferdinandActiveThisNight = true;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -156,12 +165,14 @@ public class VentAnimatronicsScript : MonoBehaviour
                     if (ferdinandPosition != Positions.a1)
                     {
                         clankarenPosition = Positions.a1;
+                        SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.2f);
                     }
                 }
                 else if (clankarenPosition == Positions.b2)
                 {
                     if (ferdinandPosition != Positions.a2)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.2f);
                         clankarenPosition = Positions.a2;
                     }
                 }
@@ -175,6 +186,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     {
                         if (ferdinandPosition != Positions.x1)
                         {
+                            SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.3f);
                             clankarenPosition = Positions.x1;
                         }
                     }
@@ -189,6 +201,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     {
                         if (ferdinandPosition != Positions.x2)
                         {
+                            SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.3f);
                             clankarenPosition = Positions.x2;
                         }
                     }
@@ -197,6 +210,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (nightScript._leftClosed == true)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventBackward, 0.3f);
                         clankarenPosition = Positions.c;
                     }
                     else
@@ -209,6 +223,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (nightScript._rightClosed == true)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventBackward, 0.3f);
                         clankarenPosition = Positions.c;
                     }
                     else
@@ -252,6 +267,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (clankarenPosition != Positions.a1)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.2f);
                         ferdinandPosition = Positions.a1;
                     }
                 }
@@ -259,6 +275,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (clankarenPosition != Positions.a2)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.3f);
                         ferdinandPosition = Positions.a2;
                     }
                 }
@@ -272,6 +289,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     {
                         if (clankarenPosition != Positions.x1)
                         {
+                            SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.2f);
                             ferdinandPosition = Positions.x1;
                         }
                     }
@@ -284,6 +302,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                     }
                     else
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventForward, 0.3f);
                         ferdinandPosition = Positions.x2;
                     }
                 }
@@ -291,6 +310,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (nightScript._leftClosed == true)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventBackward, 0.3f);
                         ferdinandPosition = Positions.c;
                     }
                     else
@@ -303,6 +323,7 @@ public class VentAnimatronicsScript : MonoBehaviour
                 {
                     if (nightScript._rightClosed == true)
                     {
+                        SoundEffectScript.Instance.PlaySoundEffect(ventBackward, 0.3f);
                         ferdinandPosition = Positions.c;
                     }
                     else

@@ -24,7 +24,7 @@ public class MenuScript : MonoBehaviour
         SoundEffectScript.Instance.flashlightSource.volume = audioSlider.value * 0.2f;
         SoundEffectScript.Instance.breathingSource.volume = audioSlider.value;
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
     public void ToggleSettings()
     {

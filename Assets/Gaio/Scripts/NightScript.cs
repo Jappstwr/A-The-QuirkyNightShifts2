@@ -26,6 +26,8 @@ public class NightScript : MonoBehaviour
     public AudioClip doorSound;
     public AudioClip flashSound;
 
+    [SerializeField] private float ambienceTimer;
+
     public int Night;
 
     public List<GameObject> offices = new List<GameObject>();
@@ -160,6 +162,7 @@ public class NightScript : MonoBehaviour
         powerUsage = 1;
         _isFlashing = false;
         _canFlash = true;
+        ambienceTimer = 10f;
 
         SoundEffectScript.Instance.StartAmbience();
     }
@@ -482,6 +485,23 @@ public class NightScript : MonoBehaviour
     {
         jumpscaresHolder.SetActive(true);
     }
+    public void CheckAmbience()
+    {
+        if (ambienceTimer <= 0)
+        {
+            ambienceTimer = Random.Range(20, 30);
+
+            int ambienceDecider = Random.Range(1, 3);
+            if (ambienceDecider == 1)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(ambience1Sound, 1f);
+            }
+            else if (ambienceDecider == 2)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(ambience2Sound, 1f);
+            }
+        }
+    }
     public void PlayerInput()
     {
         if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
@@ -538,11 +558,12 @@ public class NightScript : MonoBehaviour
         {
             scanTimer -= Time.deltaTime;
             nightTime += Time.deltaTime;
+            ambienceTimer -= Time.deltaTime;
             if (nightTime >= 360)
             {
                 _is6AM = true;
             }
-
+            CheckAmbience();
             UpdateAMText();
             PlayerInput();
             if (_powerOutage == false)

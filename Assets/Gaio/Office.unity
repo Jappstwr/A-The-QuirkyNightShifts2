@@ -3333,7 +3333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a0fdf62eb95fed24aa3bef329f688685, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1422d28fc67651f479c29a47f31cc9e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4030,6 +4030,8 @@ MonoBehaviour:
   nightScript: {fileID: 1543463250}
   clankaren: {fileID: 460412685}
   ferdinand: {fileID: 546154579}
+  ventForward: {fileID: 8300000, guid: 7afe55f8d0dd27541a92c968a83add08, type: 3}
+  ventBackward: {fileID: 8300000, guid: e30e8277242c1b1458b63bbd4cf103a7, type: 3}
   clankarenPosition: 0
   ferdinandPosition: 0
   clankarenAILevel: 0
@@ -4838,6 +4840,7 @@ MonoBehaviour:
   ambience2Sound: {fileID: 8300000, guid: fa38414eb7a9fdf4789415f9d4e2365b, type: 3}
   doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
   flashSound: {fileID: 8300000, guid: a708d5b9e528bae44b59da446451f852, type: 3}
+  ambienceTimer: 0
   Night: 3
   offices:
   - {fileID: 1199538119}
