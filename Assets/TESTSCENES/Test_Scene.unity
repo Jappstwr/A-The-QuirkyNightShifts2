@@ -1797,6 +1797,8 @@ MonoBehaviour:
   soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &320426328
@@ -2406,6 +2408,8 @@ MonoBehaviour:
   soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &399059657
@@ -5785,6 +5789,8 @@ MonoBehaviour:
   soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &1022364302
@@ -6737,6 +6743,8 @@ MonoBehaviour:
   soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &1114702601
@@ -7170,6 +7178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d1bcc78ebde7ec44a25cc218f0f08c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  scanScript: {fileID: 2117627359}
+  ventAnimScript: {fileID: 2033081285}
   office: {fileID: 1110524039}
   deathmenu: {fileID: 951171041}
   transitionObject: {fileID: 1850796460}
@@ -7180,7 +7190,7 @@ MonoBehaviour:
   ambience2Sound: {fileID: 8300000, guid: fa38414eb7a9fdf4789415f9d4e2365b, type: 3}
   doorSound: {fileID: 8300000, guid: 2480b634f4dd0d942ac7075a4e972355, type: 3}
   flashSound: {fileID: 8300000, guid: a708d5b9e528bae44b59da446451f852, type: 3}
-  Night: 3
+  Night: 6
   offices:
   - {fileID: 23193822}
   - {fileID: 834581095}
@@ -7234,6 +7244,12 @@ MonoBehaviour:
   _isJumpscared: 0
   _isDead: 0
   scanTimer: 0
+  scrapped: {fileID: 1114746551}
+  scrapped2: {fileID: 376796372}
+  normal: {fileID: 2092181527}
+  normal2: {fileID: 341898408}
+  bithoven: {fileID: 1392059699}
+  snattaren: {fileID: 812996393}
 --- !u!4 &1140767874
 Transform:
   m_ObjectHideFlags: 0
@@ -8614,6 +8630,7 @@ MonoBehaviour:
   ambienceLoop: {fileID: 8300000, guid: a022c5cb3fd6d4e4aa0a7412f676b3b5, type: 3}
   flashlightLoop: {fileID: 8300000, guid: 2b1423262bc95fc43b3d2f63d49a31d2, type: 3}
   breathingLoop: {fileID: 8300000, guid: 29294d14eb153e94ba414fb2272a11b7, type: 3}
+  Volume: 0
 --- !u!4 &1341172792
 Transform:
   m_ObjectHideFlags: 0
@@ -9836,10 +9853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a97ee8775dd88438ab4bf4638056eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpscareScript
-  nightScript: {fileID: 0}
-  soundScript: {fileID: 0}
+  nightScript: {fileID: 1140767873}
+  soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &1536725922
@@ -11715,10 +11734,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a97ee8775dd88438ab4bf4638056eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  nightScript: {fileID: 0}
-  soundScript: {fileID: 0}
+  nightScript: {fileID: 1140767873}
+  soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &1791127858
@@ -11861,7 +11882,9 @@ MonoBehaviour:
   scanScript: {fileID: 2117627359}
   ventAnimScript: {fileID: 2033081285}
   scrapped: {fileID: 1114746551}
+  scrapped2: {fileID: 0}
   normal: {fileID: 341898408}
+  normal2: {fileID: 0}
   bithoven: {fileID: 1392059699}
   snattaren: {fileID: 812996393}
   leftAnimator: {fileID: 901912102}
@@ -12352,6 +12375,8 @@ MonoBehaviour:
   soundScript: {fileID: 1341172791}
   time: 1.5
   staticTime: 0.5
+  _hasPlayedJumpscare: 0
+  jumpscareSound: {fileID: 8300000, guid: b7505aa7b12e5fa4ea4bab623b155669, type: 3}
   currentTime: 0
   currentStaticTime: 0
 --- !u!212 &1886553036
