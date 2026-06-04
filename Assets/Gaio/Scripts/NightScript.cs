@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 
 public class NightScript : MonoBehaviour
@@ -25,6 +26,18 @@ public class NightScript : MonoBehaviour
     public AudioClip ambience2Sound;
     public AudioClip doorSound;
     public AudioClip flashSound;
+    public AudioClip toneSound;
+
+    public AudioClip rolfMessage1;
+    public AudioClip rolfMessage2;
+    public AudioClip rolfMessage3;
+    public AudioClip rolfMessage4;
+    public AudioClip rolfMessage5;
+    public AudioClip rolfMessage6;
+
+    [SerializeField] private bool _hasPickedUp;
+    private float callTimer = 8;
+    private float callCooldown = 0;
 
     [SerializeField] private float ambienceTimer;
 
@@ -41,6 +54,7 @@ public class NightScript : MonoBehaviour
     public GameObject monitorButton;
     public GameObject suitButton;
     public GameObject closeButton;
+    public GameObject answerButton;
 
     public GameObject monitor;
     public GameObject ventSystem;
@@ -151,6 +165,7 @@ public class NightScript : MonoBehaviour
         monitorButton.SetActive(true);
         suitButton.SetActive(true);
         closeButton.SetActive(false);
+        answerButton.SetActive(true);
         camSystem.SetActive(true);
         ventSystem.SetActive(false);
         _isDead = false;
@@ -502,6 +517,27 @@ public class NightScript : MonoBehaviour
             }
         }
     }
+    public void UpdateCall()
+    {
+        callTimer -= UnityEngine.Time.deltaTime;
+        callCooldown -= UnityEngine.Time.deltaTime;
+
+        if (_hasPickedUp && callTimer < 0)
+        {
+            SoundEffectScript.Instance.PlaySoundEffect(rolfMessage1, 1f);
+            _hasPickedUp = false;
+        }
+        else if (callTimer > 0 && callCooldown <= 0)
+        {
+            SoundEffectScript.Instance.PlaySoundEffect(toneSound, 0.2f);
+            callCooldown = 2;
+        }
+
+        if (callTimer < 0)
+        {
+            answerButton.SetActive(false);
+        }
+    }
     public void PlayerInput()
     {
         if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
@@ -567,6 +603,7 @@ public class NightScript : MonoBehaviour
             {
                 _is6AM = true;
             }
+            UpdateCall();
             CheckAmbience();
             UpdateAMText();
             PlayerInput();

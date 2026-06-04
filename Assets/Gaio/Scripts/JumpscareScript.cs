@@ -4,7 +4,6 @@ using UnityEngine;
 public class JumpscareScript : MonoBehaviour
 {
     public NightScript nightScript;
-    public SoundEffectScript soundScript;
     public float time;
     public float staticTime;
     public bool _hasPlayedJumpscare;
@@ -41,7 +40,7 @@ public class JumpscareScript : MonoBehaviour
             currentStaticTime -= Time.deltaTime;
             if (currentStaticTime <= 0)
             {
-                soundScript.StopAmbience();
+                SoundEffectScript.Instance.StopAmbience();
                 nightScript._isDead = true;
             }
         }
