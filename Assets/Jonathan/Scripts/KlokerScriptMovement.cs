@@ -367,6 +367,7 @@ public class KlokerScriptMovement : MonoBehaviour
 
     public void ResetAnimatronics()
     {
+        GetNight(); 
         baseAI = 0;
         aiLevel = 0;
         isJumpscareActive = false; 

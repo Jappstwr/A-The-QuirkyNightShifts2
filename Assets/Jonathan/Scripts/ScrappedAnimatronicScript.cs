@@ -353,11 +353,12 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
     public void ResetScrappedAnimatronics()
     {
+        UpdateAI(); 
         BaseAI = 0;
         aiLvl = 0;
-        isJumpscareActive = false; 
-
         aiTimer = 0f;
+
+        isJumpscareActive = false;
 
         currentPathIndex = 0; 
         MoveToWaypoint(currentPathIndex);

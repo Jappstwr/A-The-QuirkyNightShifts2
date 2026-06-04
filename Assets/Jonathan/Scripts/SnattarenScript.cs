@@ -251,6 +251,7 @@ public class SnattarenScript : MonoBehaviour
 
     public void ResetSnattaren()
     {
+        UpdateAI(); 
         BaseAI = 0;
         aiLvl = 0;
         nightscript._canFlash = true; 

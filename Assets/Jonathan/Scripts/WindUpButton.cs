@@ -251,6 +251,7 @@ public class WindUpButton : MonoBehaviour
 
     public void ResetBithoven()
     {
+        GetNight(); 
         currentHoldTime = holdTime; 
         fillBar.fillAmount = 1f;
 
