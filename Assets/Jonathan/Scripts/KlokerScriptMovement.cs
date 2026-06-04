@@ -75,9 +75,16 @@ public class KlokerScriptMovement : MonoBehaviour
 
         aiTimer += Time.deltaTime; 
 
-        UpdateAILevel();
+        if (isFladderlappen)
+        {
+            UpdateAILevel();
+        }
+        else
+        {
+            UpdateAILevel2(); 
+        }
 
-        moveTimer -= Time.deltaTime;
+       moveTimer -= Time.deltaTime;
 
         if (isFladderlappen && currentWaypoint.isHallway && !attacking)
         {
@@ -117,7 +124,7 @@ public class KlokerScriptMovement : MonoBehaviour
             {
                 baseAI = 0;
                 aiLevel = 0;
-                return; 
+                //return; 
             }
             if (nightscript.Night == 2 && aiTimer >= 60f)
             {
@@ -158,6 +165,29 @@ public class KlokerScriptMovement : MonoBehaviour
         }
 
         
+    }
+    public void UpdateAILevel2()
+    {
+        aiLevel = baseAI;
+
+        if (nightscript.Night >= 1)
+        {
+            baseAI = 1; 
+        }
+        else if (nightscript.Night >= 6)
+        {
+            baseAI = 10;
+        }
+
+        if (aiTimer >= 120f)
+        {
+            aiLevel += 1;
+        }
+
+        if (aiTimer >= 240)
+        {
+            aiLevel += currentAIModifier;
+        }
     }
     public void GetNight()
     {
