@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Buffers.Text;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Rendering;
 
 public class KlokerScriptMovement : MonoBehaviour
@@ -12,7 +13,10 @@ public class KlokerScriptMovement : MonoBehaviour
 
     [SerializeField] private float checkInterval = 5f;
 
-    [SerializeField] private MainCameraScript maincamerascript; 
+    [SerializeField] private MainCameraScript maincamerascript;
+
+    [SerializeField] public GameObject FladderLappenJumpscare;
+    [SerializeField] public GameObject KlokerJumpscare; 
     
 
     private int currentPathIndex = 0;
@@ -32,10 +36,12 @@ public class KlokerScriptMovement : MonoBehaviour
     public bool hallwayPoint;
 
     public bool isFladderlappen;
+    //public bool isKloker; 
 
     private float attackTimer = 8f;
     private float retreatTimer;
     private bool attacking;
+    private bool isJumpscareActive; 
 
     private Waypoints currentWaypoint;
 
@@ -57,6 +63,8 @@ public class KlokerScriptMovement : MonoBehaviour
         moveTimer = checkInterval;
 
         retreatTimer = Random.Range(3f, 5f);
+
+        isJumpscareActive = false; 
     }
 
     // Update is called once per frame
@@ -71,25 +79,33 @@ public class KlokerScriptMovement : MonoBehaviour
 
         moveTimer -= Time.deltaTime;
 
-        if (currentWaypoint.isOffice && !attacking)
+        if (isFladderlappen && currentWaypoint.isHallway && !attacking)
         {
             attacking = true;
             attackTimer = 8f;
             retreatTimer = Random.Range(2f, 3f);
         }
+        else
+        {
+            if (currentWaypoint.isOffice && !attacking)
+            {
+                attacking = true;
+                attackTimer = 8f;
+                retreatTimer = Random.Range(2f, 3f);
+            }
+        }
         if (attacking)
         {
             AnimAttack();
-            return; 
+            return;
         }
 
-        if  (moveTimer <= 0f)
+        if (moveTimer <= 0f)
         {
             moveTimer = checkInterval;
 
-            OpportunityMovement(); 
+            OpportunityMovement();
         }
-
     }   
     public void UpdateAILevel()
     {
@@ -97,10 +113,10 @@ public class KlokerScriptMovement : MonoBehaviour
 
         if (isFladderlappen)
         {
-            if (nightscript.Night == 1)
+            if (nightscript.Night == 2 && aiTimer >= 60f)
             {
-                aiLevel = 0;
-                return; 
+                aiLevel += 1;
+                //return; 
             }
 
             if (aiTimer < 60f)
@@ -113,8 +129,17 @@ public class KlokerScriptMovement : MonoBehaviour
             {
                 aiLevel = baseAI; 
             }
+
+            if (nightscript.Night >= 6)
+            {
+                baseAI = 10; 
+            }
         }
 
+        if (nightscript.Night >= 6)
+        {
+            baseAI = 10;
+        }
 
         if (aiTimer >= 120f)
         {
@@ -125,12 +150,14 @@ public class KlokerScriptMovement : MonoBehaviour
         {
             aiLevel += currentAIModifier;
         }
+
+        
     }
     public void GetNight()
     {
         if (nightscript.Night == 1)
         {
-            currentAIModifier += 1; 
+            currentAIModifier += 2; 
         }
 
         if (nightscript.Night == 2)
@@ -212,27 +239,23 @@ public class KlokerScriptMovement : MonoBehaviour
             return; 
         }
 
-        //if (currentPathIndex == 1)
-        //{
-        //    int roll = Random.Range(1, 21);
+        if (currentWaypoint.isOuterStage)
+        {
+            int roll = Random.Range(1, 21);
 
-        //    if (roll >= 5)
-        //    {
-        //        currentPathIndex = 3;
-        //        MoveToWaypoint(currentPathIndex);
-        //        Debug.Log("Failed to move to Hallway");
-        //    }
-        //    else
-        //    {
-        //        currentPathIndex = 4;
-        //        MoveToWaypoint(currentPathIndex);
-        //        Debug.Log("Successfully moved to Hallway");
-        //    }
-        //}
+            if (roll <= aiLevel)
+            {
+                currentPathIndex = 3;
+                MoveToWaypoint(currentPathIndex); 
+            }
+        }
+        else
+        {
+            currentPathIndex++;
 
-        currentPathIndex++;
-
-        MoveToWaypoint(currentPathIndex);
+            MoveToWaypoint(currentPathIndex);
+        }
+       
     }
     public void AnimAttack()
     {
@@ -270,7 +293,11 @@ public class KlokerScriptMovement : MonoBehaviour
             }
             else if (!nightscript._inSuit && attackTimer <= 0f)
             {
-                JumpScare();
+                if (!isJumpscareActive)
+                {
+                    isJumpscareActive = true; 
+                    JumpScare();
+                }
                 Debug.Log($"Game Over! Kloker got you!");
             }
         }
@@ -282,11 +309,13 @@ public class KlokerScriptMovement : MonoBehaviour
 
     public void JumpScare()
     {
-        //Kloker jumspcare
+        KlokerJumpscare.gameObject.SetActive(true);
+        nightscript.TurnOnJumpscare(); 
     }
     public void JumpScare2()
     {
-        //FladderLappen jumpscare
+        FladderLappenJumpscare.gameObject.SetActive(true);
+        nightscript.TurnOnJumpscare(); 
     }
     public void UpdateVisibility()
     {
@@ -335,4 +364,24 @@ public class KlokerScriptMovement : MonoBehaviour
 
         sr.enabled = visible;
     }
+
+    public void ResetAnimatronics()
+    {
+        GetNight(); 
+        baseAI = 0;
+        aiLevel = 0;
+        isJumpscareActive = false; 
+
+        aiTimer = 0f;
+
+        currentPathIndex = 0;
+        MoveToWaypoint(currentPathIndex);
+
+        moveTimer = checkInterval;
+
+        KlokerJumpscare.gameObject.SetActive(false);
+        FladderLappenJumpscare.gameObject.SetActive(false);
+    }
+
+    
 }

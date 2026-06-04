@@ -7,7 +7,10 @@ public class CamHandelerInTestScene : MonoBehaviour
     [SerializeField] private GameObject CAMSImage;
     [SerializeField] private GameObject Office;
 
-    [SerializeField] private NightScript nightscript; 
+    [SerializeField] private NightScript nightscript;
+
+    private bool hasClosedCameras; 
+ 
 
     void Start()
     {
@@ -22,9 +25,29 @@ public class CamHandelerInTestScene : MonoBehaviour
 
     public void SwitchToOffice()
     {
-        CAMS.SetActive(false);
-        CAMSImage.SetActive(false);
-        Office.SetActive(true); 
+        
+        if (nightscript.scanTimer <= 0f)
+        {
+            //hasClosedCameras = true; 
+            nightscript._monitorOpen = false; 
+            CAMS.SetActive(false);
+            CAMSImage.SetActive(false);
+            Office.SetActive(true);
+        }
+        else if (nightscript.scanTimer > 0f) 
+        {
+            //hasClosedCameras = false; 
+            nightscript._monitorOpen = true; 
+            Debug.Log("Cannot close whilst scanning!"); 
+        }
+        
+        //if (!hasClosedCameras && nightscript.scanTimer > 0f)
+        //{
+        //    CAMS.SetActive(false);
+        //    CAMSImage.SetActive(false);
+        //    Office.SetActive(false);
+        //}
+        
     }
     public void SwitchToCams()
     {

@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,8 @@ public class WindUpButton : MonoBehaviour
     [SerializeField] private MainCameraScript cameraSystem;
     [SerializeField] private Button button;
     [SerializeField] private Image fillBar;
+
+    [SerializeField] private GameObject WarningTriangle; 
 
     [SerializeField] private GameObject songUI;
 
@@ -16,7 +19,8 @@ public class WindUpButton : MonoBehaviour
 
     [SerializeField] private AudioClip[] songs;
     //[SerializeField] private AudioClip song2;
-    [SerializeField] private AudioClip TireMeterSound; 
+    [SerializeField] private AudioClip TireMeterSound;
+    [SerializeField] private BithovenScriptMovement Bithovenscript; 
 
     [Header("Settings")]
     [SerializeField] private int requieredCameraIndex = 2;
@@ -48,6 +52,8 @@ public class WindUpButton : MonoBehaviour
         fillBar.fillAmount = 1;
         currentHoldTime = holdTime;
 
+        WarningTriangle.gameObject.SetActive(false); 
+
         ChangeSong();
     }
 
@@ -58,6 +64,13 @@ public class WindUpButton : MonoBehaviour
 
         button.gameObject.SetActive(correctCamera);
         button.interactable = correctCamera;
+
+        if (Bithovenscript.isJumpscareActive)
+        {
+            musicSource.Stop();
+            warningSource.Stop();
+            return; 
+        }
 
         if (correctCamera)
         {
@@ -138,7 +151,8 @@ public class WindUpButton : MonoBehaviour
             if (!warningActive)
             {
                 warningActive = true;
-                
+
+                WarningTriangle.gameObject.SetActive(true); 
 
                 warningSource.clip = TireMeterSound;
                 warningSource.loop = true;
@@ -152,12 +166,16 @@ public class WindUpButton : MonoBehaviour
                 warningActive = false;
 
                 warningSource.Stop();
+
+                WarningTriangle.SetActive(false); 
             }
             else
             {
                 warningActive = false;
 
-                warningSource.Stop(); 
+                warningSource.Stop();
+
+                WarningTriangle.gameObject.SetActive(false); 
             }
         }
         
@@ -189,6 +207,11 @@ public class WindUpButton : MonoBehaviour
         if (nightscript.Night == 5)
         {
             currentModifier += 0.040f;
+        }
+
+        if (nightscript.Night >= 6)
+        {
+            currentModifier += 0.050f; 
         }
     }
     //public void OnPointerDown(PointerEventData eventData)
@@ -226,5 +249,27 @@ public class WindUpButton : MonoBehaviour
         Debug.Log("Song Changed"); 
     }
 
+    public void ResetBithoven()
+    {
+        GetNight(); 
+        currentHoldTime = holdTime; 
+        fillBar.fillAmount = 1f;
 
+        Bithovenscript.isJumpscareActive = false; 
+
+        WarningTriangle.gameObject.SetActive(false); 
+    }
+
+    //public void StartNextNight()
+    //{
+    //    Night++; 
+
+    //    ScrappedAnimatronicScript scrapped = new ScrappedAnimatronicScript();
+    //    KlokerScriptMovement normal = new KlokerScriptMovement();
+    //    WindUpButton bithoven = new WindUpButton(); 
+
+    //    scrapped.ResetScrappedAnimatronics();
+    //    normal.ResetAnimatronics();
+    //    bithoven.ResetBithoven();
+    //}
 }

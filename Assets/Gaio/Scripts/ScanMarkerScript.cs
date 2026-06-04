@@ -13,19 +13,26 @@ public class ScanMarkerScript : MonoBehaviour
         
     }
 
+    
+
     public void Activate()
     {
         currentTime = activeTime;
+    }
+
+    public void DeActivate()
+    {
+        currentTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentTime -= Time.deltaTime;
-        if (currentTime < 4 && currentTime > 3.5 ||
-            currentTime < 3 && currentTime > 2.5 ||
-            currentTime < 2 && currentTime > 1.5 ||
-            currentTime < 1 && currentTime > 0.5)
+        if (currentTime < 3.75 && currentTime > 3.25 ||
+            currentTime < 2.75 && currentTime > 2.25 ||
+            currentTime < 1.75 && currentTime > 1.25 ||
+            currentTime < 0.75 && currentTime > 0.25)
         {
             gameObject.transform.localPosition = scanPosition;
         }
@@ -37,5 +44,7 @@ public class ScanMarkerScript : MonoBehaviour
         {
             gameObject.transform.localPosition = new Vector3(0, 500);
         }
+
+       
     }
 }

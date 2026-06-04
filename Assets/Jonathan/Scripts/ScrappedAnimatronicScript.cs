@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScrappedAnimatronicScript : MonoBehaviour
@@ -12,6 +11,9 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     [SerializeField] private float checkInterval = 5f;
 
     [SerializeField] private MainCameraScript maincamerascript;
+
+    [SerializeField] public GameObject BennyJumpscare;
+    [SerializeField] public GameObject FredrikJumpscare; 
 
     private int currentPathIndex;
     public int aiLvl = 0;
@@ -29,7 +31,10 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     public float retreatTimer;
 
     public bool attacking;
-    private bool hasAttackStarted; 
+    private bool hasAttackStarted;
+    private bool oppertunityAttackAttemped = false;
+
+    private bool isJumpscareActive; 
 
     private Waypoints currentWaypoint;
 
@@ -80,7 +85,6 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         }
         if (attacking)
         {
-            Debug.Log($"Attack started {attackTimer}");
             AnimAttack();
             return; 
         }
@@ -100,13 +104,30 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
             if (nightscript.Night == 3 && aiTimer >= 240f)
             {
-                BaseAI = 2; 
+                aiLvl = 2; 
             }
 
             if (nightscript.Night >= 4)
             {
-                BaseAI = 1;
+                aiLvl = 1;
             }
+
+            if (nightscript.Night >= 4 && aiTimer >= 120f)
+            {
+                aiLvl += 1;
+            }
+            if (nightscript.Night >= 4 && aiTimer >= 240f)
+            {
+                aiLvl += 3;
+            }
+
+
+            if (nightscript.Night >= 6)
+            {
+                BaseAI = 15; 
+            }
+
+            
         }
 
         //benny movement
@@ -114,11 +135,25 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         {
             if (nightscript.Night == 4 && aiTimer >= 240f)
             {
-                BaseAI = 2; 
+                aiLvl = 2; 
             }
             if (nightscript.Night >= 5)
             {
-                BaseAI = 1; 
+                aiLvl = 1; 
+            }
+
+            if (nightscript.Night >= 5 && aiTimer >= 120f)
+            {
+                aiLvl += 1;
+            }
+            if (nightscript.Night >= 5 && aiTimer >= 240f)
+            {
+                aiLvl += 3;
+            }
+
+            if (nightscript.Night >= 6)
+            {
+                BaseAI = 15;
             }
         }
 
@@ -158,11 +193,32 @@ public class ScrappedAnimatronicScript : MonoBehaviour
     {
         int roll = Random.Range(1,21);
 
-      
-        if (roll <= aiLvl)
+        int roll2 = Random.Range(1,5);
+        
+        if (currentWaypoint.isHallway && nightscript._monitorOpen)
         {
-            MoveForward(); 
+            if (roll2 <= 2 && !oppertunityAttackAttemped)
+            {
+                oppertunityAttackAttemped = true; 
+                MoveForward();
+                Debug.Log($"Opportunity attack! {roll2}"); 
+            }
+            else if (currentWaypoint.isHallway && oppertunityAttackAttemped)
+            {
+                if (roll <= aiLvl)
+                {
+                    MoveForward(); 
+                }
+            } 
         }
+        else
+        {
+            if (roll <= aiLvl)
+            {
+                MoveForward();
+            }
+        }
+
 
         if (isBenny)
         {
@@ -174,11 +230,20 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         }
 
     }
+    public void OpportunityAttack()
+    {
+
+    }
     public void MoveForward()
     {
         if (currentPathIndex >= paths.Length - 1)
         {
             return;
+        }
+
+        if (currentWaypoint.isOffice && oppertunityAttackAttemped)
+        {
+            oppertunityAttackAttemped = false; 
         }
 
         currentPathIndex++;
@@ -204,8 +269,12 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         }
         else if (!nightscript._inSuit && attackTimer <= 0f)
         {
-          
-            Jumpscare();
+
+            if (!isJumpscareActive)
+            {
+                isJumpscareActive = true; 
+                Jumpscare();
+            }
 
             if (isBenny)
             {
@@ -270,13 +339,33 @@ public class ScrappedAnimatronicScript : MonoBehaviour
         // Benny jumpscare 
         if (isBenny)
         {
-
+            BennyJumpscare.gameObject.SetActive(true);
+            nightscript.TurnOnJumpscare(); 
         }
         
         //Fredrik jumpscare
         if (isFredrik)
         {
-
+            FredrikJumpscare.gameObject.SetActive(true);
+            nightscript.TurnOnJumpscare(); 
         }
+    }
+
+    public void ResetScrappedAnimatronics()
+    {
+        UpdateAI(); 
+        BaseAI = 0;
+        aiLvl = 0;
+        aiTimer = 0f;
+
+        isJumpscareActive = false;
+
+        currentPathIndex = 0; 
+        MoveToWaypoint(currentPathIndex);
+
+        moveTimer = checkInterval;
+
+        BennyJumpscare.gameObject.SetActive(false);
+        FredrikJumpscare.gameObject.SetActive(false);
     }
 }

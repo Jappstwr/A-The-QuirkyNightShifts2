@@ -1,9 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FerdinandScriptHolder : MonoBehaviour
 {
     [SerializeField] public SpriteRenderer ferdinandSr;
-    [SerializeField] private NightScript nightscript; 
+    [SerializeField] private NightScript nightscript;
+
+    public float aiTimer; 
 
     void Start()
     {
@@ -13,28 +16,36 @@ public class FerdinandScriptHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        aiTimer += Time.deltaTime; 
+
+        GetNight();
     }
 
     public void GetNight() 
     {
-        if (nightscript.Night == 4 && nightscript.nightTime >= 120)
+        if (nightscript.Night >= 4)
         {
-            ferdinandSr.enabled = false;
-        }
-        else
-        {
-            ferdinandSr.enabled = true;
+            ferdinandSr.enabled = false; 
         }
 
-        if (nightscript.Night >= 5)
-        {
-            ferdinandSr.enabled = false;
-        }
-        else
-        {
-            ferdinandSr.enabled = true;
-        }
+        //if (nightscript.Night == 4 && aiTimer >= 120)
+        //{
+        //    ferdinandSr.enabled = false;
+              // return; 
+        //}
+        //else
+        //{
+        //    ferdinandSr.enabled = true;
+        //}
+
+        //if (nightscript.Night >= 5)
+        //{
+        //    ferdinandSr.enabled = false;
+        //}
+        //else
+        //{
+        //    ferdinandSr.enabled = true;
+        //}
 
     }
 }

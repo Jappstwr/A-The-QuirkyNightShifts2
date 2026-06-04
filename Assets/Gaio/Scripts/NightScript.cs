@@ -7,16 +7,39 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 
 public class NightScript : MonoBehaviour
 {
+    public VentScanScript scanScript;
+    public VentAnimatronicsScript ventAnimScript;
+
     public GameObject office;
     public GameObject deathmenu;
+    public GameObject transitionObject;
+    public GameObject jumpscaresHolder;
     
     public AudioClip pressSound;
+    public AudioClip cameraSound;
     public AudioClip ambience1Sound;
     public AudioClip ambience2Sound;
+    public AudioClip doorSound;
+    public AudioClip flashSound;
+    public AudioClip toneSound;
+
+    public AudioClip rolfMessage1;
+    public AudioClip rolfMessage2;
+    public AudioClip rolfMessage3;
+    public AudioClip rolfMessage4;
+    public AudioClip rolfMessage5;
+    public AudioClip rolfMessage6;
+
+    [SerializeField] private bool _hasPickedUp;
+    private float callTimer;
+    private float callCooldown;
+
+    [SerializeField] private float ambienceTimer;
 
     public int Night;
 
@@ -31,6 +54,7 @@ public class NightScript : MonoBehaviour
     public GameObject monitorButton;
     public GameObject suitButton;
     public GameObject closeButton;
+    public GameObject answerButton;
 
     public GameObject monitor;
     public GameObject ventSystem;
@@ -40,9 +64,10 @@ public class NightScript : MonoBehaviour
 
     public GameObject flashlight;
     public bool _isFlashing;
+    public bool _canFlash;
 
     public int maxPower;
-    [SerializeField] private float currentPower;
+    public float currentPower;
     [SerializeField] private int powerUsage;
     public float defaultPower;
     public bool _powerOutage;
@@ -55,6 +80,7 @@ public class NightScript : MonoBehaviour
     public TMP_Text amText;
 
     public float nightTime;
+    public bool _is6AM;
 
     public List<GameObject> powerLights;
 
@@ -78,7 +104,17 @@ public class NightScript : MonoBehaviour
     public Sprite leftClosed;
     public Sprite rightClosed;
 
+    public bool _isJumpscared;
     public bool _isDead;
+
+    public float scanTimer;
+
+    [SerializeField] private ScrappedAnimatronicScript scrapped;
+    [SerializeField] private ScrappedAnimatronicScript scrapped2;
+    [SerializeField] private KlokerScriptMovement normal;
+    [SerializeField] private KlokerScriptMovement normal2;
+    [SerializeField] private WindUpButton bithoven;
+    [SerializeField] private SnattarenScript snattaren;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -98,14 +134,33 @@ public class NightScript : MonoBehaviour
     // Update is called once per frame
     public void ResetNight()
     {
+        scanScript.ResetScan();
+
+        ventAnimScript.ResetAnimatronic();
+
+        scrapped.ResetScrappedAnimatronics();
+        scrapped2.ResetScrappedAnimatronics();
+        normal.ResetAnimatronics();
+        normal2.ResetAnimatronics();
+        bithoven.ResetBithoven();
+        snattaren.ResetSnattaren();
+
+
         nightText.text = $"Night {Night}";
 
         officeIndex = 1;
         nightTime = 0f;
+        _is6AM = false;
         currentPower = maxPower;
+        scanTimer = 0;
 
-        office.SetActive(true);
+        callTimer = 8;
+        callCooldown = 0;
+
+    office.SetActive(true);
         deathmenu.SetActive(false);
+        transitionObject.SetActive(false);
+        jumpscaresHolder.SetActive(false);
         monitor.SetActive(false);
         suit.SetActive(false);
         turnLeftButton.SetActive(true);
@@ -113,6 +168,9 @@ public class NightScript : MonoBehaviour
         monitorButton.SetActive(true);
         suitButton.SetActive(true);
         closeButton.SetActive(false);
+        answerButton.SetActive(true);
+        camSystem.SetActive(true);
+        ventSystem.SetActive(false);
         _isDead = false;
         _monitorOpen = false;
         _inSuit = false;
@@ -121,6 +179,8 @@ public class NightScript : MonoBehaviour
         _rightClosed = false;
         powerUsage = 1;
         _isFlashing = false;
+        _canFlash = true;
+        ambienceTimer = 10f;
 
         SoundEffectScript.Instance.StartAmbience();
     }
@@ -153,21 +213,25 @@ public class NightScript : MonoBehaviour
     }
     public void CloseButton()
     {
-        monitor.SetActive(false);
-        suit.SetActive(false);
-        turnLeftButton.SetActive(true);
-        turnRightButton.SetActive(true);
-        monitorButton.SetActive(true);
-        suitButton.SetActive(true);
-        closeButton.SetActive(false);
-        _monitorOpen = false;
-        _inSuit = false;
+        if (scanTimer <= 0)
+        {
+            monitor.SetActive(false);
+            suit.SetActive(false);
+            SoundEffectScript.Instance.StopBreathing();
+            turnLeftButton.SetActive(true);
+            turnRightButton.SetActive(true);
+            monitorButton.SetActive(true);
+            suitButton.SetActive(true);
+            closeButton.SetActive(false);
+            _monitorOpen = false;
+            _inSuit = false;
 
-        PressSoundEffect();
+            PressSoundEffect();
+        }
     }
     public void ToggleMonitor()
     {
-        if (_powerOutage == false)
+        if (_powerOutage == false && scanTimer <= 0)
         {
             _monitorOpen = !_monitorOpen;
             UpdateMonitor();
@@ -178,16 +242,21 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleMonitorView()
     {
-        _isOnCam = !_isOnCam;
-        if (_isOnCam)
+        if (scanTimer <= 0)
         {
-            camSystem.SetActive(true);
-            ventSystem.SetActive(false);
-        }
-        else
-        {
-            camSystem.SetActive(false);
-            ventSystem.SetActive(true);
+            SoundEffectScript.Instance.PlaySoundEffect(cameraSound, 0.5f);
+
+            _isOnCam = !_isOnCam;
+            if (_isOnCam)
+            {
+                camSystem.SetActive(true);
+                ventSystem.SetActive(false);
+            }
+            else
+            {
+                camSystem.SetActive(false);
+                ventSystem.SetActive(true);
+            }
         }
     }
     public void ToggleSuit()
@@ -274,6 +343,8 @@ public class NightScript : MonoBehaviour
     {
         if (_inSuit)
         {
+            SoundEffectScript.Instance.StartBreathing();
+
             suit.SetActive(true);
             turnLeftButton.SetActive(false);
             turnRightButton.SetActive(false);
@@ -284,18 +355,23 @@ public class NightScript : MonoBehaviour
     }
     public void UpdateFlash()
     {
-        if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1)
+        if (_isFlashing && _inSuit == false && _monitorOpen == false && officeIndex == 1 && _canFlash == true)
         {
             flashlight.SetActive(true);
+            SoundEffectScript.Instance.PlaySoundEffect(flashSound, 1f);
+            SoundEffectScript.Instance.StartFlashlight();
         }
         else
         {
+            if(_isFlashing)
             _isFlashing = false;
             flashlight.SetActive(false);
+            SoundEffectScript.Instance.StopFlashlight();
         }
     }
     public void ToggleLeft()
     {
+        SoundEffectScript.Instance.PlaySoundEffect(doorSound, 0.5f);
         _leftClosed = !_leftClosed;
         UpdateLeft();
     }
@@ -312,6 +388,7 @@ public class NightScript : MonoBehaviour
     }
     public void ToggleRight()
     {
+        SoundEffectScript.Instance.PlaySoundEffect(doorSound, 0.5f);
         _rightClosed = !_rightClosed;
         UpdateRight();
     }
@@ -351,14 +428,13 @@ public class NightScript : MonoBehaviour
         }
         powerUsage = calculatedUsage;
     }
-
     public void SubtractPower()
     {
         powerTimer -= Time.deltaTime;
 
         if (powerTimer <= 0)
         {
-            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage;
+            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage/1.5f;
             currentPower -= calculatedPower;
 
             powerTimer = powerCooldown;
@@ -422,6 +498,54 @@ public class NightScript : MonoBehaviour
             targetPLPositions[i] = Random.insideUnitCircle * shakePower;
         }
     }
+
+    public void TurnOnJumpscare()
+    {
+        jumpscaresHolder.SetActive(true);
+    }
+    public void CheckAmbience()
+    {
+        if (ambienceTimer <= 0)
+        {
+            ambienceTimer = Random.Range(20, 30);
+
+            int ambienceDecider = Random.Range(1, 3);
+            if (ambienceDecider == 1)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(ambience1Sound, 1f);
+            }
+            else if (ambienceDecider == 2)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(ambience2Sound, 1f);
+            }
+        }
+    }
+    public void PickUp()
+    {
+        _hasPickedUp = true;
+        answerButton.SetActive(false);
+    }
+    public void UpdateCall()
+    {
+        callTimer -= UnityEngine.Time.deltaTime;
+        callCooldown -= UnityEngine.Time.deltaTime;
+
+        if (_hasPickedUp && callTimer < 0)
+        {
+            SoundEffectScript.Instance.PlaySoundEffect(rolfMessage1, 1f);
+            _hasPickedUp = false;
+        }
+        else if (callTimer > 0 && callCooldown <= 0)
+        {
+            SoundEffectScript.Instance.PlaySoundEffect(toneSound, 0.2f);
+            callCooldown = 2;
+        }
+
+        if (callTimer < 0)
+        {
+            answerButton.SetActive(false);
+        }
+    }
     public void PlayerInput()
     {
         if (Input.GetButtonDown("Flashlight") && _powerOutage == false)
@@ -437,6 +561,10 @@ public class NightScript : MonoBehaviour
                 ToggleRight();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GoToMainMenu();
+        }
         if (Input.GetButtonDown("MonitorToggle"))
         {
             ToggleMonitorView();
@@ -449,9 +577,42 @@ public class NightScript : MonoBehaviour
             office.SetActive(false);
             deathmenu.SetActive(true);
         }
+        else if(_is6AM)
+        {
+            if (office.activeSelf)
+            {
+                SoundEffectScript.Instance.StopAmbience();
+
+                scanTimer = 0;
+                _leftClosed = false;
+                _rightClosed = false;
+                _isFlashing = false;
+                _inSuit = false;
+
+                UpdateLeft();
+                UpdateRight();
+                UpdateFlash();
+                UpdateSuit();
+                CloseButton();
+
+                CalculatePowerUsage();
+                UpdatePowerLights();
+
+                office.SetActive(false);
+                transitionObject.SetActive(true);
+            }
+        }
         else
         {
+            scanTimer -= Time.deltaTime;
             nightTime += Time.deltaTime;
+            ambienceTimer -= Time.deltaTime;
+            if (nightTime >= 360)
+            {
+                _is6AM = true;
+            }
+            UpdateCall();
+            CheckAmbience();
             UpdateAMText();
             PlayerInput();
             if (_powerOutage == false)
