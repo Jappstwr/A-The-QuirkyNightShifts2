@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TransitionScript : MonoBehaviour
 {
@@ -38,6 +39,12 @@ public class TransitionScript : MonoBehaviour
         if (transitionTime < 1 && _hasAddedNight == false)
         {
             nightScript.Night++;
+
+            if (nightScript.Night >= 7)
+            {
+                SceneManager.LoadScene(3);
+            }
+
             nightScript.nightTime = 0;
             nightScript.currentPower = 99;
 
