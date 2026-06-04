@@ -159,7 +159,7 @@ public class WindUpButton : MonoBehaviour
                 warningSource.Play();
             }
         }
-        else
+        else if (warningActive) 
         {
             if (warningActive && FillPercent >= 1f)
             {
@@ -167,16 +167,24 @@ public class WindUpButton : MonoBehaviour
 
                 warningSource.Stop();
 
-                WarningTriangle.SetActive(false); 
+                WarningTriangle.SetActive(false);
             }
             else
             {
-                warningActive = false;
+                warningActive = true;
 
-                warningSource.Stop();
+                //warningSource.Play();
 
-                WarningTriangle.gameObject.SetActive(false); 
+                WarningTriangle.gameObject.SetActive(true);
             }
+        }
+        else
+        {
+            warningActive = true;
+
+            warningSource.Stop();
+
+            WarningTriangle.gameObject.SetActive(false);
         }
         
     }
@@ -211,7 +219,7 @@ public class WindUpButton : MonoBehaviour
 
         if (nightscript.Night >= 6)
         {
-            currentModifier += 0.050f; 
+            currentModifier += 0.043f; 
         }
     }
     //public void OnPointerDown(PointerEventData eventData)
@@ -255,7 +263,8 @@ public class WindUpButton : MonoBehaviour
         currentHoldTime = holdTime; 
         fillBar.fillAmount = 1f;
 
-        Bithovenscript.isJumpscareActive = false; 
+        Bithovenscript.isJumpscareActive = false;
+        Bithovenscript.AttackTimer = 30f; 
 
         WarningTriangle.gameObject.SetActive(false); 
     }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fd859f8934a3ea343b1dd08ca0b11595
+guid: 406b3c37e686796449b537cacffd69d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -959863963982422745
-    second: ScrappedBenny 1_0
+      213: 4084612088172047542
+    second: corridorpix_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 170
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ScrappedBenny 1_0
+      name: corridorpix_0
       rect:
         serializedVersion: 2
-        x: 96
+        x: 0
         y: 0
-        width: 415
-        height: 720
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72d11227fc0eda2f0800000000000000
-      internalID: -959863963982422745
+      spriteID: 6bce2c09d057fa830800000000000000
+      internalID: 4084612088172047542
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ScrappedBenny 1_0: -959863963982422745
+      corridorpix_0: 4084612088172047542
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fd859f8934a3ea343b1dd08ca0b11595
+guid: b2dda3577267c4b4f8d6c46ea7269a99
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -959863963982422745
-    second: ScrappedBenny 1_0
+      213: -5456548222899024614
+    second: FIllIMAGECIRCLE_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 170
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ScrappedBenny 1_0
+      name: FIllIMAGECIRCLE_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 415
-        height: 720
+        x: 3
+        y: 1
+        width: 356
+        height: 358
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 72d11227fc0eda2f0800000000000000
-      internalID: -959863963982422745
+      spriteID: a1d80522d427644b0800000000000000
+      internalID: -5456548222899024614
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ScrappedBenny 1_0: -959863963982422745
+      FIllIMAGECIRCLE_0: -5456548222899024614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
