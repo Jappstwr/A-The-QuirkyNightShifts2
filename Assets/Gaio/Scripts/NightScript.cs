@@ -138,12 +138,12 @@ public class NightScript : MonoBehaviour
 
         ventAnimScript.ResetAnimatronic();
 
-        /*scrapped.ResetScrappedAnimatronics();
+        scrapped.ResetScrappedAnimatronics();
         scrapped2.ResetScrappedAnimatronics();
         normal.ResetAnimatronics();
         normal2.ResetAnimatronics();
         bithoven.ResetBithoven();
-        snattaren.ResetSnattaren();*/
+        snattaren.ResetSnattaren();
 
 
         nightText.text = $"Night {Night}";
@@ -519,6 +519,11 @@ public class NightScript : MonoBehaviour
                 SoundEffectScript.Instance.PlaySoundEffect(ambience2Sound, 1f);
             }
         }
+    }
+    public void PickUp()
+    {
+        _hasPickedUp = true;
+        answerButton.SetActive(false);
     }
     public void UpdateCall()
     {

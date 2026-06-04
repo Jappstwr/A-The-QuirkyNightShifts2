@@ -12767,7 +12767,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1140767873}
         m_TargetAssemblyTypeName: NightScript, Assembly-CSharp
-        m_MethodName: ToggleSuit
+        m_MethodName: PickUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
