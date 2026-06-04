@@ -157,7 +157,7 @@ public class KlokerScriptMovement : MonoBehaviour
     {
         if (nightscript.Night == 1)
         {
-            currentAIModifier += 1; 
+            currentAIModifier += 2; 
         }
 
         if (nightscript.Night == 2)
