@@ -185,7 +185,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2286724114230310993, guid: 556eb6eca29ce6948bc97662b92d26bb, type: 3}
+  m_Sprite: {fileID: 6449458899081204806, guid: 7f1d41f3f69fb144ea443fb6be6a27da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,7 +205,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 17.778, y: 17.778, z: 1}
+  m_LocalScale: {x: 0.93, y: 0.93, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 294642414}
@@ -1361,7 +1361,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8627549915620952191, guid: 53934207d48329044b8ababc611ab1c5, type: 3}
+  m_Sprite: {fileID: 4230803429127922754, guid: 1b4a34ebb52361e4ca869a6a163af899, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1381,7 +1381,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 17.778, y: 17.778, z: 1}
+  m_LocalScale: {x: 0.93, y: 0.93, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 55688836}
@@ -7256,10 +7256,10 @@ MonoBehaviour:
   _monitorOpen: 0
   leftSprite: {fileID: 23193823}
   rightSprite: {fileID: 235590341}
-  leftOpen: {fileID: 2286724114230310993, guid: 556eb6eca29ce6948bc97662b92d26bb, type: 3}
-  rightOpen: {fileID: -8627549915620952191, guid: 53934207d48329044b8ababc611ab1c5, type: 3}
-  leftClosed: {fileID: 21300000, guid: c3766f2f2715c474bb105505ff19a1b0, type: 3}
-  rightClosed: {fileID: 21300000, guid: 9dd6e9208a2ea3449a976cb93c4a50d4, type: 3}
+  leftOpen: {fileID: 6449458899081204806, guid: 7f1d41f3f69fb144ea443fb6be6a27da, type: 3}
+  rightOpen: {fileID: 4230803429127922754, guid: 1b4a34ebb52361e4ca869a6a163af899, type: 3}
+  leftClosed: {fileID: -9197499854938693717, guid: dc42af5502cfb0e45a6fb83662b2683c, type: 3}
+  rightClosed: {fileID: 6052468518763708759, guid: 8528be042e69edc499ef9a00096f8f45, type: 3}
   _isJumpscared: 0
   _isDead: 0
   scanTimer: 0
