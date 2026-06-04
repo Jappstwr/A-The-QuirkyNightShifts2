@@ -36,8 +36,8 @@ public class NightScript : MonoBehaviour
     public AudioClip rolfMessage6;
 
     [SerializeField] private bool _hasPickedUp;
-    private float callTimer = 8;
-    private float callCooldown = 0;
+    private float callTimer;
+    private float callCooldown;
 
     [SerializeField] private float ambienceTimer;
 
@@ -154,7 +154,10 @@ public class NightScript : MonoBehaviour
         currentPower = maxPower;
         scanTimer = 0;
 
-        office.SetActive(true);
+        callTimer = 8;
+        callCooldown = 0;
+
+    office.SetActive(true);
         deathmenu.SetActive(false);
         transitionObject.SetActive(false);
         jumpscaresHolder.SetActive(false);
