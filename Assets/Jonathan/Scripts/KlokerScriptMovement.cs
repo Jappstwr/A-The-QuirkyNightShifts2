@@ -113,7 +113,7 @@ public class KlokerScriptMovement : MonoBehaviour
 
         if (isFladderlappen)
         {
-            if (nightscript.Night == 1 && aiTimer >= 240f)
+            if (nightscript.Night == 2 && aiTimer >= 60f)
             {
                 aiLevel += 1;
                 //return; 
