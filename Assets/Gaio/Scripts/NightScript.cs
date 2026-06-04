@@ -434,7 +434,7 @@ public class NightScript : MonoBehaviour
 
         if (powerTimer <= 0)
         {
-            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage/1.5f;
+            float calculatedPower = defaultPower * Mathf.Pow(1.1f, Night) * powerUsage/1.25f;
             currentPower -= calculatedPower;
 
             powerTimer = powerCooldown;
