@@ -126,27 +126,52 @@ public class KlokerScriptMovement : MonoBehaviour
                 aiLevel = 0;
                 //return; 
             }
-            if (nightscript.Night == 2 && aiTimer >= 60f)
-            {
-                aiLevel += 1;
-                //return; 
-            }
 
             if (aiTimer < 60f)
             {
                 aiLevel = 0;
-                return; 
+                return;
             }
 
             if (aiTimer >= 60f)
             {
-                aiLevel = baseAI; 
+                aiLevel = baseAI;
             }
 
-            if (nightscript.Night >= 6)
+
+            if (nightscript.Night == 2 && aiTimer >= 60f)
             {
-                baseAI = 10; 
+                aiLevel += 1;
+
+                if (aiTimer >= 120f)
+                {
+                    aiLevel += 1;
+                }
+
+                if (aiTimer >= 240)
+                {
+                    aiLevel += currentAIModifier;
+                }
             }
+            if (nightscript.Night > 2)
+            {
+                if (aiTimer >= 120f)
+                {
+                    aiLevel += 1;
+                }
+
+                if (aiTimer >= 240)
+                {
+                    aiLevel += currentAIModifier;
+                }
+            }
+           
+        }
+
+        
+        if (nightscript.Night >= 6)
+        {
+            baseAI = 10;
         }
 
         if (nightscript.Night >= 6)
@@ -154,15 +179,7 @@ public class KlokerScriptMovement : MonoBehaviour
             baseAI = 10;
         }
 
-        if (aiTimer >= 120f)
-        {
-            aiLevel += 1;
-        }
-
-        if (aiTimer >= 240)
-        {
-            aiLevel += currentAIModifier;
-        }
+       
 
         
     }
