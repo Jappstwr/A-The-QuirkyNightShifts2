@@ -532,7 +532,31 @@ public class NightScript : MonoBehaviour
 
         if (_hasPickedUp && callTimer < 0)
         {
-            SoundEffectScript.Instance.PlaySoundEffect(rolfMessage1, 1f);
+            if (Night == 1)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage1, 1f);
+            }
+            else if (Night == 2)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage2, 1f);
+            }
+            else if (Night == 3)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage3, 1f);
+            }
+            else if (Night == 4)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage4, 1f);
+            }
+            else if (Night == 5)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage5, 1f);
+            }
+            else if (Night == 6)
+            {
+                SoundEffectScript.Instance.PlaySoundEffect(rolfMessage6, 1f);
+            }
+
             _hasPickedUp = false;
         }
         else if (callTimer > 0 && callCooldown <= 0)
