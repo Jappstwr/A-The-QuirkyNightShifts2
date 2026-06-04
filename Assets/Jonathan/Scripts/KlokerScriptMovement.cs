@@ -292,23 +292,28 @@ public class KlokerScriptMovement : MonoBehaviour
             return; 
         }
 
-        if (currentWaypoint.isOuterStage)
-        {
-            int roll = Random.Range(1, 21);
 
-            if (roll <= aiLevel)
-            {
-                currentPathIndex = 3;
-                MoveToWaypoint(currentPathIndex); 
-            }
-        }
-        else
-        {
-            currentPathIndex++;
+        currentPathIndex++;
 
-            MoveToWaypoint(currentPathIndex);
-        }
-       
+        MoveToWaypoint(currentPathIndex);
+
+        //if (currentWaypoint.isOuterStage)
+        //{
+        //    int roll = Random.Range(1, 21);
+
+        //    if (roll <= aiLevel)
+        //    {
+        //        currentPathIndex = 3;
+        //        MoveToWaypoint(currentPathIndex); 
+        //    }
+        //}
+        //else
+        //{
+        //currentPathIndex++;
+
+        //MoveToWaypoint(currentPathIndex);
+        //}
+
     }
     public void AnimAttack()
     {
