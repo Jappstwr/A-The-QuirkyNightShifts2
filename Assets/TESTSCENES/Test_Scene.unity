@@ -1689,7 +1689,7 @@ Transform:
   m_GameObject: {fileID: 288922240}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.079956, y: -0.020019531, z: -0.6}
+  m_LocalPosition: {x: -6.079956, y: 1.17, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2114,7 +2114,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7045675063963699452, guid: 0805e3776fed06d41951fe4961f3dc00, type: 3}
+  m_Sprite: {fileID: -2753044987189124816, guid: 248eacdab2123ad48aa060ab148c4f93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6429,7 +6429,7 @@ MonoBehaviour:
   BithovenJumpscare: {fileID: 399059654}
   sleepSprite: {fileID: -4444598626965939674, guid: b5de9c46bfa44eb4392e6c606f85fb9e, type: 3}
   awakeSprite: {fileID: 8780129631122002736, guid: 6b995dc99d8c6b54ea385f2a22178cb7, type: 3}
-  AttackTimer: 10
+  AttackTimer: 30
   isJumpscareActive: 0
   waypoints: {fileID: 863097607}
 --- !u!1 &1062374693
@@ -7510,6 +7510,8 @@ MonoBehaviour:
   normal2: {fileID: 341898408}
   bithoven: {fileID: 1392059699}
   snattaren: {fileID: 812996393}
+  isResetingNight: 0
+  camHandelerscript: {fileID: 2089993712}
 --- !u!4 &1140767874
 Transform:
   m_ObjectHideFlags: 0
@@ -7988,7 +7990,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1214883828
 Transform:
   m_ObjectHideFlags: 0
@@ -12862,7 +12864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1834.83, y: -553.29}
+  m_AnchoredPosition: {x: -1841.72, y: -602.18}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1892117478
@@ -14216,6 +14218,7 @@ MonoBehaviour:
   CAMSImage: {fileID: 839842867}
   Office: {fileID: 418960005}
   nightscript: {fileID: 1140767873}
+  windupscript: {fileID: 1392059699}
 --- !u!4 &2089993713
 Transform:
   m_ObjectHideFlags: 0

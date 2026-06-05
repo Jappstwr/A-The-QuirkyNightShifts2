@@ -115,6 +115,8 @@ public class NightScript : MonoBehaviour
     [SerializeField] private WindUpButton bithoven;
     [SerializeField] private SnattarenScript snattaren;
 
+    [SerializeField] private CamHandelerInTestScene camHandelerscript; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -133,6 +135,7 @@ public class NightScript : MonoBehaviour
     // Update is called once per frame
     public void ResetNight()
     {
+        camHandelerscript.SwitchToOffice(); 
         scanScript.ResetScan();
 
         ventAnimScript.ResetAnimatronic();
@@ -156,7 +159,7 @@ public class NightScript : MonoBehaviour
         callTimer = 8;
         callCooldown = 0;
 
-    office.SetActive(true);
+        office.SetActive(true);
         deathmenu.SetActive(false);
         transitionObject.SetActive(false);
         jumpscaresHolder.SetActive(false);

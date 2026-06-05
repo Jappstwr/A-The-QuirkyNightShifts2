@@ -14,8 +14,8 @@ public class WindUpButton : MonoBehaviour
 
     [SerializeField] private NightScript nightscript; 
 
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource warningSource;
+    [SerializeField] public AudioSource musicSource;
+    [SerializeField] public AudioSource warningSource;
 
     [SerializeField] private AudioClip[] songs;
     //[SerializeField] private AudioClip song2;
@@ -159,7 +159,7 @@ public class WindUpButton : MonoBehaviour
                 warningSource.Play();
             }
         }
-        else if (warningActive) 
+        else
         {
             if (warningActive && FillPercent >= 1f)
             {
@@ -171,21 +171,14 @@ public class WindUpButton : MonoBehaviour
             }
             else
             {
-                warningActive = true;
+                warningActive = false;
 
-                //warningSource.Play();
+                warningSource.Stop();
 
-                WarningTriangle.gameObject.SetActive(true);
+                WarningTriangle.gameObject.SetActive(false);
             }
         }
-        else
-        {
-            warningActive = true;
-
-            warningSource.Stop();
-
-            WarningTriangle.gameObject.SetActive(false);
-        }
+       
         
     }
     private void FixedUpdate()
@@ -205,21 +198,21 @@ public class WindUpButton : MonoBehaviour
 
         if (nightscript.Night == 3)
         {
-            currentModifier += 0.03f;
+            currentModifier += 0.027f;
         }
         if (nightscript.Night == 4)
         {
-            currentModifier += 0.035f;
+            currentModifier += 0.032f;
         }
 
         if (nightscript.Night == 5)
         {
-            currentModifier += 0.040f;
+            currentModifier += 0.037f;
         }
 
         if (nightscript.Night >= 6)
         {
-            currentModifier += 0.043f; 
+            currentModifier += 0.040f; 
         }
     }
     //public void OnPointerDown(PointerEventData eventData)
@@ -259,6 +252,8 @@ public class WindUpButton : MonoBehaviour
 
     public void ResetBithoven()
     {
+        warningSource.Stop(); 
+
         GetNight(); 
         currentHoldTime = holdTime; 
         fillBar.fillAmount = 1f;

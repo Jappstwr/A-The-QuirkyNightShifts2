@@ -7,7 +7,7 @@ public class CamHandelerInTestScene : MonoBehaviour
     [SerializeField] private GameObject CAMSImage;
     [SerializeField] private GameObject Office;
 
-    [SerializeField] private NightScript nightscript;
+    [SerializeField] private NightScript nightscript; 
 
     private bool hasClosedCameras; 
  
@@ -24,8 +24,7 @@ public class CamHandelerInTestScene : MonoBehaviour
     }
 
     public void SwitchToOffice()
-    {
-        
+    {   
         if (nightscript.scanTimer <= 0f)
         {
             //hasClosedCameras = true; 
