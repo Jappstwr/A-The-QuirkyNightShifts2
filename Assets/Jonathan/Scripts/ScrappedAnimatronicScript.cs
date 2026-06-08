@@ -353,6 +353,7 @@ public class ScrappedAnimatronicScript : MonoBehaviour
 
     public void ResetScrappedAnimatronics()
     {
+        attackTimer = 8f; 
         UpdateAI(); 
         BaseAI = 0;
         aiLvl = 0;

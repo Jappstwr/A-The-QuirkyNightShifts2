@@ -425,6 +425,7 @@ public class KlokerScriptMovement : MonoBehaviour
 
     public void ResetAnimatronics()
     {
+        attackTimer = 8f; 
         GetNight(); 
         baseAI = 0;
         aiLevel = 0;

@@ -29,6 +29,7 @@ public class SnattarenScript : MonoBehaviour
     [SerializeField] private Sprite attackSprite; 
 
     public float attackTimer = 8f;
+    public float benTimer = 8f; 
     public float retreatTimer;
     public float punishTimer; 
 
@@ -251,6 +252,7 @@ public class SnattarenScript : MonoBehaviour
 
     public void ResetSnattaren()
     {
+        attackTimer = benTimer; 
         UpdateAI(); 
         BaseAI = 0;
         aiLvl = 0;
